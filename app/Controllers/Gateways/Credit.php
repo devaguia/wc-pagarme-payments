@@ -21,8 +21,8 @@ class Credit extends WC_Payment_Gateway implements InterfaceGateways
         $this->id                 = "wc-pagarme-credit";
         // $this->icon               = ## Image path 
         $this->has_fields         = false;
-        $this->method_title       = __( "Pagar.me - Credit Card", WPP_PLUGIN_SLUG );
-        $this->method_description = __( "Pagar.me - Pay with credit card", WPP_PLUGIN_SLUG );
+        $this->method_title       = __( "Pagar.me - Credit Card", "wc-pagarme-payments" );
+        $this->method_description = __( "Pagar.me - Pay with credit card", "wc-pagarme-payments" );
 
         $this->supports = [
             "products"
@@ -55,35 +55,35 @@ class Credit extends WC_Payment_Gateway implements InterfaceGateways
 
         $this->form_fields = [
             "enabled" => [
-                "title"       => __( "Enable", WPP_PLUGIN_SLUG ),
-                "label"       => __( "Enable Gateway", WPP_PLUGIN_SLUG ),
+                "title"       => __( "Enable", "wc-pagarme-payments" ),
+                "label"       => __( "Enable Gateway", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
-                "description" => __( "Check this option to activate the payment method", WPP_PLUGIN_SLUG ),
+                "description" => __( "Check this option to activate the payment method", "wc-pagarme-payments" ),
                 "default"     => "no",
                 "desc_tip"    => true
             ],
 
             "title" => [
-                "title"       => __( "Title", WPP_PLUGIN_SLUG ),
+                "title"       => __( "Title", "wc-pagarme-payments" ),
                 "type"        => "text",
-                "description" => __( "This controls the title which the user sees during checkout.", WPP_PLUGIN_SLUG ),
-                "default"     => __( "Payment setup plugin for Woocommerce", WPP_PLUGIN_SLUG ),
+                "description" => __( "This controls the title which the user sees during checkout.", "wc-pagarme-payments" ),
+                "default"     => __( "Payment setup plugin for Woocommerce", "wc-pagarme-payments" ),
                 "desc_tip"    => true
             ],
 
             "description" => [
-                "title"       => __( "Description", WPP_PLUGIN_SLUG ),
+                "title"       => __( "Description", "wc-pagarme-payments" ),
                 "type"        => "textarea",
-                "description" => __( "This controls the description which the user sees during checkout.", WPP_PLUGIN_SLUG ),
-                "default"     => __( "Payment setup plugin for Woocommerce", WPP_PLUGIN_SLUG ),
+                "description" => __( "This controls the description which the user sees during checkout.", "wc-pagarme-payments" ),
+                "default"     => __( "Payment setup plugin for Woocommerce", "wc-pagarme-payments" ),
                 "desc_tip"    => true
             ],
 
             "test_mode" => [
-                "title"       => __( "Test Mode", WPP_PLUGIN_SLUG ),
-                "label"       => __( "Enable test mode", WPP_PLUGIN_SLUG ),
+                "title"       => __( "Test Mode", "wc-pagarme-payments" ),
+                "label"       => __( "Enable test mode", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
-                "description" => __( "Check this option to activate the test mode.", WPP_PLUGIN_SLUG ),
+                "description" => __( "Check this option to activate the test mode.", "wc-pagarme-payments" ),
                 "default"     => "no",
                 "desc_tip"    => true
             ],
@@ -103,7 +103,7 @@ class Credit extends WC_Payment_Gateway implements InterfaceGateways
 
             if ( $this->testmode ) {
 
-                $this->description .= __( " Test mode activate! In this mode transactions are not real.", WPP_PLUGIN_SLUG );
+                $this->description .= __( " Test mode activate! In this mode transactions are not real.", "wc-pagarme-payments" );
                 $this->description  = trim( $this->description );
             }
             

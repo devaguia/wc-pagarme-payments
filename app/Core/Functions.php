@@ -59,7 +59,7 @@ class Functions
 
         if( $name === Config::__base() ) {
 
-            $label = sprintf( '<a href="admin.php?page=wc-settings&tab=checkout&section=wc-pagarme-payments" id="deactivate-wc-pagarme-payments" aria-label="%s">%s</a>',
+            $label = sprintf( '<a href="admin.php?page=pagarme" id="deactivate-wc-pagarme-payments" aria-label="%s">%s</a>',
                 __( 'Payment setup plugin for Woocommerce', 'wc-pagarme-payments' ),
                 __( 'Payment Settings', 'wc-pagarme-payments' )
             );
