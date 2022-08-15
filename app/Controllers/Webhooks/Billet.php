@@ -3,12 +3,12 @@
 namespace WPP\Controllers\Webhooks;
 
 /**
- * Name: Example
- * Example of Webhook
+ * Name: Billet
+ * Webhook for Billet payments
  * @package Controllers\Webhooks
  * @since 1.0.0
  */
-class Example implements InterfaceWebhooks
+class Billet implements InterfaceWebhooks
 {
 
     public function __construct()

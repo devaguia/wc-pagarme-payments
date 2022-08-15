@@ -6,14 +6,14 @@ use WPP\Controllers\Render\Render;
 
 /**
  * Name: Render Checkout
- * Checkout fields
+ * Checkout field
  * @package Controller\Render
  * @since 1.0.0
  */
-class Checkout extends Render
+class Pix extends Render
 {
     public function request()
     {
-        $this->render( 'templates/checkout/checkout.php',[] );
+        $this->render( 'templates/checkout/pix.php',[] );
     }
 }

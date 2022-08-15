@@ -13,16 +13,16 @@ use WPP\Services\WooCommerce\Webhooks\Webhooks;
  * @package Controllers
  * @since 1.0.0
  */
-class Gateway extends WC_Payment_Gateway implements InterfaceGateways
+class Billet extends WC_Payment_Gateway implements InterfaceGateways
 {
 
     public function __construct() {
         
-        $this->id                 = "wc-pagarme-payments";
+        $this->id                 = "wc-pagarme-billet";
         // $this->icon               = ## Image path 
         $this->has_fields         = false;
-        $this->method_title       = __( "Gateway Example", WPP_PLUGIN_SLUG );
-        $this->method_description = __( "Payment gateway example", WPP_PLUGIN_SLUG );
+        $this->method_title       = __( "Pagarme - Bank Slip", WPP_PLUGIN_SLUG );
+        $this->method_description = __( "Pagarme - Pay with bank slip", WPP_PLUGIN_SLUG );
 
         $this->supports = [
             "products"
@@ -35,9 +35,8 @@ class Gateway extends WC_Payment_Gateway implements InterfaceGateways
         $this->description = $this->get_option( "description" );
         $this->enabled     = $this->get_option( "enabled" );
         $this->testmode    = "yes" === $this->get_option( "testmode" );
-        $this->secret_key  = $this->testmode ? $this->get_option( "test_secret_key" ) : $this->get_option( "secret_key" );
 
-        add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'caos_thank_you_page' ]);
+        // add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'thank_you_page' ]);
 
         if ( is_admin() ) {
             add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'process_admin_options' ] );
@@ -78,7 +77,16 @@ class Gateway extends WC_Payment_Gateway implements InterfaceGateways
                 "description" => __( "This controls the description which the user sees during checkout.", WPP_PLUGIN_SLUG ),
                 "default"     => __( "Payment setup plugin for Woocommerce", WPP_PLUGIN_SLUG ),
                 "desc_tip"    => true
-            ]
+            ],
+
+            "test_mode" => [
+                "title"       => __( "Test Mode", WPP_PLUGIN_SLUG ),
+                "label"       => __( "Enable test mode", WPP_PLUGIN_SLUG ),
+                "type"        => "checkbox",
+                "description" => __( "Check this option to activate the test mode.", WPP_PLUGIN_SLUG ),
+                "default"     => "no",
+                "desc_tip"    => true
+            ],
         ];
         
     }

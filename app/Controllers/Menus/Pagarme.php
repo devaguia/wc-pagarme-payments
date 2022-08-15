@@ -5,11 +5,11 @@ namespace WPP\Controllers\Menus;
 use WPP\Controllers\Render\Render;
 
 /**
- * Name: About
+ * Name: Pagarme
  * @package Controller 
  * @since 1.0.0
  */
-class Service extends Render
+class Pagarme extends Render
 {
     /**
      * Enqueue custom scripts and styles to the page
@@ -17,8 +17,8 @@ class Service extends Render
      */
     private function enqueue()
     {
-        $this->enqueue_scripts( [ 'name' => 'wc-admin', 'file' => 'scripts/admin/pages/service/index.js' ] );
-        $this->enqueue_styles( [ 'name' => 'wc-admin', 'file' => 'styles/admin/pages/service/index.css' ] );
+        $this->enqueue_scripts( [ 'name' => 'wc-admin', 'file' => 'scripts/admin/pages/pagarme/index.js' ] );
+        $this->enqueue_styles( [ 'name' => 'wc-admin', 'file' => 'styles/admin/pages/pagarme/index.css' ] );
     }
     
     /**
@@ -27,7 +27,7 @@ class Service extends Render
      */
     public function request()
     {
-        $this->render( 'Admin/service.php', [] );
+        $this->render( 'Admin/pagarme.php', [] );
         $this->enqueue();
     }
 }
