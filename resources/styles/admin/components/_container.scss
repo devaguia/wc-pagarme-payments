@@ -1,0 +1,24 @@
+@import "./../../global/base/vars";
+
+.wcpt-container {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+
+    *::selection {
+        background-color: $secondary-color;
+    }
+
+    .error {
+        display: none;
+    }
+
+    .content {
+        > div {
+            margin-bottom: 10px;
+            > p {
+                margin: 0;
+            }
+        }
+    }
+}

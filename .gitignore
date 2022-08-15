@@ -1,0 +1,8 @@
+# ignore folders
+vendor/
+dist/
+node_modules/
+.parcel-cache/
+
+# ignore files
+*.lock
