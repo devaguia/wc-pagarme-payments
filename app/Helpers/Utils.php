@@ -1,6 +1,6 @@
 <?php
 
-namespace WCPT\Helpers;
+namespace WPP\Helpers;
 
 /**
  * Name: Utils

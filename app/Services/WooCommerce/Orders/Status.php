@@ -1,8 +1,8 @@
 <?php
 
-namespace WCPT\Services\WooCommerce\Orders;
+namespace WPP\Services\WooCommerce\Orders;
 
-use WCPT\Helpers\Utils;
+use WPP\Helpers\Utils;
 
 /**
  * Name: Gateways
@@ -26,7 +26,7 @@ class Status
      */
     private function get_new_status()
     {
-        return [ 'wc-test-payment'  => __( 'Status test', WCPT_PLUGIN_SLUG ) ];
+        return [ 'wc-test-payment'  => __( 'Status test', WPP_PLUGIN_SLUG ) ];
     }
 
     /**

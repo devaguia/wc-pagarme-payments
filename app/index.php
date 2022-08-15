@@ -1,12 +1,12 @@
 <?php
 
-namespace WCPT;
+namespace WPP;
 
 // Define names
-define( 'WCPT_PLUGIN_NAME', 'Payment setup plugin for Woocommerce' );
-define( 'WCPT_PLUGIN_SLUG', 'wc-plugin-template' );
-define( 'WCPT_PLUGIN_NAMESPACE', 'WCPT' );
-define( 'WCPT_PLUGIN_PREFIX', 'wcpt' );
+define( 'WPP_PLUGIN_NAME', 'Pagarme Payments For WooCommerce' );
+define( 'WPP_PLUGIN_SLUG', 'wc-pagarme-payments' );
+define( 'WPP_PLUGIN_NAMESPACE', 'WPP' );
+define( 'WPP_PLUGIN_PREFIX', 'wpp' );
 
 defined( 'ABSPATH' ) || exit;
 

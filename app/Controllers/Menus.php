@@ -1,8 +1,8 @@
 <?php 
 
-namespace WCPT\Controllers;
+namespace WPP\Controllers;
 
-use WCPT\Helpers\Utils;
+use WPP\Helpers\Utils;
 
 /**
  * Name: Menus
@@ -25,7 +25,7 @@ class Menus
      */
     private function menus() {
         return [
-            [ 'Service', __( 'Payment Service', WCPT_PLUGIN_SLUG ) ]
+            [ 'Service', __( 'Payment Service', WPP_PLUGIN_SLUG ) ]
         ];
     }
 
@@ -43,7 +43,7 @@ class Menus
         foreach ( $controllers as $key => $controller ) {
 
             $slug     = Utils::parse_view( $controller[0] );
-            $function = WCPT_PLUGIN_NAMESPACE . "\\Controllers\\Menus\\$controller[0]";
+            $function = WPP_PLUGIN_NAMESPACE . "\\Controllers\\Menus\\$controller[0]";
             $menu     = [
                 'title'    => $controller[1],
                 'slug'     => $slug,

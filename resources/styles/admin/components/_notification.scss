@@ -1,5 +1,5 @@
-.wcpt-container {
-  .wcpt-notification {
+.wpp-container {
+  .wpp-notification {
     background: $primary-color;
     width: fit-content;
     padding: 20px 30px;
@@ -13,17 +13,17 @@
 
     animation: show 1s;
 
-    > .wcpt-notification-title {
+    > .wpp-notification-title {
       font-size: 16px;
       font-weight: 600;
     }
 
-    > .wcpt-notification-text {
+    > .wpp-notification-text {
         width: 100%;
         margin: 10px 0 0 0;
     }
 
-    > .wcpt-notification-close {
+    > .wpp-notification-close {
         position: relative;
         float: right;
         bottom: 10px;
@@ -37,7 +37,7 @@
         }
     }
 
-    &.wcpt-notification-close {
+    &.wpp-notification-close {
         animation: hide 1s;
     }
   }

@@ -1,6 +1,6 @@
 <?php
 
-namespace WCPT\Model\Database\Tables;
+namespace WPP\Model\Database\Tables;
 
 use As247\WpEloquent\Support\Facades\Schema;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace WCPT\Core;
+namespace WPP\Core;
 
-use WCPT\Controllers\Menus;
-use WCPT\Model\Database\Bootstrap;
-use WCPT\Helpers\Config;
-use WCPT\Core\Uninstall;
-use WCPT\Helpers\Utils;
-use WCPT\Services\WooCommerce\WooCommerce;
+use WPP\Controllers\Menus;
+use WPP\Model\Database\Bootstrap;
+use WPP\Helpers\Config;
+use WPP\Core\Uninstall;
+use WPP\Helpers\Utils;
+use WPP\Services\WooCommerce\WooCommerce;
 
 /**
  * Name: Function
@@ -24,7 +24,7 @@ class Functions
      */
     public static function initialize()
     {
-        load_plugin_textdomain( WCPT_PLUGIN_SLUG , false );
+        load_plugin_textdomain( WPP_PLUGIN_SLUG , false );
     }
 
     /**
@@ -59,9 +59,9 @@ class Functions
 
         if( $name === Config::__base() ) {
 
-            $label = sprintf( '<a href="admin.php?page=wc-settings&tab=checkout&section=wc-plugin-template" id="deactivate-wc-plugin-template" aria-label="%s">%s</a>',
-                __( 'Payment setup plugin for Woocommerce', 'wc-plugin-template' ),
-                __( 'Payment Settings', 'wc-plugin-template' )
+            $label = sprintf( '<a href="admin.php?page=wc-settings&tab=checkout&section=wc-pagarme-payments" id="deactivate-wc-pagarme-payments" aria-label="%s">%s</a>',
+                __( 'Payment setup plugin for Woocommerce', 'wc-pagarme-payments' ),
+                __( 'Payment Settings', 'wc-pagarme-payments' )
             );
 
             $arr['settings'] = $label;

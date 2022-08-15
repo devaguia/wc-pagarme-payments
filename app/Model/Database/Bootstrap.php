@@ -1,9 +1,9 @@
 <?php
 
-namespace WCPT\Model\Database;
+namespace WPP\Model\Database;
 
 use As247\WpEloquent\Application;
-use WCPT\Model\Database\Tables\Example;
+use WPP\Model\Database\Tables\Example;
 
 /**
  * Name: Bootstrap

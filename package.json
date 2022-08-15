@@ -1,8 +1,8 @@
 {
-  "name": "wc-plugin-template",
+  "name": "wc-pagarme-payments",
   "version": "1.0.0",
   "description": "Payment plugin for Woocommerce",
-  "repository": "https://github.com/codebakerys/wc-plugin-template",
+  "repository": "https://github.com/codebakerys/wc-pagarme-payments",
   "author": "Matheus Aguiar",
   "license": "GPL-3.0",
   "devDependencies": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace WCPT\Services\WooCommerce\Gateways;
+namespace WPP\Services\WooCommerce\Gateways;
 
 /**
  * Name: Gateways
@@ -33,7 +33,7 @@ class Gateways
 	 */
 	public function add_gateway_method( $gateways ) 
 	{
-        array_push( $gateways, 'WCPT\Controllers\Gateways\Gateway' );
+        array_push( $gateways, 'WPP\Controllers\Gateways\Gateway' );
         return $gateways;
 	}
 	

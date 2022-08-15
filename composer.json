@@ -1,11 +1,11 @@
 {
-    "name": "codebakery/wc-plugin-template",
+    "name": "codebakery/wc-pagarme-payments",
     "description": "Payment plugin for WooCommerce",
     "type": "wordpress-plugin",
     "license": "GPL-3.0",
     "support": {
-        "issues": "https://github.com/codebakerys/wc-plugin-template/issues",
-        "source": "https://github.com/codebakerys/wc-plugin-template"
+        "issues": "https://github.com/codebakerys/wc-pagarme-payments/issues",
+        "source": "https://github.com/codebakerys/wc-pagarme-payments"
     },
     "keywords": [ "wordpress", "plugin", "template", "woocommerce", "payment", "wp-eloquent" ],
     "authors": [
@@ -16,7 +16,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "WCPT\\": "app/"
+            "WPP\\": "app/"
         }
     },
     "require": {

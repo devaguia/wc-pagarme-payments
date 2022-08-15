@@ -1,6 +1,6 @@
 <?php 
 
-namespace WCPT\Helpers;
+namespace WPP\Helpers;
 
 /**
  * Name: Config
@@ -74,7 +74,7 @@ class Config {
      */
     public static function __main()
     {
-        return self::__dir() . "/" . WCPT_PLUGIN_SLUG . ".php";
+        return self::__dir() . "/" . WPP_PLUGIN_SLUG . ".php";
     }
 
 
@@ -85,7 +85,7 @@ class Config {
      */
     public static function __base()
     {
-        return self::__folder() . "/" . WCPT_PLUGIN_SLUG . ".php";
+        return self::__folder() . "/" . WPP_PLUGIN_SLUG . ".php";
     }
 
     /**
@@ -107,7 +107,7 @@ class Config {
     public static function _payment_methods()
     {
         return [
-            'wc-plugin-template'
+            'wc-pagarme-payments'
         ];
     }
 }

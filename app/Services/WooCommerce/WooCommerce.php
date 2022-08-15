@@ -1,9 +1,9 @@
 <?php
 
-namespace WCPT\Services\WooCommerce;
+namespace WPP\Services\WooCommerce;
 
-use WCPT\Services\WooCommerce\Gateways\Gateways;
-use WCPT\Services\WooCommerce\Orders\Status;
+use WPP\Services\WooCommerce\Gateways\Gateways;
+use WPP\Services\WooCommerce\Orders\Status;
 
 /**
  * Name: Woocommerce

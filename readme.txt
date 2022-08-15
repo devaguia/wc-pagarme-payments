@@ -1,8 +1,8 @@
-=== Payment Plugin Template ===
-Contributors: codebakery
+=== Pagarme Payments For WooCommerce ===
+Contributors: codebakery, aguiart0
 Tags: setup
 Requires at least: 5.0
-Tested up to: 5.8
+Tested up to: 6.0.1
 Stable tag: 0.0.0
 Requires PHP: 7.4
 License: GPLv3

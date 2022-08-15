@@ -1,6 +1,6 @@
 <?php
 
-namespace WCPT\Services\WooCommerce\Gateways;
+namespace WPP\Services\WooCommerce\Gateways;
 
 /**
  * Name: Interface Gateways

@@ -1,6 +1,6 @@
 <?php
 
-namespace WCPT\Services\WooCommerce\Logs;
+namespace WPP\Services\WooCommerce\Logs;
 
 use WC_Logger;
 
@@ -25,7 +25,7 @@ abstract class Logs
   public function __construct()
   {
     $this->wc = new WC_Logger();
-    $this->prefix = WCPT_PLUGIN_SLUG;
+    $this->prefix = WPP_PLUGIN_SLUG;
   }
 
   /**

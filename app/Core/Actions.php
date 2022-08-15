@@ -1,6 +1,6 @@
 <?php
 
-namespace WCPT\Core;
+namespace WPP\Core;
 
 /**
  * Name: Actions

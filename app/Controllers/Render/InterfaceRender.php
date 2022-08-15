@@ -1,6 +1,6 @@
 <?php
 
-namespace WCPT\Controllers\Render;
+namespace WPP\Controllers\Render;
 
 /**
  * Name: Interface Render

@@ -183,7 +183,7 @@ In addition to these items, it is also highly recommended that you study and rea
 │           │   └── index.scss
 │           └── index.scss
 ├── tsconfig.json
-└── wc-plugin-template.php
+└── wc-pagarme-payments.php
 
 ```
 

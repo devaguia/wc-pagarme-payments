@@ -2,7 +2,7 @@ import { Notification } from "../../components/Notification";
 
 class Service {
   constructor() {
-    if (!document.querySelector(".wcpt-container-about")) return;
+    if (!document.querySelector(".wpp-container-about")) return;
     this.handleNotification();
   }
 

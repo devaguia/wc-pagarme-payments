@@ -1,8 +1,8 @@
 <?php
 
-namespace WCPT\Core;
+namespace WPP\Core;
 
-use WCPT\Model\Database\Bootstrap;
+use WPP\Model\Database\Bootstrap;
 
 /**
  * Name: Uninstall

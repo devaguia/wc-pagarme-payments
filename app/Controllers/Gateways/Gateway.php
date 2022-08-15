@@ -1,11 +1,11 @@
 <?php
 
-namespace WCPT\Controllers\Gateways;
+namespace WPP\Controllers\Gateways;
 
 use WC_Payment_Gateway;
-use WCPT\Controllers\Checkout\Checkout;
-use WCPT\Services\WooCommerce\Gateways\InterfaceGateways;
-use WCPT\Services\WooCommerce\Webhooks\Webhooks;
+use WPP\Controllers\Checkout\Checkout;
+use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
+use WPP\Services\WooCommerce\Webhooks\Webhooks;
 
 /**
  * Name: Billet
@@ -18,11 +18,11 @@ class Gateway extends WC_Payment_Gateway implements InterfaceGateways
 
     public function __construct() {
         
-        $this->id                 = "wc-plugin-template";
+        $this->id                 = "wc-pagarme-payments";
         // $this->icon               = ## Image path 
         $this->has_fields         = false;
-        $this->method_title       = __( "Gateway Example", WCPT_PLUGIN_SLUG );
-        $this->method_description = __( "Payment gateway example", WCPT_PLUGIN_SLUG );
+        $this->method_title       = __( "Gateway Example", WPP_PLUGIN_SLUG );
+        $this->method_description = __( "Payment gateway example", WPP_PLUGIN_SLUG );
 
         $this->supports = [
             "products"
@@ -56,27 +56,27 @@ class Gateway extends WC_Payment_Gateway implements InterfaceGateways
 
         $this->form_fields = [
             "enabled" => [
-                "title"       => __( "Enable", WCPT_PLUGIN_SLUG ),
-                "label"       => __( "Enable Gateway", WCPT_PLUGIN_SLUG ),
+                "title"       => __( "Enable", WPP_PLUGIN_SLUG ),
+                "label"       => __( "Enable Gateway", WPP_PLUGIN_SLUG ),
                 "type"        => "checkbox",
-                "description" => __( "Check this option to activate the payment method", WCPT_PLUGIN_SLUG ),
+                "description" => __( "Check this option to activate the payment method", WPP_PLUGIN_SLUG ),
                 "default"     => "no",
                 "desc_tip"    => true
             ],
 
             "title" => [
-                "title"       => __( "Title", WCPT_PLUGIN_SLUG ),
+                "title"       => __( "Title", WPP_PLUGIN_SLUG ),
                 "type"        => "text",
-                "description" => __( "This controls the title which the user sees during checkout.", WCPT_PLUGIN_SLUG ),
-                "default"     => __( "Payment setup plugin for Woocommerce", WCPT_PLUGIN_SLUG ),
+                "description" => __( "This controls the title which the user sees during checkout.", WPP_PLUGIN_SLUG ),
+                "default"     => __( "Payment setup plugin for Woocommerce", WPP_PLUGIN_SLUG ),
                 "desc_tip"    => true
             ],
 
             "description" => [
-                "title"       => __( "Description", WCPT_PLUGIN_SLUG ),
+                "title"       => __( "Description", WPP_PLUGIN_SLUG ),
                 "type"        => "textarea",
-                "description" => __( "This controls the description which the user sees during checkout.", WCPT_PLUGIN_SLUG ),
-                "default"     => __( "Payment setup plugin for Woocommerce", WCPT_PLUGIN_SLUG ),
+                "description" => __( "This controls the description which the user sees during checkout.", WPP_PLUGIN_SLUG ),
+                "default"     => __( "Payment setup plugin for Woocommerce", WPP_PLUGIN_SLUG ),
                 "desc_tip"    => true
             ]
         ];
@@ -95,7 +95,7 @@ class Gateway extends WC_Payment_Gateway implements InterfaceGateways
 
             if ( $this->testmode ) {
 
-                $this->description .= __( " Test mode activate! In this mode transactions are not real.", WCPT_PLUGIN_SLUG );
+                $this->description .= __( " Test mode activate! In this mode transactions are not real.", WPP_PLUGIN_SLUG );
                 $this->description  = trim( $this->description );
             }
             

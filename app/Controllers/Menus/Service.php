@@ -1,8 +1,8 @@
 <?php
 
-namespace WCPT\Controllers\Menus;
+namespace WPP\Controllers\Menus;
 
-use WCPT\Controllers\Render\Render;
+use WPP\Controllers\Render\Render;
 
 /**
  * Name: About

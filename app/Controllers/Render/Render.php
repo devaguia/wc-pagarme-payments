@@ -1,9 +1,9 @@
 <?php
 
 
-namespace WCPT\Controllers\Render;
+namespace WPP\Controllers\Render;
 
-use WCPT\Helpers\Config;
+use WPP\Helpers\Config;
 
 /**
  * Name: Render HTML
