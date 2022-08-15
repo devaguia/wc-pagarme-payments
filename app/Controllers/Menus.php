@@ -25,7 +25,7 @@ class Menus
      */
     private function menus() {
         return [
-            [ 'Pagarme', __( 'Pagarme Payments', WPP_PLUGIN_SLUG ) ]
+            [ 'Pagarme', __( 'Pagar.me Settings', WPP_PLUGIN_SLUG ) ]
         ];
     }
 

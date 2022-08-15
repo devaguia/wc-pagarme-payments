@@ -2,6 +2,7 @@
 
 namespace WPP\Controllers\Webhooks;
 
+use WPP\Services\WooCommerce\Webhooks\InterfaceWebhooks;
 /**
  * Name: Credit
  * Webhook for Credit payments

@@ -1,6 +1,6 @@
-# WooCommerce Plugin Template
+# Pagar.me payments for WooCommerce
 
-**Description:** Template for WooCommerce Payment plugins
+**Description:** Payment plugin for WooCommerce/WordPress using the Pagar.me API.
 
 ## Anchors
 - [Developer notes](#notes)

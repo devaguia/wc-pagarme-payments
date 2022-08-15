@@ -1,4 +1,4 @@
-=== Pagarme Payments For WooCommerce ===
+=== Pagar.me payments for WooCommerce ===
 Contributors: codebakery, aguiart0
 Tags: setup
 Requires at least: 5.0
@@ -9,7 +9,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
-Initial setup for wordpress plugin
+Payment plugin for WooCommerce/WordPress using the Pagar.me API
 
 = Requisitos =
 

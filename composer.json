@@ -1,6 +1,6 @@
 {
     "name": "codebakery/wc-pagarme-payments",
-    "description": "Payment plugin for WooCommerce",
+    "description": "Payment plugin for WooCommerce/WordPress using the Pagar.me API",
     "type": "wordpress-plugin",
     "license": "GPL-3.0",
     "support": {

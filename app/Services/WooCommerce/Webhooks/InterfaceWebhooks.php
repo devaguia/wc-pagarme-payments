@@ -1,6 +1,6 @@
 <?php
 
-namespace WPP\Controllers\Webhooks;
+namespace WPP\Services\WooCommerce\Webhooks;
 
 /**
  * Name: Interface Webhooks

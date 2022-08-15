@@ -21,8 +21,8 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
         $this->id                 = "wc-pagarme-billet";
         // $this->icon               = ## Image path 
         $this->has_fields         = false;
-        $this->method_title       = __( "Pagarme - Bank Slip", WPP_PLUGIN_SLUG );
-        $this->method_description = __( "Pagarme - Pay with bank slip", WPP_PLUGIN_SLUG );
+        $this->method_title       = __( "Pagar.me - Bank Slip", WPP_PLUGIN_SLUG );
+        $this->method_description = __( "Pagar.me - Pay with bank slip", WPP_PLUGIN_SLUG );
 
         $this->supports = [
             "products"

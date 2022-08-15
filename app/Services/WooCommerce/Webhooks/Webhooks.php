@@ -29,7 +29,7 @@ class Webhooks
 		$webhook = $this->get_instance( $class );
 		
 		if ( $webhook ) {
-			add_action( 'woocommerce_api_'. $this->get_endpoint(), [ $webhook, 'handle_notifications' ] );
+			// add_action( 'woocommerce_api_'. $this->get_endpoint(), [ $webhook, 'handle_notifications' ] );
 		}
 	}
 

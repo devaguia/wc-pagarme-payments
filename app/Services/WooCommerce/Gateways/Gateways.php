@@ -33,7 +33,9 @@ class Gateways
 	 */
 	public function add_gateway_method( $gateways ) 
 	{
-        array_push( $gateways, 'WPP\Controllers\Gateways\Gateway' );
+        array_push( $gateways, 'WPP\Controllers\Gateways\Billet' );
+        array_push( $gateways, 'WPP\Controllers\Gateways\Credit' );
+        array_push( $gateways, 'WPP\Controllers\Gateways\Pix' );
         return $gateways;
 	}
 	

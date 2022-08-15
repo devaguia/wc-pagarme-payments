@@ -21,8 +21,8 @@ class Credit extends WC_Payment_Gateway implements InterfaceGateways
         $this->id                 = "wc-pagarme-credit";
         // $this->icon               = ## Image path 
         $this->has_fields         = false;
-        $this->method_title       = __( "Pagarme - Credit Card", WPP_PLUGIN_SLUG );
-        $this->method_description = __( "Pagarme - Pay with credit card", WPP_PLUGIN_SLUG );
+        $this->method_title       = __( "Pagar.me - Credit Card", WPP_PLUGIN_SLUG );
+        $this->method_description = __( "Pagar.me - Pay with credit card", WPP_PLUGIN_SLUG );
 
         $this->supports = [
             "products"

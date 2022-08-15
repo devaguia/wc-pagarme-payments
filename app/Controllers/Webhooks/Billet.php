@@ -2,6 +2,8 @@
 
 namespace WPP\Controllers\Webhooks;
 
+use WPP\Services\WooCommerce\Webhooks\InterfaceWebhooks;
+
 /**
  * Name: Billet
  * Webhook for Billet payments

@@ -2,6 +2,7 @@
 
 namespace WPP\Controllers\Webhooks;
 
+use WPP\Services\WooCommerce\Webhooks\InterfaceWebhooks;
 /**
  * Name: Pix
  * Webhook for Pix payments

@@ -17,8 +17,8 @@ class Pagarme extends Render
      */
     private function enqueue()
     {
-        $this->enqueue_scripts( [ 'name' => 'wc-admin', 'file' => 'scripts/admin/pages/pagarme/index.js' ] );
-        $this->enqueue_styles( [ 'name' => 'wc-admin', 'file' => 'styles/admin/pages/pagarme/index.css' ] );
+        $this->enqueue_scripts( [ 'name' => 'wpp-admin', 'file' => 'scripts/admin/pages/pagarme/index.js' ] );
+        $this->enqueue_styles( [ 'name' => 'wpp-admin', 'file' => 'styles/admin/pages/pagarme/index.css' ] );
     }
     
     /**
