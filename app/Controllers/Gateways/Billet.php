@@ -58,7 +58,7 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
                 "title"       => __( "Enable", "wc-pagarme-payments" ),
                 "label"       => __( "Enable Gateway", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
-                "description" => __( "Check this option to activate the payment method", "wc-pagarme-payments" ),
+                "description" => __( "Check this option to activate the payment method.", "wc-pagarme-payments" ),
                 "default"     => "no",
                 "desc_tip"    => true
             ],
@@ -75,16 +75,41 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
                 "title"       => __( "Description", "wc-pagarme-payments" ),
                 "type"        => "textarea",
                 "description" => __( "This controls the description which the user sees during checkout.", "wc-pagarme-payments" ),
-                "default"     => __( "Payment setup plugin for Woocommerce", "wc-pagarme-payments" ),
+                "default"     => __( "Payment setup plugin for Woocommerce.", "wc-pagarme-payments" ),
+                "desc_tip"    => true
+            ],
+
+            "enabled_billet_discount" => [
+                "title"       => __( "Discount for bank slip payments", "wc-pagarme-payments" ),
+                "label"       => __( "Enable dicount.", "wc-pagarme-payments" ),
+                "type"        => "checkbox",
+                "description" => __( "Check this option to activate the discount for bank slip payments.", "wc-pagarme-payments" ),
+                "default"     => "no",
+                "desc_tip"    => true
+            ],
+
+            "billet_discount" => [
+                "title"       => __( "Discount Value (%)", "wc-pagarme-payments" ),
+                "type"        => "number",
+                "description" => __( "This controls the value of discount for bank slip.", "wc-pagarme-payments" ),
                 "desc_tip"    => true
             ],
 
             "test_mode" => [
                 "title"       => __( "Test Mode", "wc-pagarme-payments" ),
-                "label"       => __( "Enable test mode", "wc-pagarme-payments" ),
+                "label"       => __( "Enable test mode.", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
                 "description" => __( "Check this option to activate the test mode.", "wc-pagarme-payments" ),
                 "default"     => "no",
+                "desc_tip"    => true
+            ],
+
+            "test_mode" => [
+                "title"       => __( "Logs", "wc-pagarme-payments" ),
+                "label"       => __( "Enable bank slip logs.", "wc-pagarme-payments" ),
+                "type"        => "checkbox",
+                "description" => __( "Check this option to activate the log for this method.", "wc-pagarme-payments" ),
+                "default"     => "yes",
                 "desc_tip"    => true
             ],
         ];

@@ -79,12 +79,37 @@ class Credit extends WC_Payment_Gateway implements InterfaceGateways
                 "desc_tip"    => true
             ],
 
+            "instalments_quant" => [
+                "title"       => __( "Instalments Quantity", "wc-pagarme-payments" ),
+                "type"        => "number",
+                "description" => __( "This controls the quantity of instalments for credit card payments.", "wc-pagarme-payments" ),
+                "default"     => __( "Max of installments.", "wc-pagarme-payments" ),
+                "desc_tip"    => true
+            ],
+
+            "instalments_config" => [
+                "title"       => __( "Instalments Configuration", "wc-pagarme-payments" ),
+                "type"        => "button",
+                "default"     => __( "Configure", "wc-pagarme-payments" ),
+                "description" => __( "This controls the quantity of instalments and the fees for credit card payments.", "wc-pagarme-payments" ),
+                "desc_tip"    => true
+            ],
+
             "test_mode" => [
                 "title"       => __( "Test Mode", "wc-pagarme-payments" ),
-                "label"       => __( "Enable test mode", "wc-pagarme-payments" ),
+                "label"       => __( "Enable test mode.", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
                 "description" => __( "Check this option to activate the test mode.", "wc-pagarme-payments" ),
                 "default"     => "no",
+                "desc_tip"    => true
+            ],
+
+            "test_mode" => [
+                "title"       => __( "Logs", "wc-pagarme-payments" ),
+                "label"       => __( "Enable credit card logs.", "wc-pagarme-payments" ),
+                "type"        => "checkbox",
+                "description" => __( "Check this option to activate the log for this method.", "wc-pagarme-payments" ),
+                "default"     => "yes",
                 "desc_tip"    => true
             ],
         ];
