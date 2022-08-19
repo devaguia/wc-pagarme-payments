@@ -1,3 +1,152 @@
 @import "./../../components/container";
 @import "./../../components/notification";
-@import "./../../components/title";
+
+#wpbody-content {
+  .notice {
+    display: none !important;
+  }
+
+  .wpp-container-pagarme {
+    .title {
+      display: flex;
+
+      > h1 {
+        font-weight: 600;
+        color: $black-color;
+      }
+
+      svg {
+        width: 30px;
+        margin-left: 10px;
+      }
+    }
+    .methods-section {
+      .methods {
+        display: grid;
+        grid-template-columns: 115px 100px 50px;
+        .method {
+          display: flex;
+          align-content: center;
+          margin: 10px 0;
+
+          div {
+            margin-left: 5px;
+          }
+
+          .status {
+            &-disabled {
+              color: $danger-color;
+              i {
+                font-size: 16px;
+              }
+            }
+
+            &-activate {
+              color: $success-color;
+              i {
+                font-size: 16px;
+              }
+            }
+          }
+
+          .label {
+            font-size: 16px;
+            color: $black-color;
+          }
+
+          .mode {
+            background-color: $black-color;
+            color: $white-color;
+            border-radius: 3px;
+            min-width: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .link {
+            margin-left: 10px;
+            a {
+              i {
+                font-size: 14px;
+                color: $black-color;
+              }
+            }
+          }
+        }
+      }
+    }
+    .plugin-options {
+      margin-top: 20px;
+      label {
+        font-size: 14px;
+        color: $black-color;
+      }
+    }
+    .payment-options {
+      margin-top: 20px;
+
+      label {
+        font-size: 14px;
+        color: $black-color;
+      }
+
+      .option {
+        margin: 20px 0;
+        .anti-fraud {
+          margin: 5px 0;
+          input {
+            max-width: 100px;
+          }
+        }
+      }
+
+      .secret-keys {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+
+        > .key {
+          > div {
+            margin: 5px 0;
+            span {
+              font-size: 16px;
+              font-weight: 400;
+              color: $black-color;
+            }
+
+            input {
+              width: 100%;
+              height: 35px;
+              padding-left: 15px;
+              border-radius: 5px;
+              border: solid 0.1px rgba(0, 0, 0, 0.2);
+
+              box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            }
+          }
+        }
+      }
+    }
+    .submit {
+      float: right;
+      margin: 50px 0;
+      input {
+        height: 40px !important;
+        padding: 0 50px;
+        border: none;
+        border-radius: 5px;
+        background-color: $secondary-color;
+        color: $white-color;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        font-weight: 400;
+        font-size: 16px;
+
+        &:hover {
+          cursor: pointer;
+          opacity: 90%;
+        }
+      }
+    }
+  }
+}
