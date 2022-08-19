@@ -53,7 +53,8 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
      */
     public function init_form_fields()
     {
-        wp_enqueue_style( 'global', Config::__dist( "styles/global/index.css") );
+        wp_enqueue_style( 'wpp-billet-page', Config::__dist( "styles/admin/pages/billet/index.css") );
+        wp_enqueue_script( 'wpp-billet-page', Config::__dist( "scripts/admin/pages/billet/index.js") );
 
         $this->form_fields = [
             "enabled" => [

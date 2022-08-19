@@ -1,1 +1,16 @@
-@import "./../../components/container";
+@import "./../../components/payment";
+
+#woocommerce_wc-pagarme-credit_instalments_config {
+    height: 30px;
+    max-width: 150px;
+    border-radius: 5px;
+    border: none;
+    background-color: $secondary-color;
+    color: $white-color;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        cursor: pointer;
+        opacity: 90%;
+    }
+}
