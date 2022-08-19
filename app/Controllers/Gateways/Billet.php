@@ -4,6 +4,7 @@ namespace WPP\Controllers\Gateways;
 
 use WC_Payment_Gateway;
 use WPP\Controllers\Checkout\Checkout;
+use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
 use WPP\Services\WooCommerce\Webhooks\Webhooks;
 
@@ -52,6 +53,7 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
      */
     public function init_form_fields()
     {
+        wp_enqueue_style( 'global', Config::__dist( "styles/global/index.css") );
 
         $this->form_fields = [
             "enabled" => [
