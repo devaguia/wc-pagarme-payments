@@ -66,6 +66,15 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
                 "desc_tip"    => true
             ],
 
+            "test_mode" => [
+                "title"       => __( "Test Mode", "wc-pagarme-payments" ),
+                "label"       => __( "Enable test mode for bank slip.", "wc-pagarme-payments" ),
+                "type"        => "checkbox",
+                "description" => __( "Check this option to activate the test mode.", "wc-pagarme-payments" ),
+                "default"     => "no",
+                "desc_tip"    => true
+            ],
+
             "title" => [
                 "title"       => __( "Title", "wc-pagarme-payments" ),
                 "type"        => "text",
@@ -82,7 +91,31 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
                 "desc_tip"    => true
             ],
 
-            "enabled_billet_discount" => [
+            "bank" => [
+                "title"       => __( "Bank", "wc-pagarme-payments" ),
+                "type"        => "select",
+                "description" => __( "This controls the witch bank generate the billet.", "wc-pagarme-payments" ),
+                "options"     => [
+                    1 => "Banco Bradesco S.A.",
+                    2 => "Banco Itaú S.A.",
+                    3 => "Banco Santander S.A.",
+                    4 => "Banco Citibank S.A.",
+                    5 => "Banco Brasil S.A.",
+                    6 => "Caixa Econômica Federal",
+                ],
+                "desc_tip"    => true,
+                "default"     => 5
+            ],
+
+            "expiration" => [
+                "title"       => __( "Expiration days", "wc-pagarme-payments" ),
+                "type"        => "number",
+                "description" => __( "This controls the expiration days for bank slip.", "wc-pagarme-payments" ),
+                "desc_tip"    => true,
+                "default"     => 5
+            ],
+
+            "enabled_discount" => [
                 "title"       => __( "Discount for bank slip payments", "wc-pagarme-payments" ),
                 "label"       => __( "Enable dicount.", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
@@ -91,24 +124,15 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
                 "desc_tip"    => true
             ],
 
-            "billet_discount" => [
+            "discount" => [
                 "title"       => __( "Discount Value (%)", "wc-pagarme-payments" ),
                 "type"        => "number",
                 "description" => __( "This controls the value of discount for bank slip.", "wc-pagarme-payments" ),
                 "desc_tip"    => true
             ],
 
-            "test_mode" => [
-                "title"       => __( "Test Mode", "wc-pagarme-payments" ),
-                "label"       => __( "Enable test mode.", "wc-pagarme-payments" ),
-                "type"        => "checkbox",
-                "description" => __( "Check this option to activate the test mode.", "wc-pagarme-payments" ),
-                "default"     => "no",
-                "desc_tip"    => true
-            ],
-
-            "test_mode" => [
-                "title"       => __( "Logs", "wc-pagarme-payments" ),
+            "logs" => [
+                "title"       => __( "WooCommerce Logs", "wc-pagarme-payments" ),
                 "label"       => __( "Enable bank slip logs.", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
                 "description" => __( "Check this option to activate the log for this method.", "wc-pagarme-payments" ),

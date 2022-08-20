@@ -66,6 +66,15 @@ class Pix extends WC_Payment_Gateway implements InterfaceGateways
                 "desc_tip"    => true
             ],
 
+            "test_mode" => [
+                "title"       => __( "Test Mode", "wc-pagarme-payments" ),
+                "label"       => __( "Enable test mode for pix payments.", "wc-pagarme-payments" ),
+                "type"        => "checkbox",
+                "description" => __( "Check this option to activate the test mode.", "wc-pagarme-payments" ),
+                "default"     => "no",
+                "desc_tip"    => true
+            ],
+
             "title" => [
                 "title"       => __( "Title", "wc-pagarme-payments" ),
                 "type"        => "text",
@@ -82,7 +91,15 @@ class Pix extends WC_Payment_Gateway implements InterfaceGateways
                 "desc_tip"    => true
             ],
 
-            "enabled_billet_discount" => [
+            "expiration" => [
+                "title"       => __( "Expiration time(seconds)", "wc-pagarme-payments" ),
+                "type"        => "number",
+                "description" => __( "This controls the time for QR code expiration.", "wc-pagarme-payments" ),
+                "desc_tip"    => true,
+                "default"     => 3500
+            ],
+
+            "enabled_discount" => [
                 "title"       => __( "Discount for PIX payments", "wc-pagarme-payments" ),
                 "label"       => __( "Enable dicount.", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
@@ -91,24 +108,15 @@ class Pix extends WC_Payment_Gateway implements InterfaceGateways
                 "desc_tip"    => true
             ],
 
-            "billet_discount" => [
+            "discount" => [
                 "title"       => __( "Discount Value (%)", "wc-pagarme-payments" ),
                 "type"        => "number",
                 "description" => __( "This controls the value of discount for PIX.", "wc-pagarme-payments" ),
                 "desc_tip"    => true
             ],
 
-            "test_mode" => [
-                "title"       => __( "Test Mode", "wc-pagarme-payments" ),
-                "label"       => __( "Enable test mode.", "wc-pagarme-payments" ),
-                "type"        => "checkbox",
-                "description" => __( "Check this option to activate the test mode.", "wc-pagarme-payments" ),
-                "default"     => "no",
-                "desc_tip"    => true
-            ],
-
-            "test_mode" => [
-                "title"       => __( "Logs", "wc-pagarme-payments" ),
+            "logs" => [
+                "title"       => __( "WooCommerce Logs", "wc-pagarme-payments" ),
                 "label"       => __( "Enable pix logs.", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
                 "description" => __( "Check this option to activate the log for this method.", "wc-pagarme-payments" ),
