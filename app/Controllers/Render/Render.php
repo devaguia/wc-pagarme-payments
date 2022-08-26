@@ -51,7 +51,7 @@ abstract class Render implements InterfaceRender
      * Render HTML files
      * @param string $file
      * @param array $dados
-     * @return string
+     * @return void
      */
     public function render( $file, $dados )
     {

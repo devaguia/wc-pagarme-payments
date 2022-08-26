@@ -3,10 +3,10 @@
 namespace WPP\Core;
 
 use WPP\Controllers\Menus;
+use WPP\Controllers\Menus\Settings;
 use WPP\Model\Database\Bootstrap;
 use WPP\Helpers\Config;
 use WPP\Core\Uninstall;
-use WPP\Helpers\Utils;
 use WPP\Services\WooCommerce\WooCommerce;
 
 /**
@@ -90,4 +90,14 @@ class Functions
     public static function desactive() {
         new Uninstall;
     }
+
+    public static function ajax_get_installment_settings()
+    {
+        $settings = new Settings;
+        return wp_send_json(
+            ['content' => $settings->request()],
+            200
+        );
+    }
+
 }

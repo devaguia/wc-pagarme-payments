@@ -33,3 +33,8 @@ add_filter( 'plugin_action_links', [
     Functions::class,
     'settings_link'
 ], 10, 2 );
+
+add_action( 'wp_ajax_get_installment_settings', [
+    Functions::class,
+    'ajax_get_installment_settings'
+], 999 );
