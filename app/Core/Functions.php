@@ -4,7 +4,6 @@ namespace WPP\Core;
 
 use WPP\Controllers\Entities\Installments;
 use WPP\Controllers\Menus;
-use WPP\Controllers\Menus\Settings;
 use WPP\Model\Database\Bootstrap;
 use WPP\Helpers\Config;
 use WPP\Core\Uninstall;
@@ -36,7 +35,6 @@ class Functions
     public static function create_admin_menu()
     {
         new Menus();
-        register_deactivation_hook( __FILE__, self::desactive() );
     }
 
     /**
