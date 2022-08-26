@@ -7,6 +7,7 @@
   }
 
   .wpp-container-pagarme {
+    padding-bottom: 100px;
     .title {
       display: flex;
 
@@ -93,11 +94,19 @@
       }
 
       .option {
-        margin: 20px 0;
+        margin: 40px 0;
         .anti-fraud {
           margin: 5px 0;
+          font-weight: 600;
           input {
-            max-width: 100px;
+            max-width: 60px;
+            font-weight: 400;
+            height: 35px;
+            padding-left: 15px;
+            border-radius: 5px;
+            border: solid 0.1px rgba(0, 0, 0, 0.2);
+
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
           }
         }
       }
@@ -131,7 +140,6 @@
     }
     .submit {
       float: right;
-      margin: 50px 0;
       input {
         height: 40px !important;
         padding: 0 50px;
