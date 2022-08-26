@@ -27,7 +27,7 @@ class Pagarme extends Render
      */
     public function request()
     {
-        $this->render( 'Admin/pagarme.php', [] );
+        $this->render( 'Admin/settings/pagarme.php', [] );
         $this->enqueue();
     }
 }

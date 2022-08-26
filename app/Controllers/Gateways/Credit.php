@@ -91,19 +91,19 @@ class Credit extends WC_Payment_Gateway implements InterfaceGateways
                 "desc_tip"    => true
             ],
 
-            "instalments_quant" => [
+            "installments_quant" => [
                 "title"       => __( "Instalments Quantity", "wc-pagarme-payments" ),
                 "type"        => "number",
-                "description" => __( "This controls the quantity of instalments for credit card payments.", "wc-pagarme-payments" ),
+                "description" => __( "This controls the quantity of installments for credit card payments.", "wc-pagarme-payments" ),
                 "default"     => __( "Max of installments.", "wc-pagarme-payments" ),
                 "desc_tip"    => true
             ],
 
-            "instalments_config" => [
+            "installments_config" => [
                 "title"       => __( "Instalments Configuration", "wc-pagarme-payments" ),
                 "type"        => "button",
                 "default"     => __( "Configure", "wc-pagarme-payments" ),
-                "description" => __( "This controls the quantity of instalments and the fees for credit card payments.", "wc-pagarme-payments" ),
+                "description" => __( "This controls the quantity of installments and the fees for credit card payments.", "wc-pagarme-payments" ),
                 "desc_tip"    => true
             ],
 
