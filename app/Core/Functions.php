@@ -2,6 +2,7 @@
 
 namespace WPP\Core;
 
+use WPP\Controllers\Entities\Installments;
 use WPP\Controllers\Menus;
 use WPP\Controllers\Menus\Settings;
 use WPP\Model\Database\Bootstrap;
@@ -93,7 +94,7 @@ class Functions
 
     public static function ajax_get_installment_settings()
     {
-        $settings = new Settings;
+        $settings = new Installments;
         return wp_send_json(
             ['content' => $settings->request()],
             200

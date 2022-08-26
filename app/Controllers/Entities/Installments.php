@@ -1,8 +1,7 @@
 <?php
 
-namespace WPP\Controllers\Menus;
+namespace WPP\Controllers\Entities;
 
-use WPP\Controllers\Render\Render;
 use WPP\Helpers\Config;
 
 /**
@@ -10,7 +9,7 @@ use WPP\Helpers\Config;
  * @package Controller 
  * @since 1.0.0
  */
-class Settings
+class Installments
 {
     /**
      * Call the view render
