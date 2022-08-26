@@ -4,6 +4,7 @@
 namespace WPP\Controllers\Render;
 
 use WPP\Helpers\Config;
+use WPP\Helpers\Utils;
 
 /**
  * Name: Render HTML
@@ -53,23 +54,9 @@ abstract class Render implements InterfaceRender
      * @param array $dados
      * @return void
      */
-    public function render( $file, $dados )
+    public function render( $file, $data )
     {
-        extract($dados);
-        ob_start();
-
-        $template = get_template_directory() . "/wctp-templates/$file";
-        
-        if ( ! file_exists( $template ) ) {
-            $template = Config::__views( $file );
-        }
-        
-        require $template;
-        $html = ob_get_clean();
-
-        echo $html;
-
-
         $this->enqueue_default();
+        echo Utils::render( $file, $data );
     }
 }

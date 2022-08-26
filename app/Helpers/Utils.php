@@ -38,4 +38,28 @@ class Utils
         }
         return $view;
     }
+
+    /**
+     * Render HTML files
+     * @param string $file
+     * @param array $data
+     * @return string
+     */
+    public static function render( $file, $data )
+    {
+        extract($data);
+        ob_start();
+
+        $template = get_template_directory() . "/wctp-templates/$file";
+        
+        if ( ! file_exists( $template ) ) {
+            $template = Config::__views( $file );
+        }
+
+        if ( file_exists( $template ) ) require $template;
+        
+        $html = ob_get_clean();
+
+        return $html;
+    }
 }

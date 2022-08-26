@@ -2,7 +2,7 @@
 
 namespace WPP\Controllers\Entities;
 
-use WPP\Helpers\Config;
+use WPP\Helpers\Utils;
 
 /**
  * Name: Settings
@@ -17,29 +17,6 @@ class Installments
      */
     public function request()
     {
-        return $this->render( 'Admin/credit/installments.php', [] );
-    }
-
-    /**
-     * Render HTML files
-     * @param string $file
-     * @param array $dados
-     * @return string
-     */
-    public function render( $file, $dados )
-    {
-        extract($dados);
-        ob_start();
-
-        $template = get_template_directory() . "/wctp-templates/$file";
-        
-        if ( ! file_exists( $template ) ) {
-            $template = Config::__views( $file );
-        }
-        
-        require $template;
-        $html = ob_get_clean();
-
-        return $html;
+        return Utils::render( 'Admin/credit/installments.php', [] );
     }
 }
