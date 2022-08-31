@@ -8,14 +8,14 @@ namespace WPP\Helpers;
  * @package Helpers
  * @since 1.0.0
  */
-class Utils 
+class Utils
 {
     /**
      * Parse constroller file name to view
      * @param string $controller
      * @return string
      */
-    public static function parse_view( $controller ) 
+    public static function parse_view( $controller )
     {
 
         $split = str_split( $controller );

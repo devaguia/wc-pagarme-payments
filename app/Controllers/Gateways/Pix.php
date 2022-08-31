@@ -3,10 +3,10 @@
 namespace WPP\Controllers\Gateways;
 
 use WC_Payment_Gateway;
-use WPP\Controllers\Checkout\Checkout;
+use WPP\Controllers\Checkout\Pix as Checkout;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
-use WPP\Services\WooCommerce\Webhooks\Webhooks;
+use WPP\Controllers\Webhooks\Pix as Webhooks;
 
 /**
  * Name: Billet
@@ -138,8 +138,7 @@ class Pix extends WC_Payment_Gateway implements InterfaceGateways
 
         if ( $this->description ) {
 
-            if ( $this->testmode ) {
-
+            if ( $this->test_mode ) {
                 $this->description .= __( " Test mode activate! In this mode transactions are not real.", "wc-pagarme-payments" );
                 $this->description  = trim( $this->description );
             }
