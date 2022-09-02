@@ -79,7 +79,7 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
                 "title"       => __( "Title", "wc-pagarme-payments" ),
                 "type"        => "text",
                 "description" => __( "This controls the title which the user sees during checkout.", "wc-pagarme-payments" ),
-                "default"     => __( "Payment setup plugin for Woocommerce", "wc-pagarme-payments" ),
+                "default"     => __( "Pagar.me Bank Slip", "wc-pagarme-payments" ),
                 "desc_tip"    => true
             ],
 
@@ -87,7 +87,7 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
                 "title"       => __( "Description", "wc-pagarme-payments" ),
                 "type"        => "textarea",
                 "description" => __( "This controls the description which the user sees during checkout.", "wc-pagarme-payments" ),
-                "default"     => __( "Payment setup plugin for Woocommerce.", "wc-pagarme-payments" ),
+                "default"     => __( "Pay with bank slip using Pagar.me.", "wc-pagarme-payments" ),
                 "desc_tip"    => true
             ],
 

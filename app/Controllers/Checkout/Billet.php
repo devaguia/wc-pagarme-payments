@@ -12,8 +12,13 @@ use WPP\Controllers\Render\Render;
  */
 class Billet extends Render
 {
+    public function __construct()
+    {
+        $this->request();
+    }
+    
     public function request()
     {
-        $this->render( 'templates/checkout/billet.php',[] );
+        $this->render( 'Pages/checkout/billet.php',[] );
     }
 }

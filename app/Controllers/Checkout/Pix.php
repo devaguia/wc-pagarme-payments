@@ -12,8 +12,13 @@ use WPP\Controllers\Render\Render;
  */
 class Pix extends Render
 {
+    public function __construct()
+    {
+        $this->request();
+    }
+    
     public function request()
     {
-        $this->render( 'templates/checkout/pix.php',[] );
+        $this->render( 'Pages/checkout/pix.php',[] );
     }
 }
