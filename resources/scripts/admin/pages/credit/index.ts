@@ -1,5 +1,5 @@
 import { Payment } from "../../components/Payment";
-import { Instalments } from "./installments";
+import { Installments } from "./installments";
 
 class Credit {
   constructor() {
@@ -11,9 +11,12 @@ class Credit {
   }
 
   handleInstalments() {
-    const button = document.querySelector(
+    const button: HTMLInputElement|null = document.querySelector(
       "#woocommerce_wc-pagarme-credit_installments_config"
     );
+
+    if (button) button.value = "Configure";
+
     button?.addEventListener("click", () => {
       this.getInstallmentsSettings();
     });
@@ -30,7 +33,12 @@ class Credit {
       .then((response) => response.json())
       .then(function (response: any) {
         if (response?.content) {
-          new Instalments(response.content);
+          const installments = new Installments(response.content);
+
+          const close = document.querySelector(".wpp-installments-settings > .close");
+          close?.addEventListener("click", () => {
+            installments.remove();
+          });
         }
       });
   }
