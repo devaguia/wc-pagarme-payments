@@ -20,7 +20,7 @@ class Pix extends WC_Payment_Gateway implements InterfaceGateways
     public function __construct() {
         
         $this->id                 = "wc-pagarme-pix";
-        // $this->icon               = ## Image path 
+        $this->icon               = Config::__images( "icons/pix.svg");
         $this->has_fields         = false;
         $this->method_title       = __( "Pagar.me - Pix", "wc-pagarme-payments" );
         $this->method_description = __( "Pagar.me - Pay with pix", "wc-pagarme-payments" );

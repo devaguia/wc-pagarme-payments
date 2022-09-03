@@ -16,9 +16,20 @@ class Billet extends Render
     {
         $this->request();
     }
+
+
+    /**
+     * Enqueue custom scripts and styles to the page
+     * @return void
+     */
+    private function enqueue()
+    {
+        $this->enqueue_styles( [ 'name' => 'wpp-billet-checkout', 'file' => 'styles/theme/pages/checkout/billet.css' ] );
+    }
     
     public function request()
     {
         $this->render( 'Pages/checkout/billet.php',[] );
+        $this->enqueue();
     }
 }

@@ -7,6 +7,7 @@ use WPP\Controllers\Checkout\Credit as Checkout;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
 use WPP\Controllers\Webhooks\Credit as Webhooks;
+use WPP\Helpers\Utils;
 
 /**
  * Name: Billet
@@ -20,7 +21,7 @@ class Credit extends WC_Payment_Gateway implements InterfaceGateways
     public function __construct() {
         
         $this->id                 = "wc-pagarme-credit";
-        // $this->icon               = ## Image path 
+        $this->icon               = Config::__images( "icons/credit.svg");
         $this->has_fields         = false;
         $this->method_title       = __( "Pagar.me - Credit Card", "wc-pagarme-payments" );
         $this->method_description = __( "Pagar.me - Pay with credit card", "wc-pagarme-payments" );

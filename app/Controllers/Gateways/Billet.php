@@ -20,7 +20,7 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
     public function __construct() {
         
         $this->id                 = "wc-pagarme-billet";
-        // $this->icon               = ## Image path 
+        $this->icon               = Config::__images( "icons/billet.svg");
         $this->has_fields         = false;
         $this->method_title       = __( "Pagar.me - Bank Slip", "wc-pagarme-payments" );
         $this->method_description = __( "Pagar.me - Pay with bank slip", "wc-pagarme-payments" );
