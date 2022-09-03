@@ -35,7 +35,7 @@ class Pix extends WC_Payment_Gateway implements InterfaceGateways
         $this->title       = $this->get_option( "title" );
         $this->description = $this->get_option( "description" );
         $this->enabled     = $this->get_option( "enabled" );
-        $this->testmode    = "yes" === $this->get_option( "testmode" );
+        $this->test_mode    = "yes" === $this->get_option( "test_mode" );
 
         // add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'thank_you_page' ]);
 

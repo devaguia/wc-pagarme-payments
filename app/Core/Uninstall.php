@@ -25,6 +25,6 @@ class Uninstall
     private static function removeTables()
     {
         $boot = new Bootstrap;
-        $boot->unistall();
+        $boot->uninstall();
     }
 }

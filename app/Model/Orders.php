@@ -1,15 +1,15 @@
 <?php
 
-namespace WPP\Model\User;
+namespace WPP\Model;
 
 use As247\WpEloquent\Database\Eloquent\Model;
 
 /**
- * Name: User
- * @package Model/User 
+ * Name: Settings
+ * @package Model 
  * @since 1.0.0
  */
-class Example extends Model
+class Orders extends Model
 {
    /**
    * The attributes that are mass assignable.
@@ -17,7 +17,9 @@ class Example extends Model
    * @var array
    */
    protected $fillable = [
-       'description'
+       'pagarme_id',
+       'code',
+       'status'
    ];
    
    /**

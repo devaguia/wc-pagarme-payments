@@ -3,7 +3,8 @@
 namespace WPP\Model\Database;
 
 use As247\WpEloquent\Application;
-use WPP\Model\Database\Tables\Example;
+use WPP\Model\Database\Tables\Orders;
+use WPP\Model\Database\Tables\Settings;
 
 /**
  * Name: Bootstrap
@@ -17,7 +18,8 @@ class Bootstrap
    public function __construct()
    {
       $this->tables = [
-         Example::class
+         Settings::class,
+         Orders::class
       ];
 
       $this->init();
@@ -39,7 +41,7 @@ class Bootstrap
     * @since 1.0.0
     * @return void
     */
-   public function unistall()
+   public function uninstall()
    {
       foreach ($this->tables as $table) {
          if ( class_exists( $table ) ) {
