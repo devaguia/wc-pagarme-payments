@@ -84,12 +84,30 @@
                     <h3><? echo __( "Plugin Options:", "wc-pagarme-payments" ); ?></h3>
                 </div>
                 <div>
+                    <h4><strong><?php echo __( "Icons", "wc-pagarme-payments" ); ?></strong></h4>
                     <div>
                         <input type="checkbox" name="show-icons" id="wpp-show-icons">
                         <label for="wpp-show-icons"><?php echo __( "Show Pagar.me icons on checkout.", "wc-pagarme-payments"); ?></label>
                     </div>
                 </div>
+                <div class="status">
+                    <h4><strong><?php echo __( "Status", "wc-pagarme-payments" ); ?></strong></h4>
+                    <div>
+                        <label for=""><?php echo __( "Status for completed orders:", "wc-pagarme-payments" ); ?></label>
+                        <select name="wpp-finish-order-status" id="wpp-finish-order-status">
+                            <option value="wc-processing">Processing</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="status">
+                    <h4><strong><?php echo __( "Order Logs", "wc-pagarme-payments" ); ?></strong></h4>
+                    <div>
+                        <input type="checkbox" name="show-icons" id="wpp-order-logs">
+                        <label for="wpp-order-logs"><?php echo __( "Add log section on order edit page.", "wc-pagarme-payments"); ?></label>
+                    </div>
+                </div>
             </div>
+            <hr>
             <div class="payment-options">
                 <div class="title">
                     <h3><? echo __( "Payment Options:", "wc-pagarme-payments" ); ?></h3>
@@ -114,11 +132,26 @@
                 </div>
                 <div>
                     <div class="option">
-                        <input type="checkbox" name="anti-fraud" id="wpp-anti-fraud">
-                        <label for="wpp-anti-fraud"><?php echo __( "Enable anti-fraud.", "wc-pagarme-payments"); ?></label>
-                        <div class="anti-fraud">
-                            <label for=""><?php echo __( "Minimum value:", "wc-pagarme-payments"); ?></label>
-                            <input type="text" name="anti-fraud-value" id="wpp-anti-fraud-value">
+                        <h4><strong><?php echo __( "Anti Fraud", "wc-pagarme-payments" ); ?></strong></h4>
+                        <div>
+                            <input type="checkbox" name="anti-fraud" id="wpp-anti-fraud">
+                            <label for="wpp-anti-fraud"><?php echo __( "Enable anti-fraud.", "wc-pagarme-payments"); ?></label>
+                            <div class="anti-fraud">
+                                <label for=""><?php echo __( "Minimum value:", "wc-pagarme-payments"); ?></label>
+                                <input type="text" name="anti-fraud-value" id="wpp-anti-fraud-value">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option">
+                        <h4><strong><?php echo __( "API Version", "wc-pagarme-payments" ); ?></strong></h4>
+                        <div>
+                            <label for="wpp-pagarme-api-version"><?php echo __( "Pagar.me API version:", "wc-pagarme-payments" ); ?></label>
+                            <div>
+                                <select name="wpp-pagarme-api-version" id="wpp-pagarme-api-version">
+                                    <option value="">Versão 1</option>
+                                    <option value="">Versão 2</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>

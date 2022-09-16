@@ -46,13 +46,67 @@ class Settings
     private $anti_fraud_value;
 
 
-    public function __construct()
+    /**
+     * WooCommerce success status
+     * @var string
+     */
+    private $success_status;
+
+    /**
+     * WooCommerce Order logs
+     * @var bool
+     */
+    private $order_log;
+
+
+
+    public function __construct( $single = false )
     {
+        if ( ! $single ) $this->fill();
+    }
+
+    /**
+     * Fill the class fields
+     * @return void
+     */
+    private function fill()
+    {
+
+    }
+
+    /**
+     * Get a single row on database
+     * @param string $key
+     * @return mixed
+     */
+    private function get_single( $key )
+    {
+
+    }
+
+    /**
+     * Set a value for a single row on database
+     * @param string $key
+     * @param string $value
+     * @return bool
+     */
+    private function set_single( $key, $value )
+    {
+        
+    }
+
+    /**
+     * Set default rows on database
+     * @return void
+     */
+    private function set_default() 
+    {
+
     }
 
     /**
      * Get $production_key
-     * @return string;
+     * @return string
      */
     private function get_production_key()
     {
@@ -162,5 +216,44 @@ class Settings
     private function set_anti_fraud_value( $value )
     {
         $this->anti_fraud_value = $value;
+    }
+
+    /**
+     * Get $success_status
+     * @return string
+     */
+    private function get_success_status()
+    {
+        return $this->success_status;
+    }
+
+    /**
+     * Set $success_status
+     * @param string $value
+     * @return void
+     */
+    private function set_success_status( $value )
+    {
+        $this->success_status = $value;
+    }
+
+
+    /**
+     * Get $order_log
+     * @return bool
+     */
+    private function get_order_log()
+    {
+        return $this->order_log;
+    }
+
+    /**
+     * Set $order_log
+     * @param bool $value
+     * @return void
+     */
+    private function set_order_log( $value )
+    {
+        $this->order_log = $value;
     }
 }

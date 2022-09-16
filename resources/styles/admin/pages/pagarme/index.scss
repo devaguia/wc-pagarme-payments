@@ -80,9 +80,25 @@
     }
     .plugin-options {
       margin-top: 20px;
+      margin-bottom: 30px;
+
+      > .title {
+        margin: 0;
+      }
+
       label {
         font-size: 14px;
         color: $black-color;
+      }
+
+      > div {
+        margin: 20px 0;
+        > h4 {
+          font-size: 14px;
+          margin: 0;
+          margin-bottom: 5px;
+          color: $black-color;
+        }
       }
     }
     .payment-options {
@@ -94,20 +110,33 @@
       }
 
       .option {
-        margin: 40px 0;
-        .anti-fraud {
-          margin: 5px 0;
-          font-weight: 600;
-          input {
-            max-width: 60px;
-            font-weight: 400;
-            height: 35px;
-            padding-left: 15px;
-            border-radius: 5px;
-            border: solid 0.1px rgba(0, 0, 0, 0.2);
+        margin: 20px 0;
 
-            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        > h4 {
+          font-size: 14px;
+          margin: 0;
+          margin-bottom: 5px;
+          color: $black-color;
+        }
+
+        > div {
+          > div {
+            input {
+              max-width: 60px;
+              font-weight: 400;
+              height: 35px;
+              padding-left: 15px;
+              border-radius: 5px;
+              border: solid 0.1px rgba(0, 0, 0, 0.2);
+  
+              box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            }
+
+            select {
+              margin: 5px 0;
+            }
           }
+          
         }
       }
 
