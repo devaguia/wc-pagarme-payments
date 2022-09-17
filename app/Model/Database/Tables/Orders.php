@@ -6,7 +6,7 @@ use As247\WpEloquent\Support\Facades\Schema;
 
 /**
  * Name: Orders
- * @package Model/Database/Tables
+ * @package Model
  * @since 1.0.0
  */
 class Orders

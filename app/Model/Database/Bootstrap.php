@@ -8,7 +8,7 @@ use WPP\Model\Database\Tables\Settings;
 
 /**
  * Name: Bootstrap
- * @package Model/Database
+ * @package Model
  * @since 1.0.0
  */
 class Bootstrap

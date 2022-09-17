@@ -1,6 +1,6 @@
 <?php
 
-namespace WPP\Model;
+namespace WPP\Model\Entity;
 
 use As247\WpEloquent\Database\Eloquent\Model;
 

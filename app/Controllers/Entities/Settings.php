@@ -237,7 +237,6 @@ class Settings
         $this->success_status = $value;
     }
 
-
     /**
      * Get $order_log
      * @return bool

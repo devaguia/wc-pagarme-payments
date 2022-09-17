@@ -1,6 +1,6 @@
 <?php
 
-namespace WPP\Model;
+namespace WPP\Model\Entity;
 
 use As247\WpEloquent\Database\Eloquent\Model;
 
@@ -11,25 +11,21 @@ use As247\WpEloquent\Database\Eloquent\Model;
  */
 class Settings extends Model
 {
-   /**
+  /**
    * The attributes that are mass assignable.
    *
    * @var array
    */
-   protected $fillable = [
-       'description',
-       'production_key',
-       'test_key',
-       'methods',
-       'credit_installments',
-       'anti_fraud',
-       'anti_fraud_value'
-   ];
-   
-   /**
+  protected $fillable = [
+    'id',
+    'key',
+    'value'
+  ];
+
+  /**
    * The attributes that should be hidden for arrays.
    *
    * @var array
    */
-   protected $hidden = [];
+  protected $hidden = [];
  }
