@@ -2,6 +2,8 @@
 
 namespace WPP\Controllers\Entities;
 
+use WPP\Model\Repository\Settings as Model;
+
 /**
  * Name: Settings
  * @package Controller 
@@ -58,10 +60,17 @@ class Settings
      */
     private $order_log;
 
+    /**
+     * Setting Repository
+     * @var Model
+     */
+    private $model;
+
 
 
     public function __construct( $single = false )
     {
+        $this->model = new Model;
         if ( ! $single ) $this->fill();
     }
 
@@ -69,9 +78,18 @@ class Settings
      * Fill the class fields
      * @return void
      */
-    private function fill()
+    public function fill()
     {
 
+    }
+
+    /**
+     * Save Paga.me Settings
+     * @return void
+     */
+    public function save()
+    {
+        $this->model->save( $this->get_fields() );
     }
 
     /**
@@ -79,9 +97,9 @@ class Settings
      * @param string $key
      * @return mixed
      */
-    private function get_single( $key )
+    public function get_single( $key )
     {
-
+        return $this->model->find( $key );
     }
 
     /**
@@ -90,18 +108,27 @@ class Settings
      * @param string $value
      * @return bool
      */
-    private function set_single( $key, $value )
+    public function save_single( $key, $value )
     {
-        
+        $this->model->save( [ $key => $value ] );
     }
 
     /**
-     * Set default rows on database
-     * @return void
+     * Get class propeties
+     * @return array 
      */
-    private function set_default() 
+    private function get_fields()
     {
-
+        return [
+            'production_key'       => $this->get_production_key(),
+            'test_key'             => $this->get_test_key(),
+            'methods'              => $this->get_methods(),
+            'credit_installments'  => $this->get_credit_installments(),
+            'anti_fraud'           => $this->get_anti_fraud(),
+            'anti_fraud_value'     => $this->get_anti_fraud_value(),
+            'success_status'       => $this->get_success_status(),
+            'order_log'            => $this->get_order_log()
+        ];
     }
 
     /**

@@ -45,7 +45,7 @@ class Settings extends Repository implements InterfaceRepository
     /**
      * Save Pagar.me settings
      * @param array $fields
-     * @return bool
+     * @return bool|array
      */
     public function save( $fields )
     {
