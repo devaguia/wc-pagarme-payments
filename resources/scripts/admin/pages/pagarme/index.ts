@@ -1,15 +1,31 @@
-import { Notification } from "../../components/Notification";
-
 class Service {
   constructor() {
-    if (!document.querySelector(".wpp-container-about")) return;
-    this.handleNotification();
+    if (!document.querySelector(".wpp-container-pagarme")) return;
+
+    this.submit();
   }
 
-  handleNotification(): void {
-    setTimeout(() => {
-      new Notification("Hello World!", "This is a example notification", 5);
-    }, 1000);
+  submit() {
+    const form : HTMLFormElement | null = document.querySelector("#wpp-pagarme-settings");
+    console.log(form);
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.saveSettings(form);
+    });
+  }
+
+  saveSettings(form: HTMLFormElement) {
+
+    const body = new FormData(form);
+    body.append("action", "save_pagarme_settings");
+
+    fetch(`${window.location.origin}/wp-admin/admin-ajax.php`, {
+      method: "POST",
+      body: body,
+
+    }).then(function (response) {
+      return response;
+    });
   }
 }
 

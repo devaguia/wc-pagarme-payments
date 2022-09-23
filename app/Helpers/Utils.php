@@ -62,4 +62,14 @@ class Utils
 
         return $html;
     }
+
+    public static function active_payment_methods()
+    {
+        $gateways = WC()->payment_gateways->get_available_payment_gateways();
+        $methods  = [];
+
+        foreach ( $gateways as $key => $gateway ) {
+            array_push( $methods, $key );
+        }
+    }
 }

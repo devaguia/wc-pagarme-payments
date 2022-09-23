@@ -2,7 +2,8 @@
 
 namespace WPP\Controllers\Entities;
 
-use WPP\Model\Repository\Settings as Model;
+use WPP\Helpers\Utils;
+use WPP\Model\Entity\Settings as Model;
 
 /**
  * Name: Settings
@@ -12,274 +13,137 @@ use WPP\Model\Repository\Settings as Model;
 class Settings
 {
     /**
-     * Pagar.me production key
-     * @var string
-     */
-    private $production_key;
-
-    /**
-     * Pagar.me test key
-     * @var string
-     */
-    private $test_key;
-
-    /**
-     * Pagar.me payment methods
      * @var array
      */
-    private $methods;
+    private $propeties;
 
     /**
-     * Pagar.me credit installments and fees
-     * @var array
+     * @var int
      */
-    private $credit_installments;
+    private $status;
 
     /**
-     * Pagar.me anti fraud
-     * @var bool
-     */
-    private $anti_fraud;
-
-    /**
-     * Pagar.me anti fraud value
-     * @var float
-     */
-    private $anti_fraud_value;
-
-
-    /**
-     * WooCommerce success status
      * @var string
      */
-    private $success_status;
+    private $response;
 
-    /**
-     * WooCommerce Order logs
-     * @var bool
-     */
-    private $order_log;
-
-    /**
-     * Setting Repository
-     * @var Model
-     */
-    private $model;
-
-
-
-    public function __construct( $single = false )
+    public function __construct()
     {
-        $this->model = new Model;
-        if ( ! $single ) $this->fill();
+        $this->sanitize_vars();
     }
 
     /**
-     * Fill the class fields
+     * Save settings
      * @return void
      */
-    public function fill()
+    private function save()
     {
+        $model = new Model();
 
+        $model->set_api_version( $this->propeties['wpp-pagarme-api-version'] );
+        $model->set_production_key( $this->propeties['wpp-production-secret-key'] );
+        $model->set_test_key( $this->propeties['wpp-test-secret-key'] );
+        $model->set_success_status( $this->propeties['finish-order-status'] );
+        $model->set_anti_fraud( $this->propeties['wpp-anti-fraud'] );
+        $model->set_anti_fraud_value( $this->propeties['wpp-anti-fraud-value'] );
+        $model->set_order_log( $this->propeties['wpp-order-log'] );
+        $model->set_methods( $this->propeties['wpp-payment-methods'] );
+
+        $result = $model->save();
+
+        if ( $result ) { 
+            $this->status   = 200;
+            $this->response = [
+                'message' => __( "Settings saved successfully!", "wc-pagarme-settings" )
+            ];
+
+        } else {
+            $this->status   = 400;
+            $this->response = [
+                'message' => __( "Could not save the settings!", "wc-pagarme-settings" )
+            ];
+        }
     }
 
     /**
-     * Save Paga.me Settings
+     * Get active payment methods
      * @return void
      */
-    public function save()
+    private function get_payment_methods()
     {
-        $this->model->save( $this->get_fields() );
-    }
-
-    /**
-     * Get a single row on database
-     * @param string $key
-     * @return mixed
-     */
-    public function get_single( $key )
-    {
-        return $this->model->find( $key );
-    }
-
-    /**
-     * Set a value for a single row on database
-     * @param string $key
-     * @param string $value
-     * @return bool
-     */
-    public function save_single( $key, $value )
-    {
-        $this->model->save( [ $key => $value ] );
-    }
-
-    /**
-     * Get class propeties
-     * @return array 
-     */
-    private function get_fields()
-    {
-        return [
-            'production_key'       => $this->get_production_key(),
-            'test_key'             => $this->get_test_key(),
-            'methods'              => $this->get_methods(),
-            'credit_installments'  => $this->get_credit_installments(),
-            'anti_fraud'           => $this->get_anti_fraud(),
-            'anti_fraud_value'     => $this->get_anti_fraud_value(),
-            'success_status'       => $this->get_success_status(),
-            'order_log'            => $this->get_order_log()
+        $default = [
+            'wc-pagarme-billet' => false,
+            'wc-pagarme-credit' => false,
+            'wc-pagarme-pix'    => false,
         ];
+
+        $methods = Utils::active_payment_methods();
+
+        foreach ( $default as $key => $value ) {
+            if ( isset( $methods[$key] ) ) {
+                $methods[$key] = true;
+            }
+        }
+
+        $this->propeties['wpp-payment-methods'] = serialize( $methods );
     }
 
     /**
-     * Get $production_key
+     * Sanitize propeties vars
+     * @return void
+     */
+    private function sanitize_vars()
+    {
+        $vars = isset( $_POST['action'] ) && $_POST['action'] === 'save_pagarme_settings' ? $_POST : [];
+
+        if ( ! empty( $vars ) ) {
+            $needed = [ 
+                'wpp-finish-order-status',
+                'wpp-production-secret-key',
+                'wpp-test-secret-key',
+                'wpp-anti-fraud-value',
+                'wpp-pagarme-api-version',
+                'wpp-order-logs',
+                'wpp-anti-fraud'
+            ];
+
+            foreach ( $vars as $key => $var ) {
+                $key = str_replace( "wpp-", "", $key );
+
+                if( in_array( $key, $needed ) ) {
+                    $this->propeties[$key] = $var;
+
+                } else {
+                    if ( $key === 'order-logs' && $key === 'anti-fraud' ) {
+                        $this->propeties[$key] = false;
+                    } else {
+                        $this->status  = 400;
+                        $this->response = [
+                            'message' => __( "Invalid parameters! Some mandatory fields were not sent.", "wc-pagarme-payments" )
+                        ];
+                    }
+                }
+            }
+
+            $this->get_payment_methods();
+        }
+    }
+
+    /**
+     * Set $message
      * @return string
      */
-    private function get_production_key()
+    public function get_response()
     {
-        return $this->production_key;
+        return $this->response;
     }
 
     /**
-     * Set $production_key
-     * @param string $value
-     * @return void
+     * Get $status
+     * @return int
      */
-    private function set_production_key( $value )
+    public function get_status()
     {
-        $this->production_key = $value;
-    }
-
-    /**
-     * Get $test_key
-     * @return string
-     */
-    private function get_test_key()
-    {
-        return $this->test_key;
-    }
-
-    /**
-     * Set $production_key
-     * @param string $value
-     * @return void
-     */
-    private function set_test_key( $value )
-    {
-        $this->test_key = $value;
-    }
-
-    /**
-     * Get $methods
-     * @return array
-     */
-    private function get_methods()
-    {
-        return $this->methods;
-    }
-
-    /**
-     * Set $methods
-     * @param array $value
-     * @return void
-     */
-    private function set_methods( $value )
-    {
-        $this->methods = $value;
-    }
-
-    /**
-     * Get $credit_installments
-     * @return array
-     */
-    private function get_credit_installments()
-    {
-        return $this->credit_installments;
-    }
-
-    /**
-     * Set $production_key
-     * @param array $value
-     * @return void
-     */
-    private function set_credit_installments( $value )
-    {
-        $this->credit_installments = $value;
-    }
-
-    /**
-     * Get $anti_fraud
-     * @return bool
-     */
-    private function get_anti_fraud()
-    {
-        return $this->anti_fraud;
-    }
-
-    /**
-     * Set $anti_fraud
-     * @param bool $value
-     * @return void
-     */
-    private function set_anti_fraud( $value )
-    {
-        $this->anti_fraud = $value;
-    }
-
-    /**
-     * Get $anti_fraud_value
-     * @return float
-     */
-    private function get_anti_fraud_value()
-    {
-        return $this->anti_fraud_value;
-    }
-
-    /**
-     * Set $anti_fraud_value
-     * @param float $value
-     * @return void
-     */
-    private function set_anti_fraud_value( $value )
-    {
-        $this->anti_fraud_value = $value;
-    }
-
-    /**
-     * Get $success_status
-     * @return string
-     */
-    private function get_success_status()
-    {
-        return $this->success_status;
-    }
-
-    /**
-     * Set $success_status
-     * @param string $value
-     * @return void
-     */
-    private function set_success_status( $value )
-    {
-        $this->success_status = $value;
-    }
-
-    /**
-     * Get $order_log
-     * @return bool
-     */
-    private function get_order_log()
-    {
-        return $this->order_log;
-    }
-
-    /**
-     * Set $order_log
-     * @param bool $value
-     * @return void
-     */
-    private function set_order_log( $value )
-    {
-        $this->order_log = $value;
+        return $this->status;
     }
 }

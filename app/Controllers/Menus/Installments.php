@@ -1,6 +1,6 @@
 <?php
 
-namespace WPP\Controllers\Entities;
+namespace WPP\Controllers\Menus;
 
 use WPP\Helpers\Utils;
 

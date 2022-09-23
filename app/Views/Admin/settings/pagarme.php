@@ -5,7 +5,7 @@
             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42.8925 43.9518H56.9567C56.9783 43.3835 56.9999 42.8081 56.9999 42.2326C56.9711 18.9361 37.9328 0.0500387 14.4216 0V13.9215C30.1847 13.9465 42.9503 26.6134 42.9466 42.2326C42.9503 42.8045 42.9286 43.3799 42.8925 43.9518Z" fill="#65A300"></path><path d="M0 42.235C0 50.3896 6.76427 57.0001 15.1084 57.0001C23.4526 57.0001 30.2169 50.3896 30.2169 42.235C30.2169 34.0805 23.4526 27.47 15.1084 27.47C6.76427 27.47 0 34.0805 0 42.235Z" fill="#65A300"></path></svg>
         </div>
         <hr>
-        <form action="" class="body">
+        <form class="body" id="wpp-pagarme-settings">
             <div class="methods-section">
                 <div>
                     <h3><? echo __( "Allowed Methods:", "wc-pagarme-payments" ); ?></h3>
@@ -86,7 +86,7 @@
                 <div>
                     <h4><strong><?php echo __( "Icons", "wc-pagarme-payments" ); ?></strong></h4>
                     <div>
-                        <input type="checkbox" name="show-icons" id="wpp-show-icons">
+                        <input type="checkbox" name="wpp-show-icons" id="wpp-show-icons">
                         <label for="wpp-show-icons"><?php echo __( "Show Pagar.me icons on checkout.", "wc-pagarme-payments"); ?></label>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                 <div class="status">
                     <h4><strong><?php echo __( "Order Logs", "wc-pagarme-payments" ); ?></strong></h4>
                     <div>
-                        <input type="checkbox" name="show-icons" id="wpp-order-logs">
+                        <input type="checkbox" name="wpp-order-logs" id="wpp-order-logs">
                         <label for="wpp-order-logs"><?php echo __( "Add log section on order edit page.", "wc-pagarme-payments"); ?></label>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                             <span><?php echo __( "Production secret key:", "wc-pagarme-payments" ); ?></span>
                         </div>
                         <div>
-                            <input type="password" name="production-secret-key" id="production-secret-key">
+                            <input type="password" name="wpp-production-secret-key" id="wpp-production-secret-key">
                         </div>
                     </div>
                     <div class="key">
@@ -126,7 +126,7 @@
                             <span><?php echo __( "Test secret key:", "wc-pagarme-payments"  ); ?></span>
                         </div>
                         <div>
-                            <input type="password" name="test-secret-key" id="test-secret-key">
+                            <input type="password" name="wpp-test-secret-key" id="wpp-test-secret-key">
                         </div>
                     </div>
                 </div>
@@ -134,11 +134,11 @@
                     <div class="option">
                         <h4><strong><?php echo __( "Anti Fraud", "wc-pagarme-payments" ); ?></strong></h4>
                         <div>
-                            <input type="checkbox" name="anti-fraud" id="wpp-anti-fraud">
+                            <input type="checkbox" name="wpp-anti-fraud" id="wpp-wpp-anti-fraud">
                             <label for="wpp-anti-fraud"><?php echo __( "Enable anti-fraud.", "wc-pagarme-payments"); ?></label>
                             <div class="anti-fraud">
                                 <label for=""><?php echo __( "Minimum value:", "wc-pagarme-payments"); ?></label>
-                                <input type="text" name="anti-fraud-value" id="wpp-anti-fraud-value">
+                                <input type="text" name="wpp-anti-fraud-value" id="wpp-anti-fraud-value">
                             </div>
                         </div>
                     </div>

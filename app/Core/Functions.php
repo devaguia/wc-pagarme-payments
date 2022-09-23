@@ -2,7 +2,8 @@
 
 namespace WPP\Core;
 
-use WPP\Controllers\Entities\Installments;
+use WPP\Controllers\Menus\Installments;
+use WPP\Controllers\Entities\Settings;
 use WPP\Controllers\Menus;
 use WPP\Model\Database\Bootstrap;
 use WPP\Helpers\Config;
@@ -94,9 +95,19 @@ class Functions
     {
         $settings = new Installments;
         return wp_send_json(
-            ['content' => $settings->request()],
+            [ 'content' => $settings->request() ],
             200
         );
     }
 
+
+    public static function ajax_save_pagarme_settings()
+    {
+        $settings = new Settings;
+        
+        return wp_send_json(
+            [ 'content' => $settings->get_response() ],
+            $settings->get_status()
+        );
+    }
 }
