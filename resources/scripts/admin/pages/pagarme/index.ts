@@ -7,7 +7,7 @@ class Service {
 
   submit() {
     const form : HTMLFormElement | null = document.querySelector("#wpp-pagarme-settings");
-    console.log(form);
+
     form?.addEventListener("submit", (e) => {
       e.preventDefault();
       this.saveSettings(form);

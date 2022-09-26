@@ -148,8 +148,8 @@
                             <label for="wpp-pagarme-api-version"><?php echo __( "Pagar.me API version:", "wc-pagarme-payments" ); ?></label>
                             <div>
                                 <select name="wpp-pagarme-api-version" id="wpp-pagarme-api-version">
-                                    <option value="">Versão 1</option>
-                                    <option value="">Versão 2</option>
+                                    <option value="1">Versão 1</option>
+                                    <option value="2">Versão 2</option>
                                 </select>
                             </div>
                         </div>

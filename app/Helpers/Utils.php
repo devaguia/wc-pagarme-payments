@@ -71,5 +71,7 @@ class Utils
         foreach ( $gateways as $key => $gateway ) {
             array_push( $methods, $key );
         }
+
+        return $methods;
     }
 }

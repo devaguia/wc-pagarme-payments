@@ -2,7 +2,7 @@
 
 namespace WPP\Model\Entity;
 
-use WPP\Model\Repository\Settings as Model;
+use WPP\Model\Repository\Settings as Repository;
 
 /**
  * Name: Settings
@@ -58,13 +58,7 @@ class Settings
      * WooCommerce Order logs
      * @var bool
      */
-    private $order_log;
-
-    /**
-     * Setting Repository
-     * @var Model
-     */
-    private $model;
+    private $order_logs;
 
     /**
      * Setting Repository
@@ -72,10 +66,16 @@ class Settings
      */
     private $api_version;
 
+    /**
+     * Setting Repository
+     * @var Repository
+     */
+    private $repository;
+
 
     public function __construct( $single = false )
     {
-        $this->model = new Model;
+        $this->repository = new Repository;
         if ( ! $single ) $this->fill();
     }
 
@@ -85,7 +85,49 @@ class Settings
      */
     public function fill()
     {
+        $fields = $this->repository->find();
 
+        foreach ( $fields as $field ) {
+            if ( ! isset( $field->key ) || ! isset( $field->value ) ) continue;
+            
+            switch ( $field->key ) {
+                case 'balela':
+                    $this->set_production_key( $field->value );
+                    break;
+                
+                case 'test_key':
+                    $this->set_test_key( $field->value );
+                    break;
+                
+                case 'methods':
+                    $this->set_methods( unserialize( $field->value ) );
+                    break;
+            
+                case 'credit_installments':
+                    $this->set_credit_installments( unserialize( $field->value ) );
+                    break;
+                
+                case 'anti_fraud':
+                    $this->set_anti_fraud( $field->value );
+                    break;
+            
+                case 'anti_fraud_value':
+                    $this->set_anti_fraud_value( $field->value );
+                    break;
+        
+                case 'success_status':
+                    $this->set_success_status( $field->value );
+                    break;
+    
+                case 'order_logs':
+                    $this->set_order_logs( $field->value );
+                    break;
+
+                case 'api_version':
+                    $this->set_api_version( $field->value );
+                    break;
+            }
+        }
     }
 
     /**
@@ -94,7 +136,7 @@ class Settings
      */
     public function save()
     {
-        $this->model->save( $this->get_fields() );
+       return $this->repository->save( $this->get_fields() );
     }
 
     /**
@@ -104,7 +146,7 @@ class Settings
      */
     public function get_single( $key )
     {
-        return $this->model->find( $key );
+        return $this->repository->find( $key );
     }
 
     /**
@@ -115,7 +157,7 @@ class Settings
      */
     public function save_single( $key, $value )
     {
-        $this->model->save( [ $key => $value ] );
+        $this->repository->save( [ $key => $value ] );
     }
 
     /**
@@ -132,7 +174,8 @@ class Settings
             'anti_fraud'           => $this->get_anti_fraud(),
             'anti_fraud_value'     => $this->get_anti_fraud_value(),
             'success_status'       => $this->get_success_status(),
-            'order_log'            => $this->get_order_log()
+            'order_logs'           => $this->get_order_logs(),
+            'api_version'          => $this->get_api_version()
         ];
     }
 
@@ -270,22 +313,22 @@ class Settings
     }
 
     /**
-     * Get $order_log
+     * Get $order_logs
      * @return bool
      */
-    public function get_order_log()
+    public function get_order_logs()
     {
-        return $this->order_log;
+        return $this->order_logs;
     }
 
     /**
-     * Set $order_log
+     * Set $order_logs
      * @param bool $value
      * @return void
      */
-    public function set_order_log( $value )
+    public function set_order_logs( $value )
     {
-        $this->order_log = $value;
+        $this->order_logs = $value;
     }
 
     /**

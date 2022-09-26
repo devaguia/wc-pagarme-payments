@@ -8,6 +8,7 @@ use WPP\Controllers\Menus;
 use WPP\Model\Database\Bootstrap;
 use WPP\Helpers\Config;
 use WPP\Core\Uninstall;
+use WPP\Model\Entity\Settings as EntitySettings;
 use WPP\Services\WooCommerce\WooCommerce;
 
 /**
@@ -104,6 +105,7 @@ class Functions
     public static function ajax_save_pagarme_settings()
     {
         $settings = new Settings;
+        $settings->save();
         
         return wp_send_json(
             [ 'content' => $settings->get_response() ],
