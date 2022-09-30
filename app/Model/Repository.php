@@ -2,8 +2,6 @@
 
 namespace WPP\Model;
 
-use As247\WpEloquent\Application;
-
 /**
  * Abstract class for repositories
  * @package Model
@@ -27,9 +25,10 @@ abstract class Repository
     }
 
     /**
-     * 
+     * Set WPDB object
+     * @return void
      */
-    protected function set_database()
+    private function set_database()
     {
         global $wpdb;
 
@@ -40,9 +39,10 @@ abstract class Repository
     }
 
     /**
-     * 
+     * Set table prefix property
+     * @return void
      */
-    protected function set_prefix()
+    private function set_prefix()
     {
         if ( $this->db ) {
             $this->prefix = $this->db->prefix;
@@ -50,7 +50,9 @@ abstract class Repository
     }
 
     /**
-     * 
+     * Execute query
+     * @param string $query
+     * @return array|bool|int
      */
     protected function query( $query )
     {
