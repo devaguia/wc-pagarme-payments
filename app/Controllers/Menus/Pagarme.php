@@ -3,6 +3,7 @@
 namespace WPP\Controllers\Menus;
 
 use WPP\Controllers\Render\Render;
+use WPP\Model\Repository\Settings;
 
 /**
  * Name: Pagarme
@@ -12,6 +13,16 @@ use WPP\Controllers\Render\Render;
 class Pagarme extends Render
 {
     /**
+     * @var array
+     */
+    private $fields;
+
+    public function __construct()
+    {
+        $this->get_fields();
+    }
+
+    /**
      * Enqueue custom scripts and styles to the page
      * @return void
      */
@@ -20,6 +31,65 @@ class Pagarme extends Render
         $this->enqueue_scripts( [ 'name' => 'wpp-admin', 'file' => 'scripts/admin/pages/pagarme/index.js' ] );
         $this->enqueue_styles( [ 'name' => 'wpp-admin', 'file' => 'styles/admin/pages/pagarme/index.css' ] );
     }
+
+    /**
+     * 
+     * @return void
+     */
+    private function default()
+    {
+        $this->fields = [
+            'production_key'      => '',
+            'test_key'            => '',
+            'methods'             => [],
+            'credit_installments' => [],
+            'anti_fraud'          => false,
+            'anti_fraud_value'    => 0,
+            'success_status'      => 'wc-processing',
+            'order_logs'          => false,
+            'api_version'         => 1,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function get_fields()
+    {
+        $settings = new Settings;
+        $fields = $settings->find();
+
+        $this->default();
+
+        foreach ( $fields as $field ) {
+            if ( isset( $field->key ) && isset( $field->value ) ) {
+                if ( isset( $this->fields[$field->key] ) && $field->value ) {
+                    $this->fields[$field->key] = $this->verify( $field->value );
+                }
+            }
+        }
+    }
+
+    /**
+     * Check if variable is serialized and unserialize
+     * @return mixed
+     */
+    private function verify( $value )
+    {
+        if( is_serialized( $value ) ) {
+            return unserialize( $value );
+        }
+
+        if ( $value === 'on' || $value === 'off' ) {
+            return $value === 'on' ? true : false;
+        }
+
+        if ( is_numeric( $value ) ) {
+            return intval( $value );
+        }
+
+        return $value;
+    }
     
     /**
      * Call the view render
@@ -27,7 +97,7 @@ class Pagarme extends Render
      */
     public function request()
     {
-        $this->render( 'Admin/settings/pagarme.php', [] );
+        $this->render( 'Admin/settings/pagarme.php', $this->fields );
         $this->enqueue();
     }
 }

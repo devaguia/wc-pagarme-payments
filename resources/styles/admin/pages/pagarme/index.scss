@@ -24,10 +24,9 @@
     }
     .methods-section {
       .methods {
-        display: grid;
-        grid-template-columns: 115px 100px 50px;
         .method {
-          display: flex;
+          display: grid;
+          grid-template-columns: 30px 100px 100px 30px;
           align-content: center;
           margin: 10px 0;
 
