@@ -24,12 +24,6 @@ class Settings
     private $test_key;
 
     /**
-     * Pagar.me payment methods
-     * @var array
-     */
-    private $methods;
-
-    /**
      * Pagar.me credit installments and fees
      * @var array
      */
@@ -98,10 +92,6 @@ class Settings
                 case 'test_key':
                     $this->set_test_key( $field->value );
                     break;
-                
-                case 'methods':
-                    $this->set_methods( unserialize( $field->value ) );
-                    break;
             
                 case 'credit_installments':
                     $this->set_credit_installments( unserialize( $field->value ) );
@@ -169,7 +159,6 @@ class Settings
         return [
             'production_key'       => $this->get_production_key(),
             'test_key'             => $this->get_test_key(),
-            'methods'              => $this->get_methods(),
             'credit_installments'  => $this->get_credit_installments(),
             'anti_fraud'           => $this->get_anti_fraud(),
             'anti_fraud_value'     => $this->get_anti_fraud_value(),
@@ -215,25 +204,6 @@ class Settings
     public function set_test_key( $value )
     {
         $this->test_key = $value;
-    }
-
-    /**
-     * Get $methods
-     * @return array
-     */
-    public function get_methods()
-    {
-        return $this->methods;
-    }
-
-    /**
-     * Set $methods
-     * @param array $value
-     * @return void
-     */
-    public function set_methods( $value )
-    {
-        $this->methods = $value;
     }
 
     /**

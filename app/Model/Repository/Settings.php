@@ -129,7 +129,6 @@ class Settings extends Repository implements InterfaceRepository
         return [
             'production_key'       => "",
             'test_key'             => "",
-            'methods'              => "",
             'credit_installments'  => "",
             'anti_fraud'           => false,
             'anti_fraud_value'     => 0,

@@ -3,6 +3,7 @@
 namespace WPP\Controllers\Menus;
 
 use WPP\Controllers\Render\Render;
+use WPP\Helpers\Gateways;
 use WPP\Model\Repository\Settings;
 
 /**
@@ -41,7 +42,6 @@ class Pagarme extends Render
         $this->fields = [
             'production_key'      => '',
             'test_key'            => '',
-            'methods'             => [],
             'credit_installments' => [],
             'anti_fraud'          => false,
             'anti_fraud_value'    => 0,
@@ -68,6 +68,9 @@ class Pagarme extends Render
                 }
             }
         }
+
+        $this->get_gateways();
+        $this->get_statuses();
     }
 
     /**
@@ -89,6 +92,22 @@ class Pagarme extends Render
         }
 
         return $value;
+    }
+
+    /**
+     * Get gateways informations
+     * @return void
+     */
+    private function get_gateways()
+    {
+        $methods = Gateways::pagarme_payment_methods();
+        $this->fields['methods'] = ( is_array( $methods ) && ! empty( $methods ) ) ? $methods : [];
+    }
+
+    private function get_statuses()
+    {
+        $statuses = wc_get_order_statuses();
+        $this->fields['statuses'] = ( is_array( $statuses ) && ! empty( $statuses ) ) ? $statuses : [];
     }
     
     /**

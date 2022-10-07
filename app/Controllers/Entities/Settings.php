@@ -47,7 +47,6 @@ class Settings
         $model->set_anti_fraud( $this->propeties['anti-fraud'] );
         $model->set_anti_fraud_value( $this->propeties['anti-fraud-value'] );
         $model->set_order_logs( $this->propeties['order-logs'] );
-        $model->set_methods( $this->propeties['payment-methods'] );
 
         $result = $model->save();
 
@@ -63,29 +62,6 @@ class Settings
                 'message' => __( "Could not save the settings!", "wc-pagarme-settings" )
             ];
         }
-    }
-
-    /**
-     * Get active payment methods
-     * @return void
-     */
-    private function get_payment_methods()
-    {
-        $default = [
-            'wc-pagarme-billet' => false,
-            'wc-pagarme-credit' => false,
-            'wc-pagarme-pix'    => false,
-        ];
-
-        $methods = Utils::active_payment_methods();
-
-        foreach ( $methods as $method ) {
-            if ( isset( $default[$method] ) ) {
-                $default[$method] = true;
-            }
-        }
-
-        $this->propeties['payment-methods'] = serialize( $methods );
     }
 
     /**
@@ -133,8 +109,6 @@ class Settings
                     $this->propeties[$var] = false;
                 } 
             }
-
-            $this->get_payment_methods();
         }
     }
 
