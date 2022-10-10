@@ -53,12 +53,16 @@ class Settings
         if ( $result ) { 
             $this->status   = 200;
             $this->response = [
+                'code'    => 200,
+                'title'   => __( "Success!", "wc-pagarme-settings" ),
                 'message' => __( "Settings saved successfully!", "wc-pagarme-settings" )
             ];
 
         } else {
             $this->status   = 400;
             $this->response = [
+                'code'    => 400,
+                'title'   => __( "Error!", "wc-pagarme-settings" ),
                 'message' => __( "Could not save the settings!", "wc-pagarme-settings" )
             ];
         }
