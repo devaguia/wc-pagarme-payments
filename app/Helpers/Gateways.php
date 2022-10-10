@@ -3,13 +3,16 @@
 namespace WPP\Helpers;
 
 /**
- * Name: Gateways
- * Has the statics methods
+ * Pagar.me Gateways statics methods
  * @package Helpers
  * @since 1.0.0
  */
 class Gateways
 {
+    /**
+     * Get the Pagar.me payment methods
+     * @return array
+     */
     public static function pagarme_payment_methods()
     {
         $gateways = WC()->payment_gateways->payment_gateways();
@@ -39,6 +42,10 @@ class Gateways
         return $methods;
     }
 
+    /**
+     * Get formated gateway title
+     * @return string
+     */
     private static function get_title( $method )
     {
         switch ($method) {
@@ -54,28 +61,35 @@ class Gateways
                 $result = __( 'Pix', 'wc-pagarme-payments' );
                 break;
             default:
-                $result = false;
+                $result = "";
                 break;
         }
 
         return $result;
     }
 
-
+    /**
+     * Get gateway mode
+     * @return string
+     */
     private static function get_mode( $settings )
     {
         $production = __( 'production', 'wc-pagarme-payments' );
         $sandbox    = __( 'sandbox', 'wc-pagarme-payments' );
-
-        if ( isset( $settings['testmode'] ) ) {
-            if ( $settings['testmode'] === 'yes' ) {
-                return $production;
+        
+        if ( isset( $settings['test_mode'] ) ) {
+            if ( $settings['test_mode'] === 'yes' ) {
+                return $sandbox;
             }
         }
 
-        return $sandbox;
+        return $production;
     }
 
+    /**
+     * Get gateway status
+     * @return bool
+     */
     private static function get_status( $settings )
     {
         if ( isset( $settings['enabled'] ) ) {

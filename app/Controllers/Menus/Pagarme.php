@@ -34,7 +34,7 @@ class Pagarme extends Render
     }
 
     /**
-     * 
+     * Set default values
      * @return void
      */
     private function default()
@@ -52,6 +52,7 @@ class Pagarme extends Render
     }
 
     /**
+     * Get fields from database
      * @return array
      */
     private function get_fields()
