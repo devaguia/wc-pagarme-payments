@@ -1,6 +1,4 @@
-import { Installments } from './index';
 import { Ajax } from "../../../components/Ajax";
-import { Popup } from "../../../components/Popup";
 
 export class Installments extends Ajax {
   constructor(content: string) {
@@ -83,13 +81,15 @@ export class Installments extends Ajax {
 
     elements?.forEach(element => {
       const index = element.getAttribute("data-index");
-      const value = element.value;
+      let value : Number = parseInt(element.value);
+
+      if ( ! value ) value = 0;
 
       const item  = {
         index: index, 
         value: value
       }
-
+      console.log(item)
       installments.push(item);
     });
 

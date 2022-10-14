@@ -39,10 +39,6 @@ class Installments
     public function save()
     {
         $model  = new Model( true );
-        $teste = serialize($this->installments);
-        error_log( var_export($teste, true ) );
-        error_log( var_export( unserialize($teste), true ) );
-
         $result = $model->save_single( 'credit_installments', serialize( $this->installments ) );
 
         if ( $result ) { 
@@ -80,7 +76,9 @@ class Installments
     }
 
     /**
-     * 
+     * Format the installments for database saving
+     * @param array $installments
+     * @return array
      */
     private function format_installments( $installments )
     {

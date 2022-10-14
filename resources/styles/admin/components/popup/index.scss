@@ -16,10 +16,12 @@
 
   .wpp-popup {
     height: fit-content;
-    width: 20px;
     background: #fff;
     border-radius: 10px;
     padding: 60px 0;
+
+    height: fit-content;
+    width: 450px;
 
     .wpp-popup-icon {
       display: flex;
@@ -105,13 +107,6 @@
           }
         }
       }
-    }
-  }
-
-  @media (min-width: 868px) {
-    .wpp-popup {
-      height: fit-content;
-      width: 450px;
     }
   }
 }
