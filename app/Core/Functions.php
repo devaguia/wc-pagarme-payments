@@ -2,6 +2,7 @@
 
 namespace WPP\Core;
 
+use WPP\Controllers\Entities\Installments as EntitiesInstallments;
 use WPP\Controllers\Menus\Installments;
 use WPP\Controllers\Entities\Settings;
 use WPP\Controllers\Menus;
@@ -92,6 +93,10 @@ class Functions
         new Uninstall;
     }
 
+    /**
+     * Ajax function for get installments
+     * @return void
+     */
     public static function ajax_get_installment_settings()
     {
         $settings = new Installments;
@@ -101,7 +106,25 @@ class Functions
         );
     }
 
+    /**
+     * Ajax function for save Pagar.me installments settings
+     * @return void
+     */
+    public static function ajax_save_pagarme_installments()
+    {
+        $settings = new EntitiesInstallments;
+        $settings->save();
+        
+        return wp_send_json(
+            [ 'content' => $settings->get_response() ],
+            $settings->get_status()
+        );
+    }
 
+    /**
+     * Ajax function for save Pagar.me settings
+     * @return void
+     */
     public static function ajax_save_pagarme_settings()
     {
         $settings = new Settings;

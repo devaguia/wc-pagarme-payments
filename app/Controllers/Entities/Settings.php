@@ -96,6 +96,8 @@ class Settings
                 } else {
                     $this->status  = 400;
                     $this->response = [
+                        'code'    => 400,
+                        'title'   => __( "Error!", "wc-pagarme-settings" ),
                         'message' => __( "Invalid parameters! Some mandatory fields were not sent.", "wc-pagarme-payments" )
                     ];
                 }

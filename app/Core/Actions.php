@@ -39,6 +39,11 @@ add_action( 'wp_ajax_get_installment_settings', [
     'ajax_get_installment_settings'
 ], 999 );
 
+add_action( 'wp_ajax_save_pagarme_installments', [
+    Functions::class,
+    'ajax_save_pagarme_installments'
+], 999 );
+
 add_action( 'wp_ajax_save_pagarme_settings', [
     Functions::class,
     'ajax_save_pagarme_settings'

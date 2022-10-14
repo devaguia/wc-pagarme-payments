@@ -100,6 +100,7 @@ class Settings extends Repository implements InterfaceRepository
     {
         try {
             return $this->query( "UPDATE {$this->prefix}wc_pagarme_settings SET `value` = '$value' WHERE `key` like '$key';" );
+            return $teste;
         } catch ( Exception $e ) {
             return false;
         }

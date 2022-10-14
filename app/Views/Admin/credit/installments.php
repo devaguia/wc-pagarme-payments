@@ -15,7 +15,7 @@
                 <div class="installments-item">
                     <div class="installment-fee">
                         <span><?php echo esc_html("{$i}°"); ?></span>
-                        <input type="number" max="24" min="1">
+                        <input class="wpp-installment" name="wpp-installment-<?php echo esc_attr( $i ); ?>" data-index="<?php echo esc_attr( $i ); ?>" type="number" max="24" min="0">
                         <span><?php echo esc_html("(%)"); ?></span>
                     </div>
                 </div>

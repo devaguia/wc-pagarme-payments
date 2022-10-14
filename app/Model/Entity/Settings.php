@@ -147,7 +147,7 @@ class Settings
      */
     public function save_single( $key, $value )
     {
-        $this->repository->save( [ $key => $value ] );
+        return $this->repository->save( [ $key => $value ] );
     }
 
     /**
@@ -159,7 +159,6 @@ class Settings
         return [
             'production_key'       => $this->get_production_key(),
             'test_key'             => $this->get_test_key(),
-            'credit_installments'  => $this->get_credit_installments(),
             'anti_fraud'           => $this->get_anti_fraud(),
             'anti_fraud_value'     => $this->get_anti_fraud_value(),
             'success_status'       => $this->get_success_status(),
