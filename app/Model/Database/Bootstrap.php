@@ -2,8 +2,6 @@
 
 namespace WPP\Model\Database;
 
-use As247\WpEloquent\Application;
-use WPP\Model\Database\Tables\Orders;
 use WPP\Model\Database\Tables\Settings;
 
 /**
@@ -19,7 +17,6 @@ class Bootstrap
    {
       $this->tables = [
          Settings::class,
-         Orders::class
       ];
 
       $this->init();
@@ -32,7 +29,6 @@ class Bootstrap
     */
    public function init()
    {
-      Application::bootWp();
       $this->tables();
    }
 

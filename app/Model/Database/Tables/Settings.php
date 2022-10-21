@@ -2,30 +2,34 @@
 
 namespace WPP\Model\Database\Tables;
 
-use As247\WpEloquent\Support\Facades\Schema;
+use WPP\Model\Database\Table;
 
 /**
  * Name: Settings
  * @package Model
  * @since 1.0.0
  */
-class Settings
+class Settings extends Table
 {
+    public function __construct()
+    {
+        $this->set_table( "wc_pagarme_settings" );
+    }
+
     public function up() 
     {
-        if ( ! Schema::hasTable( 'wc_pagarme_settings' ) ) {
-            Schema::create( 'wc_pagarme_settings', function ( $table ) {
-                $table->increments( 'id' );
-                $table->string( 'key' );
-                $table->string( 'value' );
-                $table->timestamps();
-            });
-        }
+        $this->create( [
+            'id'         => [ 'INT AUTO_INCREMENT primary key NOT NULL' ],
+            'key'        => [ 'varchar(255) NOT NULL' ],
+            'value'      => [ 'TEXT' ],
+            'created_at' => [ 'DATETIME DEFAULT CURRENT_TIMESTAMP' ],
+            'updated_at' => [ 'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP' ]
+        ] );
     }
 
     public function down()
     {
-        Schema::drop( 'wc_pagarme_settings' );
+        $this->drop();
     }
 }
 

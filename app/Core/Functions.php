@@ -9,6 +9,7 @@ use WPP\Controllers\Menus;
 use WPP\Model\Database\Bootstrap;
 use WPP\Helpers\Config;
 use WPP\Core\Uninstall;
+use WPP\Model\Database\Tables\Settings as TablesSettings;
 use WPP\Model\Entity\Settings as EntitySettings;
 use WPP\Services\WooCommerce\WooCommerce;
 

@@ -87,7 +87,7 @@ class Status
         $order = wc_get_order( $id );
 
         $payment_method  = $order->get_payment_method();
-        $payment_methods = Utils::plugin_payment_methods();
+        $payment_methods = Utils::active_payment_methods();
 
         if ( array_intersect( $payment_methods, [ $payment_method ] ) ) {
             if ( $to === 'cancelled' ) {
