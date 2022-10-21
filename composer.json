@@ -18,10 +18,5 @@
         "psr-4": {
             "WPP\\": "app/"
         }
-    },
-    "require": {
-        "ext-json": "*",
-        "ext-pdo": "*",
-        "as247/wp-eloquent": "^2.0"
     }
 }

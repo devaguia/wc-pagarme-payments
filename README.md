@@ -6,7 +6,6 @@
 - [Developer notes](#notes)
 - [Install dependencies](#install)
 - [Build dependencies](#build)
-- [Database(Eloquent)](#database)
 - [Ignored folders and files](#ignore)
 - [File Tree](#tree)
 
@@ -48,24 +47,6 @@ yarn watch
 ```
 yarn build
 ```
-
-
-<h2 id="database">Database and ORM</h1>
-As stated in the previous topics, the plugin uses the ORM Eloquent by default. For configuration and use within the framework established by the plugin, some actions are necessary:
-</br>
-
-### Create table class:
-Create the table class you want to create inside the folder "[Tables](./app/Model/Database/Tables/)", and replicate the file "[Example.php](./app/Model/Database/Tables/ Example.php)" changing only the properties and name of the table.
-
-### Add table class in "Bootstrap.php" file:
-Add the class to the tables list in the file "[Bootstrap.php](./app/Model/Database/Bootstrap.php)".
-
-### Create Model class
-Create the class inside the "[Model](./app/Model/)" folder. I recommend that you also replicate the "Example.php" file present in the folder.
-</br>
-
-In addition to these items, it is also highly recommended that you study and read the documentation for the "[wp-eloquent]()" module and also the "[Eloquent]()" documentation itself.
-
 
 <h2 id="ignore">Ignored folders and files</h2>
 
