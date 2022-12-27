@@ -6,8 +6,8 @@
   "author": "Matheus Aguiar",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@parcel/transformer-sass": "2.7.0",
-    "node-sass": "^7.0.1",
+    "@parcel/transformer-sass": "2.8.2",
+    "node-sass": "^8.0.0",
     "node-wp-i18n": "^1.2.6",
     "parcel": "^2.7.0",
     "sass": "^1.54.4"
