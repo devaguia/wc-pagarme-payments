@@ -149,8 +149,7 @@
                             </label>
                             <div>
                                 <select name="wpp-pagarme-api-version" id="wpp-pagarme-api-version" value="<?php echo esc_html( isset( $api_version ) ? $api_version : 1 ); ?>" >
-                                    <option value="1">Versão 1</option>
-                                    <option value="2">Versão 2</option>
+                                    <option value="v5">v5</option>
                                 </select>
                             </div>
                         </div>

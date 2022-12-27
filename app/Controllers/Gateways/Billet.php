@@ -2,11 +2,12 @@
 
 namespace WPP\Controllers\Gateways;
 
-use WC_Payment_Gateway;
+use DateTime;
 use WPP\Controllers\Checkout\Billet as Checkout;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
 use WPP\Controllers\Webhooks\Billet as Webhooks;
+use WPP\Services\WooCommerce\Gateways\Gateway;
 
 /**
  * Name: Billet
@@ -14,7 +15,7 @@ use WPP\Controllers\Webhooks\Billet as Webhooks;
  * @package Controllers
  * @since 1.0.0
  */
-class Billet extends WC_Payment_Gateway implements InterfaceGateways
+class Billet extends Gateway implements InterfaceGateways
 {
 
     public function __construct() {
@@ -96,12 +97,12 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
                 "type"        => "select",
                 "description" => __( "This controls the witch bank generate the billet.", "wc-pagarme-payments" ),
                 "options"     => [
-                    1 => "Banco Bradesco S.A.",
-                    2 => "Banco Itaú S.A.",
-                    3 => "Banco Santander S.A.",
-                    4 => "Banco Citibank S.A.",
-                    5 => "Banco Brasil S.A.",
-                    6 => "Caixa Econômica Federal",
+                    "237" => "Banco Bradesco S.A.",
+                    "341" => "Banco Itaú S.A.",
+                    "033" => "Banco Santander S.A.",
+                    "745" => "Banco Citibank S.A.",
+                    "001" => "Banco Brasil S.A.",
+                    "104" => "Caixa Econômica Federal",
                 ],
                 "desc_tip"    => true,
                 "default"     => 5
@@ -176,14 +177,28 @@ class Billet extends WC_Payment_Gateway implements InterfaceGateways
     }
 
     /**
-     * Handle gateway process payment
+     * Override method WPP\Services\WooCommerce\Gateways\Gateway::get_payment_method 
      * @since 1.0.0
-     * @param int $wc_order_id
-     * @return void
+     * @param object $wc_order
+     * @return array
      */
-    public function process_payment( $wc_order_id )
+    protected function get_payment_method( $wc_order )
     {
-        global $woocommerce;
-        $wc_order = wc_get_order( $wc_order_id );
+        $person = $this->get_person();
+        $date   = new DateTime();
+
+        return [
+            [
+                "boleto" => [
+                    "bank"            => $this->get_option("bank"),
+                    "instructions"    => "Pagar",
+                    "due_at"          => $date->format("Y-m-d\TH:i:s"),
+                    "document_number" => $person['document'],
+                    "type"            => "DM"
+                ],
+               "payment_method" => "boleto"
+            ]
+        ];
     }
+
 }
