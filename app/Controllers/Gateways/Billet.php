@@ -177,7 +177,7 @@ class Billet extends Gateway implements InterfaceGateways
     }
 
     /**
-     * Override method WPP\Services\WooCommerce\Gateways\Gateway::get_payment_method 
+     * Method override WPP\Services\WooCommerce\Gateways\Gateway::get_payment_method 
      * @since 1.0.0
      * @param object $wc_order
      * @return array

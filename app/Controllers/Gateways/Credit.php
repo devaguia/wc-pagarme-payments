@@ -2,12 +2,11 @@
 
 namespace WPP\Controllers\Gateways;
 
-use WC_Payment_Gateway;
 use WPP\Controllers\Checkout\Credit as Checkout;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
 use WPP\Controllers\Webhooks\Credit as Webhooks;
-use WPP\Helpers\Utils;
+use WPP\Services\WooCommerce\Gateways\Gateway;
 
 /**
  * Name: Billet
@@ -15,7 +14,7 @@ use WPP\Helpers\Utils;
  * @package Controllers
  * @since 1.0.0
  */
-class Credit extends WC_Payment_Gateway implements InterfaceGateways
+class Credit extends Gateway implements InterfaceGateways
 {
 
     public function __construct() {
@@ -153,14 +152,13 @@ class Credit extends WC_Payment_Gateway implements InterfaceGateways
     }
 
     /**
-     * Handle gateway process payment
+     * Method override WPP\Services\WooCommerce\Gateways\Gateway::get_payment_method 
      * @since 1.0.0
-     * @param int $wc_order_id
-     * @return void
+     * @param object $wc_order
+     * @return array
      */
-    public function process_payment( $wc_order_id )
+    protected function get_payment_method( $wc_order )
     {
-        global $woocommerce;
-        $wc_order = wc_get_order( $wc_order_id );
+        return [];
     }
 }
