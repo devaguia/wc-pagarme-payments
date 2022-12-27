@@ -168,6 +168,14 @@ class Pix extends Gateway implements InterfaceGateways
      */
     protected function get_payment_method( $wc_order )
     {
-        return [];
+        return [
+            [
+                "amount" => $wc_order->get_total(), 
+                "pix"    => [
+                    "expires_in" => $this->get_option("expiration")
+                ],
+               "payment_method" => "pix"
+            ]
+        ];
     }
 }

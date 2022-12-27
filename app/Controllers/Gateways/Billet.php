@@ -189,6 +189,7 @@ class Billet extends Gateway implements InterfaceGateways
 
         return [
             [
+                "amount" => $wc_order->get_total(), 
                 "boleto" => [
                     "bank"            => $this->get_option("bank"),
                     "instructions"    => "Pagar",

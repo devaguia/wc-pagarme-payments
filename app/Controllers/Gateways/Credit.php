@@ -159,6 +159,16 @@ class Credit extends Gateway implements InterfaceGateways
      */
     protected function get_payment_method( $wc_order )
     {
-        return [];
+        return [
+            [
+                "amount"      => $wc_order->get_total(), 
+                "credit_card" => [
+                    "installments"         => 1,
+                    "statement_descriptor" => "",
+                    "card_token"           => ""
+                ],
+                "payment_method" => "credit_card"
+            ]
+        ];
     }
 }
