@@ -192,7 +192,7 @@ class Billet extends Gateway implements InterfaceGateways
                 "boleto" => [
                     "bank"            => $this->get_option("bank"),
                     "instructions"    => "Pagar",
-                    "due_at"          => $date->format("Y-m-d\TH:i:s"),
+                    "due_at"          => $date->format("Y-m-d\TH:i:s") . "Z",
                     "document_number" => $person['document'],
                     "type"            => "DM"
                 ],

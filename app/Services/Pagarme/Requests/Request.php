@@ -12,10 +12,26 @@ use WPP\Services\Pagarme\Config;
  */
 abstract class Request 
 {
-    protected $body;
-    protected $header;
-    protected $method;
-    protected $endpoint;
+    /**
+     * @var array
+     */
+    private $body;
+
+    /**
+     * @var array
+     */
+    private $header;
+
+    /**
+     * @var string
+     */
+    private $method;
+
+    /**
+     * @var string
+     */
+    private $endpoint;
+
 
     /**
      * Send requests
@@ -25,25 +41,26 @@ abstract class Request
      */
     protected function send()
     {
+        if ( ! $this->body ) $this->body     = [];
+        if ( ! $this->header ) $this->header = [];
+
         $_header = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
 
         $header = array_merge( $_header, $this->header );
-
-        if ( ! $this->body ) {
-            $this->body = [];
-        }
         
         $args = [
             'headers' => $header,
             'timeout' => 10000,
-            'body'    => json_encode($this->body),
+            'body'    => json_encode( $this->body ),
             'method'  => $this->method
         ];
 
-        $response = wp_remote_request( $this->endpoint, $args );
+        $url = $this->get_request_url( $this->endpoint );
+
+        $response = wp_remote_request( $url, $args );
 
         return $response;
     }
@@ -54,15 +71,80 @@ abstract class Request
      * @param array $parameters
      * @return string
      */
-    protected function get_endpoint( $base, $parameters = [] )
+    protected function get_request_url( $endpoint )
     {
-        $url = Config::request_domain() . $base;
-        foreach( $parameters as $param ) {
-            if ( $param ) {
-                $url .= "/{$param}";
-            }
-        }
+        return Config::base_url() . "/$endpoint";
+    }
 
-        return $url;
+    /**
+     * Get body
+     * @return array
+     */
+    protected function get_body()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set body
+     * @param array $body
+     */
+    protected function set_body( $body )
+    {
+        $this->body = $body;
+    }
+
+    /**
+     * Get header
+     * @return array
+     */
+    protected function get_header()
+    {
+        return $this->header;
+    }
+
+    /**
+     * Set header
+     * @param array $header
+     */
+    protected function set_header( $header )
+    {
+        $this->header = $header;
+    }
+
+    /**
+     * Get method
+     * @return array
+     */
+    protected function get_method()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Set method
+     * @param array $method
+     */
+    protected function set_method( $method )
+    {
+        $this->method = $method;
+    }
+
+    /**
+     * Get endpoint
+     * @return array
+     */
+    protected function get_endpoint()
+    {
+        return $this->endpoint;
+    }
+
+    /**
+     * Set endpoint
+     * @param array $endpoint
+     */
+    protected function set_endpoint( $endpoint )
+    {
+        $this->endpoint = $endpoint;
     }
 }

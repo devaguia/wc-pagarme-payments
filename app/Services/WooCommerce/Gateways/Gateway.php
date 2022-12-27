@@ -3,6 +3,7 @@
 namespace WPP\Services\WooCommerce\Gateways;
 
 use WC_Payment_Gateway;
+use WPP\Services\Pagarme\Requests\Orders\Create;
 
 /**
  * Name: Billet
@@ -28,18 +29,18 @@ abstract class Gateway extends WC_Payment_Gateway
         $customer = $this->get_customer( $wc_order );
         $phones   = $this->get_phones( $wc_order );
         $items    = $this->get_items( $wc_order );
-        $payments = $this->get_payment_method( $wc_order );
+        $payment  = $this->get_payment_method( $wc_order );
 
-        
-        error_log( var_export( [
-            $address,
-            $customer,
-            $phones,
-            $items,
-            $payments
-        ], true ) );
+        $request = new Create( $wc_order );
 
-        exit;
+        $request->set_address( $address );
+        $request->set_customer( $customer );
+        $request->set_phones( $phones );
+        $request->set_items( $items );
+        $request->set_payment( $payment );
+
+        $response = $request->handle_request();
+
     }
 
     /**

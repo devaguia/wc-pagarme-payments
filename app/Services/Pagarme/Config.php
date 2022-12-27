@@ -43,6 +43,16 @@ class Config
     }
 
     /**
+     * Get base url for the selected mode
+     * @since 1.0.0
+     * @return string
+     */
+    public static function base_url()
+    {
+        return '';
+    }
+
+    /**
      * Get secret key
      * @since 1.0.0
      * @return string
