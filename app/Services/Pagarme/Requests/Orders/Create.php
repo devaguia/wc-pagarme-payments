@@ -40,6 +40,11 @@ class Create extends Request implements InterfaceRequest
      */
     private $payment;
 
+    /**
+     * @var array
+     */
+    private $shipping;
+
     public function __construct( $wc_order )
     {
         $this->set_endpoint( "orders" );
@@ -55,10 +60,12 @@ class Create extends Request implements InterfaceRequest
 
         $items    = $this->get_items();
         $payments = $this->get_payment();
+        $shipping = $this->get_shipping();
         $body     = [
-            "customer" => $customer,
-            "items"    => $items,
-            "payments" => $payments
+            'customer' => $customer,
+            'items'    => $items,
+            'payments' => $payments,
+            'shipping' => $shipping
         ];
 
         $this->set_body( $body );
@@ -160,5 +167,24 @@ class Create extends Request implements InterfaceRequest
     public function get_payment()
     {
         return $this->payment;
+    }
+
+    /**
+     * Set shipping
+     * @param array $shipping
+     * @return void
+     */
+    public function set_shipping( $shipping )
+    {
+        $this->shipping = $shipping;
+    }
+
+    /**
+     * Get shipping
+     * @return array
+     */
+    public function get_shipping()
+    {
+        return $this->shipping;
     }
 }

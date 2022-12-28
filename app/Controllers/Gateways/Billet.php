@@ -2,6 +2,7 @@
 
 namespace WPP\Controllers\Gateways;
 
+use DateInterval;
 use DateTime;
 use WPP\Controllers\Checkout\Billet as Checkout;
 use WPP\Helpers\Config;
@@ -184,12 +185,14 @@ class Billet extends Gateway implements InterfaceGateways
      */
     protected function get_payment_method( $wc_order )
     {
-        $person = $this->get_person();
-        $date   = new DateTime();
+        $person     = $this->get_person();
+        $expiration = $this->get_option("expiration");
+        $date       = new DateTime();
 
+        $date->add( new DateInterval( "P{$expiration}D" ) );
+        
         return [
             [
-                "amount" => $wc_order->get_total(), 
                 "boleto" => [
                     "bank"            => $this->get_option("bank"),
                     "instructions"    => "Pagar",

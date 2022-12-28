@@ -30,6 +30,7 @@ abstract class Gateway extends WC_Payment_Gateway
         $phones   = $this->get_phones( $wc_order );
         $items    = $this->get_items( $wc_order );
         $payment  = $this->get_payment_method( $wc_order );
+        $shipping = $this->get_order_shipping( $wc_order, $address, $customer );
 
         $request = new Create( $wc_order );
 
@@ -38,9 +39,10 @@ abstract class Gateway extends WC_Payment_Gateway
         $request->set_phones( $phones );
         $request->set_items( $items );
         $request->set_payment( $payment );
+        $request->set_shipping( $shipping );
 
+        // return $this->abort_process( "teste" );
         $response = $request->handle_request();
-
     }
 
     /**
@@ -49,25 +51,30 @@ abstract class Gateway extends WC_Payment_Gateway
      * @param object $wc_order
      * @return array
      */
-    protected function get_items( $wc_order )
+    private function get_items( $wc_order )
     {
         $items = [];
         $cart  = $wc_order->get_items();
 
+        $discounts = $this->get_discounts( $wc_order );
+        $taxes     = $this->get_taxes( $wc_order );
+
         foreach ( $cart as $key => $item ) {
             $product = $item->get_product();
-            
-            $amount      = str_replace( '.','', $product->get_price() );
-            $description = $item->get_name();
-            $quantity    = $item->get_quantity();
-            $code        = "WC-{$product->get_id()}";
-
-            array_push( $items, [
-                'amount'      => $amount,
-                'code'        => $code,
-                'description' => $description,
-                'quantity'    => $quantity
-            ] );
+            if ( $product ) {
+                $total       = ( $product->get_price() + $taxes ) - $discounts;
+                $amount      = preg_replace( '/[^0-9]/', '', number_format( $total, 2, ',', '.' ) );
+                $description = $item->get_name();
+                $quantity    = $item->get_quantity();
+                $code        = "WC-{$product->get_id()}";
+                
+                array_push( $items, [
+                    'amount'      => $amount,
+                    'code'        => $code,
+                    'description' => $description,
+                    'quantity'    => $quantity
+                ] );
+            }
         }
 
         return $items;
@@ -79,7 +86,7 @@ abstract class Gateway extends WC_Payment_Gateway
      * @param object $wc_order
      * @return array
      */
-    protected function get_address( $wc_order )
+    private function get_address( $wc_order )
     {
         $billing  = $wc_order->get_address( 'billing' );
         $shipping = $wc_order->get_address( 'shipping' );
@@ -94,7 +101,7 @@ abstract class Gateway extends WC_Payment_Gateway
         }
 
         if ( ! empty( $address ) ) {
-            $line     = "{$address['address_1']}, {$address['neighborhood']}";
+            $line     = "{$address['address_1']}, N° {$address['number']} - {$address['neighborhood']}";
             $postcode = preg_replace( '/[^0-9]/', '', $address['postcode'] );
 
             return [
@@ -118,7 +125,7 @@ abstract class Gateway extends WC_Payment_Gateway
      * @param array $address
      * @return bool
      */
-    protected function validate_address_fields( $address )
+    private function validate_address_fields( $address )
     {
         $needed = [ 'address_1', 'city', 'state', 'postcode', 'country', 'number', 'neighborhood' ];
 
@@ -138,7 +145,7 @@ abstract class Gateway extends WC_Payment_Gateway
      * @param object $wc_order
      * @return array
      */
-    protected function get_customer( $wc_order )
+    private function get_customer( $wc_order )
     {
         $billing_first_name = $wc_order->get_billing_first_name();
         $billing_last_name  = $wc_order->get_billing_last_name();
@@ -187,7 +194,7 @@ abstract class Gateway extends WC_Payment_Gateway
      * @param array $phones
      * @return array
      */
-    protected function get_phones( $wc_order, $phones = [] )
+    private function get_phones( $wc_order, $phones = [] )
     {
         $billing_phone = $wc_order->get_billing_phone();
         if ( $billing_phone ) {
@@ -224,6 +231,81 @@ abstract class Gateway extends WC_Payment_Gateway
     }
 
     /**
+     * Get order shipping
+     * @since 1.0.0
+     * @param object $wc_order
+     * @return array
+     */
+    private function get_order_shipping( $wc_order, $address, $customer )
+    {
+        $shipping = [];
+        $cart  = $wc_order->get_items( 'shipping' );
+
+        foreach ( $cart as $key => $item ) {
+            $amount          = preg_replace( '/[^0-9]/', '', $item->get_total() );
+            $description     = $item->get_name();
+            $address         = $address;
+            $recipient_name  = $customer['name'];
+            $recipient_phone = $wc_order->get_billing_phone();
+
+            $shipping = [
+                'amount'          => $amount,
+                'description'     => $description,
+                'address'         => $address,
+                'recipient_name'  => $recipient_name,
+                'recipient_phone' => $recipient_phone
+            ];
+        }
+
+        return $shipping;
+    }
+
+    /**
+     * Get order discounts
+     * @since 1,0,0
+     * @param object $wc_order
+     * @return float
+     */
+    private function get_discounts( $wc_order )
+    {
+        $count = count( $wc_order->get_items() );
+        $discount = 0;
+
+        foreach( $wc_order->get_items('fee') as $item_id => $item_fee ){
+            $total = floatval( $item_fee->get_total() );
+
+            if ( $total < 0 ) {
+                $discount += $total * -1;
+            }
+        }
+
+        $discount += floatval( $wc_order->get_total_discount() );
+        return $discount / $count;
+    }
+
+    /**
+     * Get order taxes
+     * @since 1.0.0
+     * @param object $wc_order
+     * @return float
+     */
+    private function get_taxes( $wc_order )
+    {
+        $count = count( $wc_order->get_items() );
+        $taxes = 0;
+
+        foreach( $wc_order->get_items('fee') as $item_id => $item_fee ){
+            $total = floatval( $item_fee->get_total() );
+
+            if ( $total > 0 ) {
+                $taxes += $total;
+            }
+        }
+
+        return $taxes / $count;
+    }
+
+    /**
      * Get payment method data
      * @since 1.0.0
      * @param object $wc_order
@@ -251,8 +333,8 @@ abstract class Gateway extends WC_Payment_Gateway
      * @param string $message
      * @return bool
      */
-    protected function abort_payment_process( $message )
+    protected function abort_process( $message, $type = "error" )
     {
-
+        wc_add_notice(  __( "Pagar.me: $message", 'wc-pagarme-payments' ), $type ); exit;
     }
 }
