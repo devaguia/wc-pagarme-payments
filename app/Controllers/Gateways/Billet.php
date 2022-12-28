@@ -186,7 +186,7 @@ class Billet extends Gateway implements InterfaceGateways
     protected function get_payment_method( $wc_order )
     {
         $person     = $this->get_person();
-        $expiration = $this->get_option("expiration");
+        $expiration = $this->get_option( "expiration" );
         $date       = new DateTime();
 
         $date->add( new DateInterval( "P{$expiration}D" ) );
@@ -194,9 +194,9 @@ class Billet extends Gateway implements InterfaceGateways
         return [
             [
                 "boleto" => [
-                    "bank"            => $this->get_option("bank"),
+                    "bank"            => $this->get_option( "bank" ),
                     "instructions"    => "Pagar",
-                    "due_at"          => $date->format("Y-m-d\TH:i:s") . "Z",
+                    "due_at"          => $date->format( "Y-m-d\TH:i:s" ) . "Z",
                     "document_number" => $person['document'],
                     "type"            => "DM"
                 ],

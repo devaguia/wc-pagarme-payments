@@ -172,7 +172,7 @@ class Pix extends Gateway implements InterfaceGateways
             [
                 "amount" => $wc_order->get_total(), 
                 "pix"    => [
-                    "expires_in" => $this->get_option("expiration")
+                    "expires_in" => $this->get_option( "expiration" )
                 ],
                "payment_method" => "pix"
             ]

@@ -19,6 +19,12 @@
     </div>
     <div class="form-row form-row-wide line select">
         <label><?php echo __( "Installments", "wc-pagarme-payments" ); ?> <span class="required">*</span></label>
-        <select name="wpp-card-installments" id="wpp-card-installments"></select>
+        <select name="wpp-card-installments" id="wpp-card-installments">
+            <?php foreach ( $installments as $installment ) : ?>
+                <option value="<?php echo esc_attr( $installment['installment'] ); ?>">
+                    <?php echo esc_html( $installment['label'] ); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     </div>
 </div>
