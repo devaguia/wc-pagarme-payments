@@ -19,6 +19,7 @@ export class Installments extends Ajax {
     body?.appendChild(container);
 
     this.submit();
+    this.setMask();
   }
 
   remove() {
@@ -81,7 +82,7 @@ export class Installments extends Ajax {
 
     elements?.forEach(element => {
       const index = element.getAttribute("data-index");
-      let value : Number = parseInt(element.value);
+      let value : Number = parseFloat(element.value);
 
       if ( ! value ) value = 0;
 
@@ -89,10 +90,29 @@ export class Installments extends Ajax {
         index: index, 
         value: value
       }
-      console.log(item)
+
       installments.push(item);
     });
 
     return installments;
+  }
+
+  setMask() {
+    const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(".wpp-installment");
+
+    inputs.forEach(input => {
+      input.addEventListener("keyup", () => {
+        const arr = input.value.split("");
+        const char: any = arr.at(-1);
+
+          if ( isNaN(char) && char !== '.') {
+            if (char === ',') {
+              input.value = input.value.replace(",", ".");
+            } else {
+              input.value = input.value.replace(char, "");
+            }
+          } 
+      });
+    });
   }
 }
