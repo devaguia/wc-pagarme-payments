@@ -59,6 +59,8 @@ class Utils
         if ( file_exists( $template ) ) require $template;
         
         $html = ob_get_clean();
+        
+        ob_end_clean($html);
 
         return $html;
     }
