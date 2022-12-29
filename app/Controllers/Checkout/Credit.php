@@ -73,7 +73,7 @@ class Credit extends Render
                 $value = $value + ( ( $value * $fee ) / 100 );
                 $value = "R$ " . number_format( $value, 2, ',', '.' );
     
-                $label = $fee === 0  ? "{$key} x {$value} ( Sem de juros )" : "{$key} x {$value} ( {$percent} de juros )";
+                $label = $fee === 0  ? "{$key} x {$value} ( Sem de juros )" : "{$key} x {$value} ( {$percent}% de juros )";
     
                 array_push( $installments, [
                     'installment' => $key,
