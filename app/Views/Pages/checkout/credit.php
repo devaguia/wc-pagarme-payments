@@ -9,15 +9,15 @@ use WPP\Helpers\Config;
             <label><?php echo __( "Accepted card brands", "wc-pagarme-payments" ); ?></label>
         </div>
         <div class="brands">
-            <img src="<?php echo esc_url( Config::__images( "icons/brands/mastercard.svg" ) ); ?>" alt="Generic back credit card">
-            <img src="<?php echo esc_url( Config::__images( "icons/brands/visa.svg" ) ); ?>" alt="Generic back credit card">
-            <img src="<?php echo esc_url( Config::__images( "icons/brands/elo.svg" ) ); ?>" alt="Generic back credit card">
-            <img src="<?php echo esc_url( Config::__images( "icons/brands/hipercard.svg" ) ); ?>" alt="Generic back credit card">
-            <img src="<?php echo esc_url( Config::__images( "icons/brands/amex.svg" ) ); ?>" alt="Generic back credit card">
-            <img src="<?php echo esc_url( Config::__images( "icons/brands/jcb.svg" ) ); ?>" alt="Generic back credit card">
-            <img src="<?php echo esc_url( Config::__images( "icons/brands/discover.svg" ) ); ?>" alt="Generic back credit card">
-            <img src="<?php echo esc_url( Config::__images( "icons/brands/diners.svg" ) ); ?>" alt="Generic back credit card">
-            <img src="<?php echo esc_url( Config::__images( "icons/brands/aura.svg" ) ); ?>" alt="Generic back credit card">
+            <img src="<?php echo esc_url( Config::__images( "icons/brands/mastercard.svg" ) ); ?>" alt="Mastercard">
+            <img src="<?php echo esc_url( Config::__images( "icons/brands/visa.svg" ) ); ?>" alt="Visa">
+            <img src="<?php echo esc_url( Config::__images( "icons/brands/elo.svg" ) ); ?>" alt="Elo">
+            <img src="<?php echo esc_url( Config::__images( "icons/brands/hipercard.svg" ) ); ?>" alt="Hiper Card">
+            <img src="<?php echo esc_url( Config::__images( "icons/brands/amex.svg" ) ); ?>" alt="American Express">
+            <img src="<?php echo esc_url( Config::__images( "icons/brands/jcb.svg" ) ); ?>" alt="JCB">
+            <img src="<?php echo esc_url( Config::__images( "icons/brands/discover.svg" ) ); ?>" alt="Discover">
+            <img src="<?php echo esc_url( Config::__images( "icons/brands/diners.svg" ) ); ?>" alt="Diners">
+            <img src="<?php echo esc_url( Config::__images( "icons/brands/aura.svg" ) ); ?>" alt="Aura">
         </div>
     </div>
     <div class="form-row form-row-wide line wpp-card-owner">
@@ -27,7 +27,7 @@ use WPP\Helpers\Config;
     <div class="form-row form-row-wide line">
         <label><?php echo __( "Card Number", "wc-pagarme-payments" ); ?> <span class="required">*</span></label>
         <div class="wpp-card-img">
-            <img id="wpp-credi-card-icon" src="<?php echo esc_url( Config::__images( "icons/brands/mono/generic.svg" ) ); ?>" data-img="mono/generic" alt="Generic credit card">
+            <img id="wpp-credi-card-icon" src="<?php echo esc_url( Config::__images( "icons/brands/mono/generic.svg" ) ); ?>" data-img="mono/generic" alt="Credit card brand">
             <input type="text" required autocomplete="off" id="wpp-card-number" placeholder="0000 0000 0000 0000">
         </div>
     </div>
@@ -39,7 +39,7 @@ use WPP\Helpers\Config;
         <div class="form-row form-row-last">
             <label><?php echo __( "Card Code", "wc-pagarme-payments" ); ?> <span class="required">*</span></label>
             <div class="wpp-card-img">
-                <img id="wpp-cvv-icon" src="<?php echo esc_url( Config::__images( "icons/brands/mono/cvv.svg" ) ); ?>" data-img="mono/cvv" alt="Generic back credit card">
+                <img id="wpp-cvv-icon" src="<?php echo esc_url( Config::__images( "icons/brands/mono/cvv.svg" ) ); ?>" data-img="mono/cvv" alt="Credit card CVV">
                 <input type="text" required placeholder="CVV" id="wpp-card-cvv" autocomplete="off">
             </div>
         </div>
