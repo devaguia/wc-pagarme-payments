@@ -2,6 +2,7 @@
 
 namespace WPP\Model\Database;
 
+use WPP\Model\Database\Tables\OrderLogs;
 use WPP\Model\Database\Tables\Settings;
 
 /**
@@ -17,6 +18,7 @@ class Bootstrap
    {
       $this->tables = [
          Settings::class,
+         OrderLogs::class
       ];
 
       $this->init();
