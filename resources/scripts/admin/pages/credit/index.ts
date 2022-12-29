@@ -1,3 +1,4 @@
+import IMask from "imask";
 import { Payment } from "../../components/Payment";
 import { Installments } from "./installments";
 
@@ -8,6 +9,7 @@ class Credit {
     new Payment();
 
     this.handleInstalments();
+    this.handleCard();
   }
 
   handleInstalments() {
@@ -53,6 +55,23 @@ class Credit {
     }).then(function (response) {
       return response;
     });
+  }
+
+  handleCard() {
+    this.setMasks();
+    console.log("aaa");
+  }
+
+  setMasks() {
+    const card: HTMLInputElement | null = document.querySelector("#wpp-card-number");
+    console.log(card);
+    if ( card ) {
+      var maskOptions = {
+        mask: '+{7}(000)000-00-00'
+      };
+      var mask = IMask(card, maskOptions);
+      console.log(mask);
+    }
   }
 }
 

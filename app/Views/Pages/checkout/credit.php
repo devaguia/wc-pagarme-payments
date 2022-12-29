@@ -10,11 +10,11 @@
     <div class="line">
         <div class="form-row form-row-first ">
             <label><?php echo __( "Expiry Date", "wc-pagarme-payments" ); ?> <span class="required">*</span></label>
-            <input type="text" required autocomplete="off" placeholder='<?php echo __( "MM/YY", "wc-pagarme-payments" ); ?>'>
+            <input type="text" required autocomplete="off" name="wpp-card-expiry" id="wpp-card-expiry" placeholder='<?php echo __( "MM/YY", "wc-pagarme-payments" ); ?>'>
         </div>
         <div class="form-row form-row-last">
             <label><?php echo __( "Card Code", "wc-pagarme-payments" ); ?> <span class="required">*</span></label>
-            <input type="text" required placeholder="CVV" autocomplete="off">
+            <input type="text" required placeholder="CVV" name="wpp-card-cvv" id="wpp-card-cvv" autocomplete="off">
         </div>
     </div>
     <div class="form-row form-row-wide line select">

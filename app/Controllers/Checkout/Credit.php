@@ -26,6 +26,7 @@ class Credit extends Render
     private function enqueue()
     {
         $this->enqueue_styles( [ 'name' => 'wpp-credit-checkout', 'file' => 'styles/theme/pages/checkout/credit.css' ] );
+        $this->enqueue_scripts( [ 'name' => 'wpp-credit-checkout', 'file' => 'scripts/theme/pages/credit/checkout.js' ] );
     }
 
     /**
