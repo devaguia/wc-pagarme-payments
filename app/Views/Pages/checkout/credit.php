@@ -28,7 +28,7 @@ use WPP\Helpers\Config;
         <label><?php echo __( "Card Number", "wc-pagarme-payments" ); ?> <span class="required">*</span></label>
         <div class="wpp-card-img">
             <img id="wpp-credi-card-icon" src="<?php echo esc_url( Config::__images( "icons/brands/mono/generic.svg" ) ); ?>" data-img="mono/generic" alt="Generic credit card">
-            <input type="text" required autocomplete="off" name="wpp-card-number" id="wpp-card-number" placeholder="0000 0000 0000 0000">
+            <input type="text" required autocomplete="off" id="wpp-card-number" placeholder="0000 0000 0000 0000">
         </div>
     </div>
     <div class="line">
@@ -40,7 +40,7 @@ use WPP\Helpers\Config;
             <label><?php echo __( "Card Code", "wc-pagarme-payments" ); ?> <span class="required">*</span></label>
             <div class="wpp-card-img">
                 <img id="wpp-cvv-icon" src="<?php echo esc_url( Config::__images( "icons/brands/mono/cvv.svg" ) ); ?>" data-img="mono/cvv" alt="Generic back credit card">
-                <input type="text" required placeholder="CVV" name="wpp-card-cvv" id="wpp-card-cvv" autocomplete="off">
+                <input type="text" required placeholder="CVV" id="wpp-card-cvv" autocomplete="off">
             </div>
         </div>
     </div>
@@ -56,5 +56,6 @@ use WPP\Helpers\Config;
     </div>
     <div class="wpp-hiddens">
         <input type="hidden" name="wpp-card-brand" id="wpp-card-brand" value="">
+        <input type="hidden" name="wpp-card-number" id="wpp-hidden-number" value="">
     </div>
 </div>

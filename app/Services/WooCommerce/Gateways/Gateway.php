@@ -335,6 +335,7 @@ abstract class Gateway extends WC_Payment_Gateway
      */
     protected function abort_process( $message, $type = "error" )
     {
-        wc_add_notice(  __( "Pagar.me: $message", 'wc-pagarme-payments' ), $type ); exit;
+        wc_add_notice(  __( "Pagar.me: $message", 'wc-pagarme-payments' ), $type );
+        return false;
     }
 }

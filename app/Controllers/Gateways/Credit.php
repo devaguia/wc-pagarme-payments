@@ -16,6 +16,10 @@ use WPP\Services\WooCommerce\Gateways\Gateway;
  */
 class Credit extends Gateway implements InterfaceGateways
 {
+    /**
+     * @var array
+     */
+    private $card_fields;
 
     public function __construct() {
         
@@ -35,7 +39,9 @@ class Credit extends Gateway implements InterfaceGateways
         $this->title       = $this->get_option( "title" );
         $this->description = $this->get_option( "description" );
         $this->enabled     = $this->get_option( "enabled" );
-        $this->test_mode    = "yes" === $this->get_option( "test_mode" );
+        $this->test_mode   = "yes" === $this->get_option( "test_mode" );
+
+        $this->card_fields = [];
 
         // add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'thank_you_page' ]);
 
@@ -147,8 +153,52 @@ class Credit extends Gateway implements InterfaceGateways
      */
     public function validate_fields()
     {
-        ## Validade fields
+        $fields['owner']         = isset( $_POST['wpp-card-owner'] ) && $_POST['wpp-card-owner'] ? filter_var( $_POST['wpp-card-owner'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
+        $fields['expiry']        = isset( $_POST['wpp-card-expiry'] ) && $_POST['wpp-card-expiry'] ? filter_var( $_POST['wpp-card-expiry'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
+        $fields['number']        = isset( $_POST['wpp-card-number'] ) && $_POST['wpp-card-number'] ? filter_var( $_POST['wpp-card-number'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
+        $fields['brand']         = isset( $_POST['wpp-card-brand'] ) && $_POST['wpp-card-brand'] ? filter_var( $_POST['wpp-card-brand'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
+        $fields['installments']  = isset( $_POST['wpp-card-installments'] ) && $_POST['wpp-card-installments'] ? filter_var( $_POST['wpp-card-installments'], FILTER_SANITIZE_NUMBER_INT ) : false;
+        $fields['token']         = isset( $_POST['wpp-card-token'] ) && $_POST['wpp-card-token'] ? filter_var( $_POST['wpp-card-token'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
+
+        foreach ( $fields as $key => $value ) {
+            if ( ! $value ) {
+                return $this->abort_process( $this->get_invalid_field_message( $key ) );
+            }
+        }
+        
+        $this->card_fields = $fields;
         return true;
+    }
+
+    private function get_invalid_field_message( $field )
+    {
+        switch ( $field ) {
+            case 'owner':
+                $message = __( 'Pagar.me: The "Card Owner" field must be filled in correctly!', 'wc-pagarme-payments' );
+                break;
+            
+            case 'number':
+                $message = __( 'Pagar.me: The "Card Number" field must be filled in correctly!', 'wc-pagarme-payments' );
+                break;
+            
+            case 'expiry':
+                $message = __( 'Pagar.me: The "Expiry Date" field must be filled in correctly!', 'wc-pagarme-payments' );
+                break;
+            
+            case 'installments':
+                $message = __( 'Pagar.me: The "Installments" field must be filled in correctly!', 'wc-pagarme-payments' );
+                break;
+
+            case 'brand':
+                $message = __( 'Pagar.me: Invalid card flag! Check the inserted card number!', 'wc-pagarme-payments' );
+                break;
+                
+            default:
+                $message = __( 'Pagar.me: Sorry! Unable to access card token', 'wc-pagarme-payments' );
+                break;
+        }
+
+        return $message;
     }
 
     /**
@@ -163,9 +213,9 @@ class Credit extends Gateway implements InterfaceGateways
             [
                 "amount"      => $wc_order->get_total(), 
                 "credit_card" => [
-                    "installments"         => 1,
+                    "installments"         => $this->card_fields['installments'],
                     "statement_descriptor" => "",
-                    "card_token"           => ""
+                    "card_token"           => $this->card_fields['token'],
                 ],
                 "payment_method" => "credit_card"
             ]
