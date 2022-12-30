@@ -3,6 +3,7 @@
 namespace WPP\Services\WooCommerce;
 
 use WPP\Services\WooCommerce\Gateways\Gateways;
+use WPP\Services\WooCommerce\Orders\Metabox;
 use WPP\Services\WooCommerce\Orders\Status;
 
 /**
@@ -28,6 +29,7 @@ class WooCommerce
 	{  
         new Gateways;
         new Status;
+		new Metabox;
 	}
 
 	/**
