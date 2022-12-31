@@ -1,9 +1,10 @@
-<?php if ( $logs ) : ?>
+<?php if ( ! $logs ) : ?>
     <div class="wpp-logs-metabox">
         <div>
             <textarea id="wpp-order-logs" readonly ></textarea>
         </div>
         <div class="actions">
+            <input type="button" class="button" value="<?php echo esc_attr( __( "Copy text", "wc-pagarme-payments" ) ); ?>">
             <input type="button" class="button button-primary" value="<?php echo esc_attr( __( "Download", "wc-pagarme-payments" ) ); ?>">
         </div>
     </div>
