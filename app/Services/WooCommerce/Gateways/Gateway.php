@@ -34,8 +34,6 @@ abstract class Gateway extends WC_Payment_Gateway
      */
     public function process_payment( $wc_order_id )
     {
-        global $woocommerce;
-
         $wc_order = wc_get_order( $wc_order_id );
         
         $address  = $this->get_address( $wc_order );
@@ -423,19 +421,19 @@ abstract class Gateway extends WC_Payment_Gateway
     abstract protected function get_payment_method( $wc_order );    
 
     /**
-     * Abtract method for handle the thankyou page
-     * @since 1.0.0
-     * @param int $wc_order_id
-     * @return void
-     */
-    abstract protected function show_thankyou_page( $wc_order_id );    
-
-    /**
      * Abstract method for validate transaction response
      * @since 1.0.0
      * @param object
      * @return bool
      */
     abstract protected function validade_transaction( $charges, $wc_order );
+
+    /**
+     * Abtract method for handle the thankyou page
+     * @since 1.0.0
+     * @param int $wc_order_id
+     * @return void
+     */
+    abstract public function show_thankyou_page( $wc_order_id );    
 
 }

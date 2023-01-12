@@ -185,7 +185,7 @@ class Pix extends Gateway implements InterfaceGateways
      * @param int $wc_order_id
      * @return void
      */
-    protected function show_thankyou_page( $wc_order_id )
+    public function show_thankyou_page( $wc_order_id )
     {
     }
 

@@ -5,6 +5,7 @@ namespace WPP\Controllers\Gateways;
 use DateInterval;
 use DateTime;
 use WPP\Controllers\Checkout\Billet as Checkout;
+use WPP\Controllers\Thankyou\Billet as ThankyouBillet;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
 use WPP\Controllers\Webhooks\Billet as Webhooks;
@@ -215,9 +216,9 @@ class Billet extends Gateway implements InterfaceGateways
      * @param int $wc_order_id
      * @return void
      */
-    protected function show_thankyou_page( $wc_order_id )
+    public function show_thankyou_page( $wc_order_id )
     {
-        
+        return new ThankyouBillet( $wc_order_id );
     }
 
     /**

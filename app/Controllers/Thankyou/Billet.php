@@ -11,9 +11,34 @@ use WPP\Controllers\Render\Render;
  */
 class Billet extends Render
 {
-    public function __construct()
+    /**
+     * @var int
+     */
+    private $wc_order_id;
+
+    public function __construct( $wc_order_id )
     {
+        $this->wc_order_id = $wc_order_id;
         $this->request();
+    }
+
+    /**
+     * Get order payment meta values
+     */
+    private function get_metas()
+    {
+        $keys  = [ 'barcode', 'billet_line', 'transaction_type', 'billet_url', 'billet_pdf', 'status' ];
+        $metas = [];
+        
+        foreach ( $keys as $key ) {
+            $value = get_post_meta( $this->wc_order_id, "wc-pagarme-$key", true );
+
+            if ( $value ) {
+                $metas[$key] = $value;
+            }
+        }
+        
+        return $metas;
     }
 
     /**
@@ -27,7 +52,9 @@ class Billet extends Render
     
     public function request()
     {
-        $this->render( 'Pages/thankyou/billet.php',[] );
+        $metas = $this->get_metas();
+
+        $this->render( 'Pages/thankyou/billet.php', $metas );
         $this->enqueue();
     }
 }
