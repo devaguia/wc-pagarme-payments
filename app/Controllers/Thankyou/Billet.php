@@ -1,12 +1,11 @@
 <?php
 
-namespace WPP\Controllers\Checkout;
+namespace WPP\Controllers\Thankyou;
 
 use WPP\Controllers\Render\Render;
 
 /**
- * Name: Render Checkout
- * Checkout field
+ * Name: Render Billet thankyou page
  * @package Controller\Render
  * @since 1.0.0
  */
@@ -23,12 +22,12 @@ class Billet extends Render
      */
     private function enqueue()
     {
-        $this->enqueue_styles( [ 'name' => 'wpp-billet-checkout', 'file' => 'styles/theme/pages/checkout/billet.css' ] );
+        $this->enqueue_styles( [ 'name' => 'wpp-billet-thankyou', 'file' => 'styles/theme/pages/thankyou/billet.css' ] );
     }
     
     public function request()
     {
-        $this->render( 'Pages/checkout/billet.php',[] );
+        $this->render( 'Pages/thankyou/billet.php',[] );
         $this->enqueue();
     }
 }
