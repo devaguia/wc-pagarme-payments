@@ -182,9 +182,10 @@ class Pix extends Gateway implements InterfaceGateways
     /**
      * Method override WPP\Services\WooCommerce\Gateways\Gateway::show_thankyou_page 
      * @since 1.0.0
+     * @param int $wc_order_id
      * @return void
      */
-    protected function show_thankyou_page()
+    protected function show_thankyou_page( $wc_order_id )
     {
     }
 

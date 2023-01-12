@@ -425,9 +425,10 @@ abstract class Gateway extends WC_Payment_Gateway
     /**
      * Abtract method for handle the thankyou page
      * @since 1.0.0
+     * @param int $wc_order_id
      * @return void
      */
-    abstract protected function show_thankyou_page();    
+    abstract protected function show_thankyou_page( $wc_order_id );    
 
     /**
      * Abstract method for validate transaction response
