@@ -39,12 +39,8 @@ class Credit extends Render
         $model = new Settings( true );
         $installments = $model->get_single( 'credit_installments' );
 
-        if ( isset( $installments['0'] ) ) {
-            $installments = $installments['0'];
-
-            if ( isset( $installments->value ) && is_serialized( $installments->value ) ) {
-                return unserialize( $installments->value );
-            }
+        if ( isset( $installments->value ) && is_serialized( $installments->value ) ) {
+            return unserialize( $installments->value );
         }
 
         return [];

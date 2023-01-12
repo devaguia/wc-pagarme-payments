@@ -136,7 +136,11 @@ class Settings
      */
     public function get_single( $key )
     {
-        return $this->repository->find( $key );
+        $reult = $this->repository->find( $key );
+        if ( is_array( $reult ) && isset( $reult[0] ) ) {
+            return $reult[0];
+        }
+        return ;
     }
 
     /**

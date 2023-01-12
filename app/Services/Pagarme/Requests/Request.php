@@ -32,6 +32,10 @@ abstract class Request
      */
     private $endpoint;
 
+    /**
+     * @var string
+     */
+    private $token;
 
     /**
      * Send requests
@@ -44,9 +48,11 @@ abstract class Request
         if ( ! $this->body ) $this->body     = [];
         if ( ! $this->header ) $this->header = [];
 
+
         $_header = [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
+            'Accept'         => 'application/json',
+            'Content-Type'   => 'application/json',
+            'Authorization'  => $this->token
         ];
 
         $header = array_merge( $_header, $this->header );
@@ -62,7 +68,9 @@ abstract class Request
 
         $response = wp_remote_request( $url, $args );
 
-        return $response;
+        if ( isset( $response['body'] ) ) {
+            return $response['body'];
+        }
     }
 
     /**
@@ -77,15 +85,6 @@ abstract class Request
     }
 
     /**
-     * Get body
-     * @return array
-     */
-    protected function get_body()
-    {
-        return $this->body;
-    }
-
-    /**
      * Set body
      * @param array $body
      */
@@ -94,14 +93,6 @@ abstract class Request
         $this->body = $body;
     }
 
-    /**
-     * Get header
-     * @return array
-     */
-    protected function get_header()
-    {
-        return $this->header;
-    }
 
     /**
      * Set header
@@ -110,15 +101,6 @@ abstract class Request
     protected function set_header( $header )
     {
         $this->header = $header;
-    }
-
-    /**
-     * Get method
-     * @return array
-     */
-    protected function get_method()
-    {
-        return $this->method;
     }
 
     /**
@@ -131,20 +113,21 @@ abstract class Request
     }
 
     /**
-     * Get endpoint
-     * @return array
-     */
-    protected function get_endpoint()
-    {
-        return $this->endpoint;
-    }
-
-    /**
      * Set endpoint
      * @param array $endpoint
      */
     protected function set_endpoint( $endpoint )
     {
         $this->endpoint = $endpoint;
+    }
+
+
+    /**
+     * Set token
+     * @param array $token
+     */
+    public function set_token( $token )
+    {
+        $this->token = $token;
     }
 }

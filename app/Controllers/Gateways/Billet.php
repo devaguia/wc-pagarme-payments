@@ -39,13 +39,16 @@ class Billet extends Gateway implements InterfaceGateways
         $this->enabled     = $this->get_option( "enabled" );
         $this->test_mode    = "yes" === $this->get_option( "test_mode" );
 
-        // add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'thank_you_page' ]);
+        add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'show_thankyou_page' ]);
 
         if ( is_admin() ) {
             add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'process_admin_options' ] );
         }
+        
 
         new Webhooks( $this->id, get_class( $this ) );
+
+        parent::__construct();
     }
 
     /**
@@ -106,7 +109,7 @@ class Billet extends Gateway implements InterfaceGateways
                     "104" => "Caixa Econômica Federal",
                 ],
                 "desc_tip"    => true,
-                "default"     => 5
+                "default"     => 237
             ],
 
             "expiration" => [
@@ -193,16 +196,85 @@ class Billet extends Gateway implements InterfaceGateways
         
         return [
             [
+                "amount"         => preg_replace( '/[^0-9]/', '', $wc_order->get_total() ),
+                "payment_method" => "boleto",
                 "boleto" => [
                     "bank"            => $this->get_option( "bank" ),
                     "instructions"    => "Pagar",
                     "due_at"          => $date->format( "Y-m-d\TH:i:s" ) . "Z",
                     "document_number" => $person['document'],
                     "type"            => "DM"
-                ],
-               "payment_method" => "boleto"
+                ]
             ]
         ];
+    }
+
+    /**
+     * Method override WPP\Services\WooCommerce\Gateways\Gateway::show_thankyou_page 
+     * @since 1.0.0
+     * @return void
+     */
+    protected function show_thankyou_page()
+    {
+    }
+
+    /**
+     * Method override WPP\Services\WooCommerce\Gateways\Gateway::validade_response 
+     * @since 1.0.0
+     * @param object $response
+     * @return bool
+     */
+    protected function validade_transaction( $charges, $wc_order )
+    {
+        global $woocommerce;
+
+        $needed =  [ 'barcode', 'line', 'transaction_type', 'url', 'pdf', 'status' ];
+        $metas  = [];
+
+        foreach ( $charges as $charge ) {
+            if ( isset( $charge->last_transaction ) ) {
+                $transaction = (array) $charge->last_transaction;
+                
+                if ( array_intersect( $needed, array_keys( $transaction ) ) === $needed ) {
+                    $metas['barcode']          = $transaction['barcode'];
+                    $metas['billet_line']      = $transaction['line'];
+                    $metas['billet_url']       = $transaction['url'];
+                    $metas['billet_pdf']       = $transaction['pdf'];
+                    $metas['transaction_type'] = $transaction['transaction_type'];
+                    $metas['status']           = $transaction['status'];
+                }
+
+            }
+        }
+        
+        if ( ! empty( $metas ) ){
+            foreach ( $metas as $key => $meta ) {
+                update_post_meta( $wc_order->get_id(), "wc-pagarme-$key", $meta );
+            }
+
+            $status = $this->get_woocommerce_status( $metas['status'] );
+
+            $wc_order->update_status( $status, sprintf( "<strong>%s</strong> :", __( "Pagar.me: ", 'wc-pagarme-payments' ) ), true );
+
+            wc_reduce_stock_levels( $wc_order->get_id() );
+
+            $wc_order->add_order_note( sprintf( "<strong>%s</strong> : %s.",
+                __( "Pagar.me: ", 'wc-pagarme-payments' ), 
+                __( "Bank slip line: {$metas['billet_line']}", 'wc-pagarme-payments' )
+            ), true );
+            
+            $wc_order->add_order_note( sprintf( "<strong>%s</strong> : %s", 
+                __( "Pagar.me: ", 'wc-pagarme-payments' ), 
+                __( "Awaiting the payment of the bank slip.", 'wc-pagarme-payments' )
+            ), true );
+
+
+            $woocommerce->cart->empty_cart();
+
+            return true;
+        }
+
+        return false;
     }
 
 }

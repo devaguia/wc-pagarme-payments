@@ -49,7 +49,7 @@ class Config
      */
     public static function base_url()
     {
-        return '';
+        return 'https://api.pagar.me/core/v5/';
     }
 
     /**

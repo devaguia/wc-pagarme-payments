@@ -43,7 +43,7 @@ class Credit extends Gateway implements InterfaceGateways
 
         $this->card_fields = [];
 
-        // add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'thank_you_page' ]);
+        add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'show_thankyou_page' ]);
 
         if ( is_admin() ) {
             add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'process_admin_options' ] );
@@ -211,7 +211,7 @@ class Credit extends Gateway implements InterfaceGateways
     {
         return [
             [
-                "amount"      => $wc_order->get_total(), 
+                "amount"      => preg_replace( '/[^0-9]/', '', $wc_order->get_total() ),
                 "credit_card" => [
                     "installments"         => $this->card_fields['installments'],
                     "statement_descriptor" => "",
@@ -221,4 +221,25 @@ class Credit extends Gateway implements InterfaceGateways
             ]
         ];
     }
+
+    /**
+     * Method override WPP\Services\WooCommerce\Gateways\Gateway::show_thankyou_page 
+     * @since 1.0.0
+     * @return void
+     */
+    protected function show_thankyou_page()
+    {
+    }
+
+    /**
+     * Method override WPP\Services\WooCommerce\Gateways\Gateway::validade_response 
+     * @since 1.0.0
+     * @param object $response
+     * @return bool
+     */
+    protected function validade_transaction( $response, $wc_order )
+    {
+        return false;
+    }
+
 }

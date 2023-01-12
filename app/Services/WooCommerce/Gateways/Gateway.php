@@ -3,7 +3,10 @@
 namespace WPP\Services\WooCommerce\Gateways;
 
 use WC_Payment_Gateway;
+use WPP\Model\Entity\Settings;
+use WPP\Services\Pagarme\Authentication;
 use WPP\Services\Pagarme\Requests\Orders\Create;
+use WPP\Services\WooCommerce\Logs\Logger;
 
 /**
  * Name: Billet
@@ -13,6 +16,16 @@ use WPP\Services\Pagarme\Requests\Orders\Create;
  */
 abstract class Gateway extends WC_Payment_Gateway 
 {
+    /**
+     * @var Logs
+     */
+    protected $logger;
+
+    public function __construct()
+    {
+        $this->logger = new Logger;
+    }
+
     /**
      * Handle gateway process payment
      * @since 1.0.0
@@ -41,8 +54,41 @@ abstract class Gateway extends WC_Payment_Gateway
         $request->set_payment( $payment );
         $request->set_shipping( $shipping );
 
-        // return $this->abort_process( "teste" );
-        $response = $request->handle_request();
+        $authentication = new Authentication( get_class( $this ) );
+        $token = $authentication->auth();
+
+        $request->set_token( $token );
+
+        $response = json_decode( $request->handle_request() );
+        
+        $this->logger->add( $response );
+
+        if ( isset( $response->errors ) ) {
+            $this->logger->add( [ $response->erros, $response->message ], 'error' );
+            return $this->abort_process( $response->message );
+        }
+
+        if ( isset ( $response->charges ) ) {
+            if ( $this->validade_transaction( $response->charges, $wc_order ) ) {
+
+                if ( $this->get_option( "test_mode" ) === 'yes' ) {
+                    
+                    $wc_order->add_order_note( sprintf( "<strong>%s</strong> : %s", 
+                        __( "Pagar.me: ", 'wc-pagarme-payments' ), 
+                        __( "Test mode activate! In this mode transactions are not real.", 'wc-pagarme-payments' )
+                    ), true );
+                }
+
+                return array(
+                    'result' => 'success',
+                    'redirect' => $this->get_return_url( $wc_order )
+                );
+            }
+        }
+
+
+        return $this->abort_process( __( 'Pagar.me: Failed to charge', 'wc-pagarme-payments' ) );
+
     }
 
     /**
@@ -155,13 +201,13 @@ abstract class Gateway extends WC_Payment_Gateway
 
         $name     = "$billing_first_name $billing_last_name";
         $mail     = $wc_order->get_billing_email();
-        $person   = $person_type['person'];
+        $type     = $person_type['person'];
         $document = $person_type['document'];
 
         return [
             'name'     => $name,
             'email'    => $mail,
-            'person'   => $person,
+            'type'     => $type,
             'document' => $document
         ];
 
@@ -238,7 +284,11 @@ abstract class Gateway extends WC_Payment_Gateway
      */
     private function get_order_shipping( $wc_order, $address, $customer )
     {
-        $shipping = [];
+        $shipping = [
+            'amount'      => 0,
+            'description' => __( "No shipping", "wc-pagarme-payment" ),
+            'address'     => $address
+        ];
         $cart  = $wc_order->get_items( 'shipping' );
 
         foreach ( $cart as $key => $item ) {
@@ -306,17 +356,6 @@ abstract class Gateway extends WC_Payment_Gateway
     }
 
     /**
-     * Get payment method data
-     * @since 1.0.0
-     * @param object $wc_order
-     * @return array
-     */
-    protected function get_payment_method( $wc_order )
-    {
-        return [];
-    }
-
-    /**
      * Get POST variables
      * @since 1.0.0
      * @param string $var
@@ -325,6 +364,42 @@ abstract class Gateway extends WC_Payment_Gateway
     private function get_post_vars( $var )
     {
         return isset( $_POST[$var] ) && ! empty( $_POST[$var] ) ? $_POST[$var] : false;
+    }
+
+    /**
+     * Convert The Pagar.me order status to the WooCommerce order status
+     * @since 1.0.0
+     * @param string $original_status
+     * @return string
+     */
+    protected function get_woocommerce_status( $original_status )
+    {
+        switch ( $original_status ) {
+            case 'paid':
+                $status = $this->get_success_status();
+                break;
+
+            case 'generated':
+                $status = 'wc-on-hold';
+                break;
+            
+            default:
+                $status = 'wc-processing';
+                break;
+        }
+
+        return $status;
+    }
+
+    /**
+     * Get success WooCommerce status
+     * @since 1.0.0
+     * @return string
+     */
+    protected function get_success_status()
+    {
+        $model = new Settings();
+        return $model->get_success_status();
     }
 
     /**
@@ -338,4 +413,28 @@ abstract class Gateway extends WC_Payment_Gateway
         wc_add_notice(  __( "Pagar.me: $message", 'wc-pagarme-payments' ), $type );
         return false;
     }
+
+    /**
+     * Abtract method for payment method data
+     * @since 1.0.0
+     * @param object $wc_order
+     * @return array
+     */
+    abstract protected function get_payment_method( $wc_order );    
+
+    /**
+     * Abtract method for handle the thankyou page
+     * @since 1.0.0
+     * @return void
+     */
+    abstract protected function show_thankyou_page();    
+
+    /**
+     * Abstract method for validate transaction response
+     * @since 1.0.0
+     * @param object
+     * @return bool
+     */
+    abstract protected function validade_transaction( $charges, $wc_order );
+
 }
