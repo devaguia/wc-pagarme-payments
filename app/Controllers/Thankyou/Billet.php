@@ -24,6 +24,8 @@ class Billet extends Render
 
     /**
      * Get order payment meta values
+     * @since 1.0.0
+     * @return array
      */
     private function get_metas()
     {
@@ -43,6 +45,7 @@ class Billet extends Render
 
     /**
      * Enqueue custom scripts and styles to the page
+     * @since 1.0.0
      * @return void
      */
     private function enqueue()
