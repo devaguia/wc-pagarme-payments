@@ -7,9 +7,25 @@ class Service extends Ajax {
     if (!document.querySelector(".wpp-container-pagarme")) return;
 
     this.submit();
+    this.showPasswordContent();
   }
 
-  submit() {
+  showPasswordContent(): void {
+    const fields: NodeListOf<HTMLInputElement> = document.querySelectorAll("#wpp-pagarme-settings input[type=password");
+    if (fields) {
+      fields.forEach(field => {
+        field.addEventListener("focusin", () => {
+          field.setAttribute("type", "text");
+        })
+
+        field.addEventListener("focusout", () => {
+          field.setAttribute("type", "password");
+        })
+      });
+    }
+  }
+
+  submit(): void {
     const form: HTMLFormElement | null = document.querySelector(
       "#wpp-pagarme-settings"
     );
@@ -20,7 +36,7 @@ class Service extends Ajax {
     });
   }
 
-  saveSettings(form: HTMLFormElement) {
+  saveSettings(form: HTMLFormElement): void {
     const body = new FormData(form);
     body.append("action", "save_pagarme_settings");
 

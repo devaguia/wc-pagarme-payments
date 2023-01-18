@@ -99,59 +99,70 @@
                 <div class="title">
                     <h3><? echo __( "Payment Options:", "wc-pagarme-payments" ); ?></h3>
                 </div>
-                <div class="secret-keys">
-                    <div class="key">
-                        <div>
-                            <span>
-                                <?php echo __( "Production secret key:", "wc-pagarme-payments" ); ?>
-                            </span>
+                <div class="keys">
+                    <div>
+                        <div class="key">
+                            <div>
+                                <span>
+                                    <?php echo __( "Production secret key:", "wc-pagarme-payments" ); ?>
+                                </span>
+                            </div>
+                            <div>
+                                <input type="password" name="wpp-production-secret-key" id="wpp-production-secret-key" value="<?php echo esc_html( isset( $production_secret_key ) ? $production_secret_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
+                            </div>
                         </div>
-                        <div>
-                            <input type="password" name="wpp-production-secret-key" id="wpp-production-secret-key" value="<?php echo esc_html( isset( $production_key ) ? $production_key : '' ); ?>">
+                        <div class="key">
+                            <div>
+                                <span>
+                                    <?php echo __( "Production public key:", "wc-pagarme-payments"  ); ?>
+                                </span>
+                            </div>
+                            <div>
+                                <input type="text" name="wpp-production-public-key" id="wpp-production-public-key" value="<?php echo esc_html( isset( $production_public_key ) ? $production_public_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
+                            </div>
                         </div>
                     </div>
-                    <div class="key">
-                        <div>
-                            <span>
-                                <?php echo __( "Test secret key:", "wc-pagarme-payments"  ); ?>
-                            </span>
-                        </div>
-                        <div>
-                            <input type="password" name="wpp-test-secret-key" id="wpp-test-secret-key" value="<?php echo esc_html( isset( $test_key ) ? $test_key : '' ); ?>" >
+                    <div>
+                        <div class="key">
+                                <div>
+                                    <span>
+                                        <?php echo __( "Test secret key:", "wc-pagarme-payments" ); ?>
+                                    </span>
+                                </div>
+                                <div>
+                                    <input type="password" name="wpp-test-secret-key" id="wpp-test-secret-key" value="<?php echo esc_html( isset( $test_secret_key ) ? $test_secret_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
+                                </div>
+                            </div>
+                            <div class="key">
+                                <div>
+                                    <span>
+                                        <?php echo __( "Test public key:", "wc-pagarme-payments"  ); ?>
+                                    </span>
+                                </div>
+                                <div>
+                                    <input type="text" name="wpp-test-public-key" id="wpp-test-public-key" value="<?php echo esc_html( isset( $test_public_key ) ? $test_public_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div class="option">
-                        <h4><strong><?php echo __( "Anti Fraud", "wc-pagarme-payments" ); ?></strong></h4>
+            </div>
+            <hr>
+            <div class="api-options">
+                <div class="option">
+                    <h3>
+                        <strong>
+                            <?php echo __( "API Version", "wc-pagarme-payments" ); ?>
+                        </strong>
+                    </h3>
+                    <div>
+                        <label for="wpp-pagarme-api-version">
+                            <?php echo __( "Pagar.me API version:", "wc-pagarme-payments" ); ?>
+                        </label>
                         <div>
-                            <input type="checkbox" name="wpp-anti-fraud" id="wpp-wpp-anti-fraud" <?php echo esc_attr( isset( $anti_fraud ) && $anti_fraud ? 'checked' : '' ) ?>>
-                            <label for="wpp-anti-fraud">
-                                <?php echo __( "Enable anti-fraud.", "wc-pagarme-payments"); ?>
-                            </label>
-                            <div class="anti-fraud">
-                                <label for="">
-                                    <?php echo __( "Minimum value:", "wc-pagarme-payments"); ?>
-                                </label>
-                                <input type="text" name="wpp-anti-fraud-value" id="wpp-anti-fraud-value" value="<?php echo esc_html( isset( $anti_fraud_value ) ? $anti_fraud_value : '' ); ?>">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="option">
-                        <h4>
-                            <strong>
-                                <?php echo __( "API Version", "wc-pagarme-payments" ); ?>
-                            </strong>
-                        </h4>
-                        <div>
-                            <label for="wpp-pagarme-api-version">
-                                <?php echo __( "Pagar.me API version:", "wc-pagarme-payments" ); ?>
-                            </label>
-                            <div>
-                                <select name="wpp-pagarme-api-version" id="wpp-pagarme-api-version" value="<?php echo esc_html( isset( $api_version ) ? $api_version : 1 ); ?>" >
-                                    <option value="v5">v5</option>
-                                </select>
-                            </div>
+                            <select name="wpp-pagarme-api-version" id="wpp-pagarme-api-version" value="<?php echo esc_html( isset( $api_version ) ? $api_version : 1 ); ?>" >
+                                <option value="v5">v5</option>
+                            </select>
                         </div>
                     </div>
                 </div>
