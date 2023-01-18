@@ -59,7 +59,7 @@ export class Masks {
 
     if (cod) {
       var mask = {
-        mask: /^[A-Z]+$/i
+        mask: /^[A-Za-z\s]*$/
       };
       IMask(cod, mask);
     }

@@ -55,7 +55,8 @@ use WPP\Helpers\Config;
         </select>
     </div>
     <div class="wpp-hiddens">
+        <input type="hidden" name="wpp-public-key" id="wpp-public-key" value="<?php echo esc_attr( isset( $public_key ) ? $public_key : "" ) ?>">
+        <input type="hidden" name="wpp-card-token" id="wpp-card-token" value="">
         <input type="hidden" name="wpp-card-brand" id="wpp-card-brand" value="">
-        <input type="hidden" name="wpp-card-number" id="wpp-hidden-number" value="">
     </div>
 </div>
