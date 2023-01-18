@@ -147,26 +147,6 @@
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="api-options">
-                <div class="option">
-                    <h3>
-                        <strong>
-                            <?php echo __( "API Version", "wc-pagarme-payments" ); ?>
-                        </strong>
-                    </h3>
-                    <div>
-                        <label for="wpp-pagarme-api-version">
-                            <?php echo __( "Pagar.me API version:", "wc-pagarme-payments" ); ?>
-                        </label>
-                        <div>
-                            <select name="wpp-pagarme-api-version" id="wpp-pagarme-api-version" value="<?php echo esc_html( isset( $api_version ) ? $api_version : 1 ); ?>" >
-                                <option value="v5">v5</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="submit">
                 <div>
                     <input type="submit" id="wpp-submit" value="<?php echo __( "Save Settings", "wc-pagarme-payments" ); ?>" >
