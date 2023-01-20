@@ -25,6 +25,7 @@ class Pagarme extends Render
 
     /**
      * Enqueue custom scripts and styles to the page
+     * @since 1.0.0
      * @return void
      */
     private function enqueue()
@@ -35,6 +36,7 @@ class Pagarme extends Render
 
     /**
      * Set default values
+     * @since 1.0.0
      * @return void
      */
     private function default() //TODO Create database colum for public keys
@@ -53,6 +55,7 @@ class Pagarme extends Render
 
     /**
      * Get fields from database
+     * @since 1.0.0
      * @return array
      */
     private function get_fields()
@@ -76,6 +79,7 @@ class Pagarme extends Render
 
     /**
      * Check if variable is serialized and unserialize
+     * @since 1.0.0
      * @return mixed
      */
     private function verify( $value )
@@ -97,6 +101,7 @@ class Pagarme extends Render
 
     /**
      * Get gateways informations
+     * @since 1.0.0
      * @return void
      */
     private function get_gateways()
@@ -113,6 +118,7 @@ class Pagarme extends Render
     
     /**
      * Call the view render
+     * @since 1.0.0
      * @return void
      */
     public function request()
