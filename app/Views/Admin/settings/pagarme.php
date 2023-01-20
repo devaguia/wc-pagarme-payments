@@ -104,44 +104,21 @@
                         <div class="key">
                             <div>
                                 <span>
-                                    <?php echo __( "Production secret key:", "wc-pagarme-payments" ); ?>
+                                    <?php echo __( "Secret key:", "wc-pagarme-payments" ); ?>
                                 </span>
                             </div>
                             <div>
-                                <input type="password" name="wpp-production-secret-key" id="wpp-production-secret-key" value="<?php echo esc_html( isset( $production_secret_key ) ? $production_secret_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
+                                <input type="password" name="wpp-secret-key" id="wpp-secret-key" value="<?php echo esc_html( isset( $secret_key ) ? $secret_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
                             </div>
                         </div>
                         <div class="key">
                             <div>
                                 <span>
-                                    <?php echo __( "Production public key:", "wc-pagarme-payments"  ); ?>
+                                    <?php echo __( "Public key:", "wc-pagarme-payments"  ); ?>
                                 </span>
                             </div>
                             <div>
-                                <input type="text" name="wpp-production-public-key" id="wpp-production-public-key" value="<?php echo esc_html( isset( $production_public_key ) ? $production_public_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="key">
-                                <div>
-                                    <span>
-                                        <?php echo __( "Test secret key:", "wc-pagarme-payments" ); ?>
-                                    </span>
-                                </div>
-                                <div>
-                                    <input type="password" name="wpp-test-secret-key" id="wpp-test-secret-key" value="<?php echo esc_html( isset( $test_secret_key ) ? $test_secret_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
-                                </div>
-                            </div>
-                            <div class="key">
-                                <div>
-                                    <span>
-                                        <?php echo __( "Test public key:", "wc-pagarme-payments"  ); ?>
-                                    </span>
-                                </div>
-                                <div>
-                                    <input type="text" name="wpp-test-public-key" id="wpp-test-public-key" value="<?php echo esc_html( isset( $test_public_key ) ? $test_public_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
-                                </div>
+                                <input type="text" name="wpp-public-key" id="wpp-public-key" value="<?php echo esc_html( isset( $public_key ) ? $public_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
                             </div>
                         </div>
                     </div>
