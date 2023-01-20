@@ -2,8 +2,8 @@
 /**
  * Available variables
  * 
- * @var string $production_key 
- * @var string $test_key 
+ * @var string $secret_key 
+ * @var string $public_key 
  * @var array $methods 
  * @var array $credit_installments 
  * @var array $anti_fraud 

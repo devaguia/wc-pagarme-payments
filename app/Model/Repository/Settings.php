@@ -128,13 +128,13 @@ class Settings extends Repository implements InterfaceRepository
     private function default()
     {
         return [
-            'production_key'       => "",
-            'test_key'             => "",
+            'secret_key'          => "",
+            'public_key'           => "",
             'credit_installments'  => "",
             'anti_fraud'           => false,
             'anti_fraud_value'     => 0,
             'success_status'       => "processing",
-            'order_logs'            => false,
+            'order_logs'           => false,
             'api_version'          => 1
         ];
     }

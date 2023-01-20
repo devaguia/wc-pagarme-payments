@@ -22,12 +22,10 @@ class Authentication
      */
     private $erros;
 
-    public function __construct( $payment = "" )
+    public function __construct()
     {
-        $this->secret = "";
-        $this->erros  = [];
-
-        $this->set_secret( $payment );
+        $this->erros = [];
+        $this->set_secret();
     }
 
     /**
@@ -60,20 +58,16 @@ class Authentication
      * @param string $payment
      * @return void
      */
-    private function set_secret( $payment )
+    private function set_secret()
     {
-        if ( ! class_exists( $payment ) ) return;
-
-        $class =  new $payment;
-        $mode  = $class->get_option( "test_mode" ) === "yes" ? true : false;
         $model = new Settings( true );
 
-        $option = $mode ? "production_key" : "test_key";
-        $result = $model->get_single( $option );
+        $result = $model->get_single( 'secret_key' );
 
         if ( isset( $result->value ) && $result->value ) {
             $this->secret = $result->value;
         } else {
+            $this->secret = "";
             $this->erros[] = __( "Pagar.me: Unable to authenticate!", "wc-pagarme-payments" ); 
         }
         

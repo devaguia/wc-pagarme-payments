@@ -41,8 +41,8 @@ class Settings
         $model = new Model();
         
         $model->set_api_version( $this->propeties['pagarme-api-version'] );
-        $model->set_production_key( $this->propeties['production-secret-key'] );
-        $model->set_test_key( $this->propeties['test-secret-key'] );
+        $model->set_secret_key( $this->propeties['secret-key'] );
+        $model->set_public_key( $this->propeties['public-key'] );
         $model->set_success_status( $this->propeties['finish-order-status'] );
         $model->set_anti_fraud( $this->propeties['anti-fraud'] );
         $model->set_anti_fraud_value( $this->propeties['anti-fraud-value'] );
@@ -79,8 +79,8 @@ class Settings
         if ( ! empty( $vars ) ) {
             $needed = [ 
                 'finish-order-status',
-                'production-secret-key',
-                'test-secret-key',
+                'secret-key',
+                'public-key',
                 'anti-fraud-value',
                 'pagarme-api-version',
                 'order-logs',

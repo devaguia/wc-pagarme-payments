@@ -12,16 +12,16 @@ use WPP\Model\Repository\Settings as Repository;
 class Settings
 {
     /**
-     * Pagar.me production key
+     * Pagar.me secret key
      * @var string
      */
-    private $production_key;
+    private $secret_key;
 
     /**
      * Pagar.me test key
      * @var string
      */
-    private $test_key;
+    private $public_key;
 
     /**
      * Pagar.me credit installments and fees
@@ -85,12 +85,12 @@ class Settings
             if ( ! isset( $field->key ) || ! isset( $field->value ) ) continue;
             
             switch ( $field->key ) {
-                case 'balela':
-                    $this->set_production_key( $field->value );
+                case 'secret_key':
+                    $this->set_secret_key( $field->value );
                     break;
                 
-                case 'test_key':
-                    $this->set_test_key( $field->value );
+                case 'public_key':
+                    $this->set_public_key( $field->value );
                     break;
             
                 case 'credit_installments':
@@ -161,8 +161,8 @@ class Settings
     private function get_fields()
     {
         return [
-            'production_key'       => $this->get_production_key(),
-            'test_key'             => $this->get_test_key(),
+            'secret_key'          => $this->get_secret_key(),
+            'public_key'           => $this->get_public_key(),
             'anti_fraud'           => $this->get_anti_fraud(),
             'anti_fraud_value'     => $this->get_anti_fraud_value(),
             'success_status'       => $this->get_success_status(),
@@ -172,41 +172,41 @@ class Settings
     }
 
     /**
-     * Get $production_key
+     * Get $secret_key
      * @return string
      */
-    public function get_production_key()
+    public function get_secret_key()
     {
-        return $this->production_key;
+        return $this->secret_key;
     }
 
     /**
-     * Set $production_key
+     * Set $secret_key
      * @param string $value
      * @return void
      */
-    public function set_production_key( $value )
+    public function set_secret_key( $value )
     {
-        $this->production_key = $value;
+        $this->secret_key = $value;
     }
 
     /**
-     * Get $test_key
+     * Get $public_key
      * @return string
      */
-    public function get_test_key()
+    public function get_public_key()
     {
-        return $this->test_key;
+        return $this->public_key;
     }
 
     /**
-     * Set $production_key
+     * Set $secret_key
      * @param string $value
      * @return void
      */
-    public function set_test_key( $value )
+    public function set_public_key( $value )
     {
-        $this->test_key = $value;
+        $this->public_key = $value;
     }
 
     /**
@@ -219,7 +219,7 @@ class Settings
     }
 
     /**
-     * Set $production_key
+     * Set $secret_key
      * @param array $value
      * @return void
      */
