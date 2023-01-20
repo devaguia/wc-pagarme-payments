@@ -100,7 +100,6 @@ class Settings extends Repository implements InterfaceRepository
     {
         try {
             return $this->query( "UPDATE {$this->prefix}wc_pagarme_settings SET `value` = '$value' WHERE `key` like '$key';" );
-            return $teste;
         } catch ( Exception $e ) {
             return false;
         }
@@ -128,14 +127,28 @@ class Settings extends Repository implements InterfaceRepository
     private function default()
     {
         return [
-            'secret_key'          => "",
+            'secret_key'           => "",
             'public_key'           => "",
-            'credit_installments'  => "",
+            'credit_installments'  => serialize($this->get_default_credit_installments()),
             'anti_fraud'           => false,
             'anti_fraud_value'     => 0,
-            'success_status'       => "processing",
+            'success_status'       => "wc-processing",
             'order_logs'           => false,
             'api_version'          => 1
         ];
+    }
+
+    /**
+     * @return array
+     */
+    private function get_default_credit_installments()
+    {
+        $installments = [];
+
+        for ($i=1; $i < 25; $i++) { 
+            $installments[$i] = 0;
+        }
+
+        return $installments;
     }
 }
