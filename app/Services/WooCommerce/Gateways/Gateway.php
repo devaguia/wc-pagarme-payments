@@ -59,31 +59,34 @@ abstract class Gateway extends WC_Payment_Gateway
 
         $response = json_decode( $request->handle_request() );
         
-        $this->logger->add( $response );
+        if ( $response ) {
+            
+            $this->logger->add( $response );
 
-        if ( isset( $response->errors ) ) {
-            $this->logger->add( [ $response->erros, $response->message ], 'error' );
-            return $this->abort_process( $response->message );
-        }
+            if ( isset( $response->errors ) ) {
+                $this->logger->add( [ $response->erros, $response->message ], 'error' );
+                return $this->abort_process( $response->message );
+            }
 
-        if ( isset ( $response->charges ) ) {
-            if ( $this->validade_transaction( $response->charges, $wc_order ) ) {
+            if ( isset ( $response->charges ) ) {
+                if ( $this->validade_transaction( $response->charges, $wc_order ) ) {
 
-                if ( $this->get_option( "test_mode" ) === 'yes' ) {
-                    
-                    $wc_order->add_order_note( sprintf( "<strong>%s</strong> : %s", 
-                        __( "Pagar.me: ", 'wc-pagarme-payments' ), 
-                        __( "Test mode activate! In this mode transactions are not real.", 'wc-pagarme-payments' )
-                    ), true );
+                    if ( $this->get_option( "test_mode" ) === 'yes' ) {
+                        
+                        $wc_order->add_order_note( sprintf( "<strong>%s</strong> : %s", 
+                            __( "Pagar.me: ", 'wc-pagarme-payments' ), 
+                            __( "Test mode activate! In this mode transactions are not real.", 'wc-pagarme-payments' )
+                        ), true );
+                    }
+
+                    return array(
+                        'result' => 'success',
+                        'redirect' => $this->get_return_url( $wc_order )
+                    );
                 }
-
-                return array(
-                    'result' => 'success',
-                    'redirect' => $this->get_return_url( $wc_order )
-                );
             }
         }
-
+        
 
         return $this->abort_process( __( 'Pagar.me: Failed to charge', 'wc-pagarme-payments' ) );
 

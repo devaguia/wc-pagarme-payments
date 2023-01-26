@@ -15,6 +15,11 @@ abstract class Table
     protected $db;
 
     /**
+     * @var string
+     */
+    protected $table;
+
+    /**
      * Set WPDB object
      * @return void
      */

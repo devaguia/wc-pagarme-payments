@@ -84,10 +84,29 @@ class Credit extends Render
 
     }
 
+    /**
+     * @return string
+     */
+    private function get_public_key()
+    {
+        $model      = new Settings( true );
+        $public_key = $model->get_single( 'public_key' );
+
+        if ( isset( $public_key->value ) ) {
+            return $public_key->value;
+        }
+
+        return "";
+    }
+
+    /**
+     * @return void
+     */
     public function request()
     {
         $this->render( 'Pages/checkout/credit.php',[
-            'installments' => $this->get_installments()
+            'installments' => $this->get_installments(),
+            'public_key'   => $this->get_public_key()
         ] );
 
         $this->enqueue();

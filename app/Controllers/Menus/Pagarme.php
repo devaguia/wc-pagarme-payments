@@ -39,7 +39,7 @@ class Pagarme extends Render
      * @since 1.0.0
      * @return void
      */
-    private function default() //TODO Create database colum for public keys
+    private function default() 
     {
         $this->fields = [
             'secret_key'         => '',

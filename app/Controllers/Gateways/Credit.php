@@ -50,6 +50,8 @@ class Credit extends Gateway implements InterfaceGateways
         }
 
         new Webhooks( $this->id, get_class( $this ) );
+        
+        parent::__construct();
     }
 
     /**
@@ -153,19 +155,28 @@ class Credit extends Gateway implements InterfaceGateways
      */
     public function validate_fields()
     {
+        $fields['token']         = [];
         $fields['owner']         = isset( $_POST['wpp-card-owner'] ) && $_POST['wpp-card-owner'] ? filter_var( $_POST['wpp-card-owner'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
         $fields['expiry']        = isset( $_POST['wpp-card-expiry'] ) && $_POST['wpp-card-expiry'] ? filter_var( $_POST['wpp-card-expiry'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
-        $fields['number']        = isset( $_POST['wpp-card-number'] ) && $_POST['wpp-card-number'] ? filter_var( $_POST['wpp-card-number'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
         $fields['brand']         = isset( $_POST['wpp-card-brand'] ) && $_POST['wpp-card-brand'] ? filter_var( $_POST['wpp-card-brand'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
         $fields['installments']  = isset( $_POST['wpp-card-installments'] ) && $_POST['wpp-card-installments'] ? filter_var( $_POST['wpp-card-installments'], FILTER_SANITIZE_NUMBER_INT ) : false;
-        $fields['token']         = isset( $_POST['wpp-card-token'] ) && $_POST['wpp-card-token'] ? filter_var( $_POST['wpp-card-token'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
+        $token                   = isset( $_POST['wpp-card-token'] ) && $_POST['wpp-card-token'] ? filter_var( $_POST['wpp-card-token'] ) : false;
 
+        $token = json_decode( stripslashes( $token ) );
+
+        if ( $token && is_object( $token )) {
+            $fields['token'] = ( array ) $token;
+            if ( isset( $token->card ) ) {
+                $fields['token']['card'] = ( array ) $token->card;
+            }
+        }
+        
         foreach ( $fields as $key => $value ) {
             if ( ! $value ) {
                 return $this->abort_process( $this->get_invalid_field_message( $key ) );
             }
         }
-        
+
         $this->card_fields = $fields;
         return true;
     }
@@ -207,15 +218,15 @@ class Credit extends Gateway implements InterfaceGateways
      * @param object $wc_order
      * @return array
      */
-    protected function get_payment_method( $wc_order )
+    protected function get_payment_method( $wc_order ) //TODO get card_token value correctly
     {
         return [
             [
                 "amount"      => preg_replace( '/[^0-9]/', '', $wc_order->get_total() ),
                 "credit_card" => [
                     "installments"         => $this->card_fields['installments'],
-                    "statement_descriptor" => "",
-                    "card_token"           => $this->card_fields['token'],
+                    "statement_descriptor" => strtoupper( str_replace( ' ', '', get_bloginfo( 'name' ) ) ),
+                    "card_token"           => isset( $this->card_fields['token']['id'] ) ? $this->card_fields['token']['id'] : '',
                 ],
                 "payment_method" => "credit_card"
             ]

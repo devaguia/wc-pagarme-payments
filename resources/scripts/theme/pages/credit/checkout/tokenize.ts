@@ -45,7 +45,7 @@ export class Tokenize {
         this.setCardBrand();
         this.setCardCvv();
 
-        this.checkCardObjectFields();
+        this.verifyCardFields();
       })
     }
   }
@@ -103,7 +103,7 @@ export class Tokenize {
 
     if (input) {
       input.addEventListener("keyup", () => {
-          if (input.value) {
+          if (input.value && input.value.length >= 3) {
             this.cardObject.cvv = parseInt(input.value);
           }
       });
@@ -163,6 +163,25 @@ export class Tokenize {
 
     return hasDifference;
   }
+
+  verifyCardFields(): void {
+    const fields = [
+      "card-expiry",
+      "card-number",
+      "card-expiry",
+      "card-owner",
+      "card-cvv"
+    ];
+
+    fields.forEach(field => {
+      const element = document.querySelector(`#wpp-${field}`);
+      if (element) {
+        element.addEventListener("keyup", () => {
+          this.checkCardObjectFields();
+        });
+      }
+    });
+  } 
 
   checkCardObjectFields(): void {
     let isFilled = true;
