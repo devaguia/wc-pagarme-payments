@@ -39,7 +39,6 @@ class Credit extends Gateway implements InterfaceGateways
         $this->title       = $this->get_option( "title" );
         $this->description = $this->get_option( "description" );
         $this->enabled     = $this->get_option( "enabled" );
-        $this->test_mode   = "yes" === $this->get_option( "test_mode" );
 
         $this->card_fields = [];
 
@@ -50,7 +49,7 @@ class Credit extends Gateway implements InterfaceGateways
         }
 
         new Webhooks( $this->id, get_class( $this ) );
-        
+
         parent::__construct();
     }
 
@@ -70,15 +69,6 @@ class Credit extends Gateway implements InterfaceGateways
                 "label"       => __( "Enable Gateway", "wc-pagarme-payments" ),
                 "type"        => "checkbox",
                 "description" => __( "Check this option to activate the payment method", "wc-pagarme-payments" ),
-                "default"     => "no",
-                "desc_tip"    => true
-            ],
-
-            "test_mode" => [
-                "title"       => __( "Test Mode", "wc-pagarme-payments" ),
-                "label"       => __( "Enable test mode for credit card.", "wc-pagarme-payments" ),
-                "type"        => "checkbox",
-                "description" => __( "Check this option to activate the test mode.", "wc-pagarme-payments" ),
                 "default"     => "no",
                 "desc_tip"    => true
             ],
@@ -137,7 +127,7 @@ class Credit extends Gateway implements InterfaceGateways
 
         if ( $this->description ) {
 
-            if ( $this->test_mode ) {
+            if ( true ) { //TODO Somehow check if the plugin is on the test mode
                 $this->description .= __( " Test mode activate! In this mode transactions are not real.", "wc-pagarme-payments" );
                 $this->description  = trim( $this->description );
             }

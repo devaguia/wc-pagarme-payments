@@ -32,8 +32,7 @@ class Gateways
 
                     $methods[$key] = [
                         'active' => self::get_status( $settings ),
-                        'label'  => self::get_title( $key ),
-                        'mode'   => self::get_mode( $settings )
+                        'label'  => self::get_title( $key )
                     ];
                 }
             }
@@ -66,24 +65,6 @@ class Gateways
         }
 
         return $result;
-    }
-
-    /**
-     * Get gateway mode
-     * @return string
-     */
-    private static function get_mode( $settings )
-    {
-        $production = __( 'production', 'wc-pagarme-payments' );
-        $sandbox    = __( 'sandbox', 'wc-pagarme-payments' );
-        
-        if ( isset( $settings['test_mode'] ) ) {
-            if ( $settings['test_mode'] === 'yes' ) {
-                return $sandbox;
-            }
-        }
-
-        return $production;
     }
 
     /**

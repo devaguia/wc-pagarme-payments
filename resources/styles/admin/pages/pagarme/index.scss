@@ -27,7 +27,7 @@
       .methods {
         .method {
           display: grid;
-          grid-template-columns: 30px 100px 100px 30px;
+          grid-template-columns: 30px 100px 20px 30px;
           align-content: center;
           margin: 10px 0;
 
@@ -92,7 +92,7 @@
       }
 
       > div {
-        margin: 20px 0;
+        margin-bottom: 20px;
         > h4 {
           font-size: 14px;
           margin: 0;
@@ -179,13 +179,15 @@
     }
     .submit {
       float: right;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 10px;
+
       input {
         height: 40px !important;
         padding: 0 50px;
         border: none;
         border-radius: 5px;
-        background-color: $secondary-color;
-        color: $white-color;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         font-weight: 400;
         font-size: 16px;
@@ -194,6 +196,17 @@
           cursor: pointer;
           opacity: 90%;
         }
+      }
+
+      #wpp-submit {
+        background-color: $secondary-color;
+        color: $white-color;
+      }
+
+      #wpp-export {
+        background-color: #fff;
+        border: solid 1px $secondary-color;
+        color: $secondary-color;
       }
     }
   }

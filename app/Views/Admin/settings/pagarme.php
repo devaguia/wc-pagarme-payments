@@ -47,10 +47,8 @@
                                         <?php echo esc_html( isset( $method['label'] ) ? $method['label'] : '' ); ?>
                                     </span>
                                 </div>
-                                <div class="mode">
-                                    <span>
-                                        <?php echo esc_html( isset( $method['mode'] ) ? $method['mode'] : '' ); ?>
-                                    </span>
+                                <div>
+                                    <span> | </span>
                                 </div>
                                 <div class="link">
                                     <a target="_blank" href="admin.php?page=wc-settings&tab=checkout&section=<?php echo esc_html( $key ) ?>">
@@ -125,6 +123,9 @@
                 </div>
             </div>
             <div class="submit">
+                <div>
+                    <input type="button" id="wpp-export" value="<?php echo __( "Export Settings", "wc-pagarme-payments" ); ?>">
+                </div>
                 <div>
                     <input type="submit" id="wpp-submit" value="<?php echo __( "Save Settings", "wc-pagarme-payments" ); ?>" >
                 </div>

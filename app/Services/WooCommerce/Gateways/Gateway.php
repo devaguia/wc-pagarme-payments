@@ -71,7 +71,7 @@ abstract class Gateway extends WC_Payment_Gateway
             if ( isset ( $response->charges ) ) {
                 if ( $this->validade_transaction( $response->charges, $wc_order ) ) {
 
-                    if ( $this->get_option( "test_mode" ) === 'yes' ) {
+                    if ( true ) { //TODO Somehow check if the plugin is on the test mode
                         
                         $wc_order->add_order_note( sprintf( "<strong>%s</strong> : %s", 
                             __( "Pagar.me: ", 'wc-pagarme-payments' ), 
