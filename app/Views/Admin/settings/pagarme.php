@@ -1,27 +1,15 @@
-<?php 
-/**
- * Available variables
- * 
- * @var string $secret_key 
- * @var string $public_key 
- * @var array $methods 
- * @var array $credit_installments 
- * @var array $anti_fraud 
- * @var string $anti_fraud_value 
- * @var string $success_status 
- * @var bool $order_logs 
- * @var int $api_version 
- */
-
-?>
-
 <div class="wrap wpp-wrap">
     <div class="wpp-container wpp-container-pagarme">
         <div class="title">
             <h1>
-                <?php echo __( "Pagar.me General Settings" ); ?>
+                <?php echo __( "Pagar.me General Settings", "wc-pagarme-payments" );?>
             </h1>
             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42.8925 43.9518H56.9567C56.9783 43.3835 56.9999 42.8081 56.9999 42.2326C56.9711 18.9361 37.9328 0.0500387 14.4216 0V13.9215C30.1847 13.9465 42.9503 26.6134 42.9466 42.2326C42.9503 42.8045 42.9286 43.3799 42.8925 43.9518Z" fill="#65A300"></path><path d="M0 42.235C0 50.3896 6.76427 57.0001 15.1084 57.0001C23.4526 57.0001 30.2169 50.3896 30.2169 42.235C30.2169 34.0805 23.4526 27.47 15.1084 27.47C6.76427 27.47 0 34.0805 0 42.235Z" fill="#65A300"></path></svg>
+            <?php if ( isset( $mode_label ) ): ?>
+                <div class="wpp-payment-mode">
+                    <span><?php echo esc_html( $mode_label ); ?></span>
+                </div>
+            <?php endif; ?>
         </div>
         <hr>
         <form class="body" id="wpp-pagarme-settings">
@@ -119,6 +107,15 @@
                                 <input type="text" name="wpp-public-key" id="wpp-public-key" value="<?php echo esc_html( isset( $public_key ) ? $public_key : '' ); ?>" placeholder="<?php echo __( "Leave blank if you don't want to use it.", "wc-pagarme-payments" ); ?>">
                             </div>
                         </div>
+                        <input type="hidden" name="wpp-payment-mode" id="wpp-payment-mode" value="<?php echo esc_html( isset( $mode ) ? $mode : '' ); ?>">
+                    </div>
+                </div>
+                <div class="wpp-warnings">
+                    <div class="wpp-warning" id="wpp-warning-key">
+                        <span>
+                            <strong><?php echo __( "Warning: ", "wc-pagarme-payments" ); ?></strong>
+                            <?php echo __( "Your keys must be of the same type (test or production).", "wc-pagarme-payments" ); ?>
+                        </span>
                     </div>
                 </div>
             </div>

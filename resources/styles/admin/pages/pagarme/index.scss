@@ -23,6 +23,23 @@
         margin-top: -5px;
       }
     }
+
+    .wpp-payment-mode {
+      position: relative;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      bottom: 3px;
+
+      span {
+        padding: 5px 20px;
+        background-color: #000;
+        color: #fff;
+        border-radius: 5px;
+      }
+    }
+
     .methods-section {
       .methods {
         .method {
@@ -110,6 +127,24 @@
         color: $black-color;
       }
 
+      > .wpp-warnings {
+        height: 50px;
+        > .wpp-warning {
+          display: none;
+          &-active {
+            display: block;
+            background-color: #ffcc66;
+            padding: 10px 20px;
+            border-radius: 5px;
+            position: relative;
+            bottom: 15px;
+            font-size: 14px;
+          }
+
+          animation: slide 1s;
+        }
+      }
+
       .option {
         margin: 20px 0;
 
@@ -177,6 +212,7 @@
     .api-options {
       margin-top: 30px;
     }
+
     .submit {
       float: right;
       display: grid;
@@ -198,6 +234,15 @@
         }
       }
 
+      .wpp-submit-disabled {
+        opacity: 20%;
+
+        &:hover {
+          opacity: 20% !important;
+          cursor: default !important;
+        }
+      }
+
       #wpp-submit {
         background-color: $secondary-color;
         color: $white-color;
@@ -209,5 +254,16 @@
         color: $secondary-color;
       }
     }
+  }
+}
+
+@keyframes slide {
+  from {
+      transform: translateY(20px);
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0px);
+      opacity: 1;
   }
 }

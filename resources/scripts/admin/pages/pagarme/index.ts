@@ -7,10 +7,11 @@ class Service extends Ajax {
     if (!document.querySelector(".wpp-container-pagarme")) return;
 
     this.submit();
-    this.showPasswordContent();
+    this.showTokenContent();
+    this.checkTokenContent();
   }
 
-  showPasswordContent(): void {
+  showTokenContent(): void {
     const fields: NodeListOf<HTMLInputElement> = document.querySelectorAll("#wpp-pagarme-settings input[type=password");
     if (fields) {
       fields.forEach(field => {
@@ -22,6 +23,52 @@ class Service extends Ajax {
           field.setAttribute("type", "password");
         })
       });
+    }
+  }
+
+  checkTokenContent(): void {
+    const secretKey: HTMLInputElement|null = document.querySelector("#wpp-secret-key");
+    const publicKey: HTMLInputElement|null = document.querySelector("#wpp-public-key");
+    const warning: HTMLDivElement|null = document.querySelector("#wpp-warning-key");
+
+    if (!secretKey || !publicKey || !warning) return;
+
+    [secretKey, publicKey].forEach(element => {
+      element.addEventListener("keyup", () => {
+        const secretMode = secretKey.value.includes('sk_test_');
+        const publicMode = publicKey.value.includes('pk_test_');
+
+        if (secretMode !== publicMode) {
+          warning.classList.add('wpp-warning-active');
+          this.controlSubmitDisabled(false);
+        } else {
+          warning.classList.remove('wpp-warning-active');
+          this.controlSubmitDisabled(true);
+
+          const mode = secretMode  ? 'test' : 'production';
+          this.setPaymentMode(mode);
+        }
+      });
+    });
+  }
+
+  controlSubmitDisabled(active: boolean = true): void {
+    const submit: HTMLInputElement|null = document.querySelector("#wpp-submit");
+
+    if (active) {
+      submit?.removeAttribute("disabled");
+      submit?.classList.remove("wpp-submit-disabled");
+    } else {
+      submit?.setAttribute("disabled", "");
+      submit?.classList.add("wpp-submit-disabled");
+    }
+  }
+
+  setPaymentMode( mode: string): void {
+    const paymentMode: HTMLInputElement|null = document.querySelector("#wpp-payment-mode");
+    console.log(mode);
+    if (paymentMode && mode) {
+      paymentMode.value = mode;
     }
   }
 
