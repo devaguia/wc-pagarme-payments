@@ -6,6 +6,7 @@ use WPP\Controllers\Checkout\Credit as Checkout;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
 use WPP\Controllers\Webhooks\Credit as Webhooks;
+use WPP\Model\Entity\Settings;
 use WPP\Services\WooCommerce\Gateways\Gateway;
 
 /**
@@ -127,7 +128,9 @@ class Credit extends Gateway implements InterfaceGateways
 
         if ( $this->description ) {
 
-            if ( true ) { //TODO Somehow check if the plugin is on the test mode
+            $model = new Settings();
+
+            if ( $model->get_payment_mode() !== 'production' ) {
                 $this->description .= __( " Test mode activate! In this mode transactions are not real.", "wc-pagarme-payments" );
                 $this->description  = trim( $this->description );
             }
@@ -208,7 +211,7 @@ class Credit extends Gateway implements InterfaceGateways
      * @param object $wc_order
      * @return array
      */
-    protected function get_payment_method( $wc_order ) //TODO get card_token value correctly
+    protected function get_payment_method( $wc_order )
     {
         return [
             [

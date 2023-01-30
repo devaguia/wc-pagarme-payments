@@ -12,40 +12,25 @@ use WPP\Model\Entity\Settings as Model;
  */
 class Settings
 {
-    /**
-     * @var array
-     */
-    private $propeties;
 
-    /**
-     * @var int
-     */
-    private $status;
-
-    /**
-     * @var string
-     */
-    private $response;
+    private array $propeties;
+    private int $status;
+    private array $response;
 
     public function __construct()
     {
         $this->sanitize_vars();
     }
 
-    /**
-     * Save settings
-     * @return void
-     */
-    public function save()
+
+    public function save(): void
     {
         $model = new Model();
         
-        $model->set_api_version( $this->propeties['pagarme-api-version'] );
         $model->set_secret_key( $this->propeties['secret-key'] );
         $model->set_public_key( $this->propeties['public-key'] );
+        $model->set_payment_mode( $this->propeties['payment-mode'] );
         $model->set_success_status( $this->propeties['finish-order-status'] );
-        $model->set_anti_fraud( $this->propeties['anti-fraud'] );
-        $model->set_anti_fraud_value( $this->propeties['anti-fraud-value'] );
         $model->set_order_logs( $this->propeties['order-logs'] );
 
         $result = $model->save();
@@ -68,11 +53,8 @@ class Settings
         }
     }
 
-    /**
-     * Sanitize propeties vars
-     * @return void
-     */
-    private function sanitize_vars()
+
+    private function sanitize_vars(): void
     {
         $vars = isset( $_POST['action'] ) && $_POST['action'] === 'save_pagarme_settings' ? $_POST : [];
         
@@ -81,10 +63,8 @@ class Settings
                 'finish-order-status',
                 'secret-key',
                 'public-key',
-                'anti-fraud-value',
-                'pagarme-api-version',
-                'order-logs',
-                'anti-fraud'
+                'payment-mode',
+                'order-logs'
             ];
 
             foreach ( $vars as $key => $var ) {
@@ -118,20 +98,14 @@ class Settings
         }
     }
 
-    /**
-     * Set $message
-     * @return string
-     */
-    public function get_response()
+
+    public function get_response(): array
     {
         return $this->response;
     }
 
-    /**
-     * Get $status
-     * @return int
-     */
-    public function get_status()
+
+    public function get_status(): int
     {
         return $this->status;
     }

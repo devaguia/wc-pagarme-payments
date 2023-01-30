@@ -66,6 +66,8 @@ class Settings
      */
     private $repository;
 
+    private string $payment_mode;
+
 
     public function __construct( $single = false )
     {
@@ -116,6 +118,9 @@ class Settings
                 case 'api_version':
                     $this->set_api_version( $field->value );
                     break;
+                case 'payment_mode':
+                    $this->set_payment_mode( $field->value );
+                    break;
             }
         }
     }
@@ -161,7 +166,8 @@ class Settings
     private function get_fields()
     {
         return [
-            'secret_key'          => $this->get_secret_key(),
+            'secret_key'           => $this->get_secret_key(),
+            'payment_mode'         => $this->get_payment_mode(),
             'public_key'           => $this->get_public_key(),
             'anti_fraud'           => $this->get_anti_fraud(),
             'anti_fraud_value'     => $this->get_anti_fraud_value(),
@@ -321,5 +327,17 @@ class Settings
     public function set_api_version( $value )
     {
         $this->api_version = $value;
+    }
+
+
+    public function get_payment_mode(): string
+    {
+        return $this->payment_mode;
+    }
+
+
+    public function set_payment_mode( string $value ): void
+    {
+        $this->payment_mode = $value;
     }
 }

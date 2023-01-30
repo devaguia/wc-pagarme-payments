@@ -9,6 +9,7 @@ use WPP\Controllers\Thankyou\Billet as ThankyouBillet;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
 use WPP\Controllers\Webhooks\Billet as Webhooks;
+use WPP\Model\Entity\Settings;
 use WPP\Services\WooCommerce\Gateways\Gateway;
 
 /**
@@ -149,7 +150,9 @@ class Billet extends Gateway implements InterfaceGateways
 
         if ( $this->description ) {
 
-            if ( true ) { //TODO Somehow check if the plugin is on the test mode
+            $model = new Settings();
+
+            if ( $model->get_payment_mode() !== 'production' ) {
                 $this->description .= __( " Test mode activate! In this mode transactions are not real.", "wc-pagarme-payments" );
                 $this->description  = trim( $this->description );
             }

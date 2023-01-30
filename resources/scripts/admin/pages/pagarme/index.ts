@@ -1,5 +1,4 @@
 import { Ajax } from "../../components/Ajax";
-import { Popup } from "../../components/Popup";
 
 class Service extends Ajax {
   constructor() {

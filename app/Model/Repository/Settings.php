@@ -129,6 +129,7 @@ class Settings extends Repository implements InterfaceRepository
         return [
             'secret_key'           => "",
             'public_key'           => "",
+            'payment_mode'         => "",
             'credit_installments'  => serialize($this->get_default_credit_installments()),
             'anti_fraud'           => false,
             'anti_fraud_value'     => 0,

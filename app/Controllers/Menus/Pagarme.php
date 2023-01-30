@@ -42,8 +42,9 @@ class Pagarme extends Render
     private function default() 
     {
         $this->fields = [
-            'secret_key'         => '',
+            'secret_key'          => '',
             'public_key'          => '',
+            'payment_mode'        => '',
             'credit_installments' => [],
             'anti_fraud'          => false,
             'anti_fraud_value'    => 0,
@@ -75,13 +76,10 @@ class Pagarme extends Render
 
         $this->get_gateways();
         $this->get_statuses();
+        $this->get_payment_mode_label();
     }
 
-    /**
-     * Check if variable is serialized and unserialize
-     * @since 1.0.0
-     * @return mixed
-     */
+
     private function verify( $value )
     {
         if( is_serialized( $value ) ) {
@@ -99,29 +97,40 @@ class Pagarme extends Render
         return $value;
     }
 
-    /**
-     * Get gateways informations
-     * @since 1.0.0
-     * @return void
-     */
-    private function get_gateways()
+
+    private function get_gateways(): void
     {
         $methods = Gateways::pagarme_payment_methods();
         $this->fields['methods'] = ( is_array( $methods ) && ! empty( $methods ) ) ? $methods : [];
     }
 
-    private function get_statuses()
+
+    private function get_statuses(): void
     {
         $statuses = wc_get_order_statuses();
         $this->fields['statuses'] = ( is_array( $statuses ) && ! empty( $statuses ) ) ? $statuses : [];
     }
     
-    /**
-     * Call the view render
-     * @since 1.0.0
-     * @return void
-     */
-    public function request()
+    private function get_payment_mode_label(): void
+    {
+        if ( isset( $this->fields['payment_mode'] ) ) {
+            switch ($this->fields['payment_mode']) {
+                case 'test':
+                    $this->fields['payment_mode_label'] = __( 'Test mode', 'wc-pagarme-payments' );
+                    break;
+
+                case 'production':
+                    $this->fields['payment_mode_label'] = __( 'Production mode', 'wc-pagarme-payments' );
+                    break;
+                
+                default:
+                    $this->fields['payment_mode_label'] = "";
+                    break;
+            }
+        }
+    }
+
+    public function request(): void
     {
         $this->render( 'Admin/settings/pagarme.php', $this->fields );
         $this->enqueue();
