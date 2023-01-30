@@ -5,40 +5,29 @@ namespace WPP\Services\WooCommerce\Webhooks;
 use WPP\Model\Options;
 
 /**
- * Name: Woocommerce
  * Intance Woocommerce classes
- * @package Services\WooCommerce
+ * @package Services
  * @since 1.0.0
  */
 class Webhooks 
 {
-	private $gateway;
-	private $class;
+	private string $gateway;
+	private string $class;
 
-	/**
-	 * Class constructor
-	 * @since 1.0.0
-	 * @param string $gateways
-     * @param string $class
-	 */
-	public function __construct( $gateway, $class )
+	public function __construct( string $gateway, string $class )
 	{
 		$this->gateway = $gateway;
 		$this->class   = $class;
 
-		$webhook = $this->get_instance( $class );
+		$webhook = $this->get_webhook_instance( $class );
 		
 		if ( $webhook ) {
 			// add_action( 'woocommerce_api_'. $this->get_endpoint(), [ $webhook, 'handle_notifications' ] );
 		}
 	}
 
-	/**
-	 * Get webhook endpoint
-	 * @since 1.0.0
-	 * @return string
-	 */
-	private function get_endpoint()
+
+	private function get_webhook_endpoint(): string
 	{
 		$option    = new Options;
 		$settings  = $option->get_gateway_option( 'enable_webhook_token' );
@@ -51,12 +40,8 @@ class Webhooks
 		return $this->gateway;
 	}
 
-	/**
-	 * Get class instance
-	 * @since 1.0.0
-	 * @return object|bool
-	 */
-	public function get_instance()
+
+	public function get_webhook_instance()
 	{
 		$classname = $this->class;
 

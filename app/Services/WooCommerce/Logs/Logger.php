@@ -5,22 +5,14 @@ namespace WPP\Services\WooCommerce\Logs;
 use WC_Logger;
 
 /**
- * Name: Logs
  * Woocommerce logs
- * @package Services\WooCommerce
+ * @package Services
  * @since 1.0.0
  */
 class Logger
 {
-  /**
-   * @var WC_Logger
-   */
-  protected $wc;
-  
-  /**
-   * @var string 
-   */
-  protected $prefix;
+  protected WC_Logger $wc;
+  protected string $prefix;
 
   public function __construct()
   {
@@ -28,13 +20,7 @@ class Logger
     $this->prefix = WPP_PLUGIN_SLUG;
   }
 
-  /**
-   * Success log messages
-   * @since 1.0.0
-   * @param mixed $var
-   * @return void
-   */
-  public function add( $var, $type = 'request' )
+  public function add( $var, string $type = 'request' ): void
   {
     switch ( $type ) {
       case 'error':

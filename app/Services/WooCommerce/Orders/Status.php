@@ -5,9 +5,8 @@ namespace WPP\Services\WooCommerce\Orders;
 use WPP\Helpers\Utils;
 
 /**
- * Name: Gateways
- * Create customs status
- * @package Services\WooCommerce
+ * Create custom status
+ * @package Services
  * @since 1.0.0
  */
 class Status 
@@ -19,22 +18,16 @@ class Status
         add_action( 'woocommerce_order_status_changed', [ $this, 'on_status_changed' ], 10, 3 ); 
 	}
 
-    /**
-     * Controller statuses
-     * @since 1.0.0
-     * @return array
-     */
-    private function get_new_status()
+
+    private function get_new_status(): array
     {
-        return [ 'wc-test-payment'  => __( 'Status test', WPP_PLUGIN_SLUG ) ];
+        return [ 
+            'wc-test-payment'  => __( 'Status test', "wc-pagarme-payments" ) 
+        ];
     }
 
-    /**
-     * Register custom statuses
-     * @since 1.0.0
-     * @return void
-     */
-    public function register_custom_statuses()
+
+    public function register_custom_statuses(): void
     {
         $statuses = $this->get_new_status();
 
@@ -49,13 +42,9 @@ class Status
         }
     }
 
-    /**
-     * Add custom statuses
-     * @since 1.0.0
-     * @param array $order_statuses
-     * @return array
-     */
-    public function add_custom_statuses( $order_statuses ) {
+
+    public function add_custom_statuses( array $order_statuses ): array
+    {
 
         $statuses = $this->get_new_status();
         $_order_statuses = [];
@@ -74,15 +63,8 @@ class Status
         return $_order_statuses;
     }
 
-    /**
-     * Filter when orders status change
-     * @since 1.0.0
-     * @param int $id
-     * @param string $from
-     * @param string $to
-     * @return void
-     */
-    public function on_status_changed( $id, $from, $to )
+
+    public function on_status_changed( int $id, string $from, string $to ): void
     {
         $order = wc_get_order( $id );
 
