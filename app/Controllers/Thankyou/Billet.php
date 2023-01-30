@@ -38,6 +38,7 @@ class Billet extends Render
     private function enqueue(): void
     {
         $this->enqueue_styles( [ 'name' => 'wpp-billet-thankyou', 'file' => 'styles/theme/pages/thankyou/billet.css' ] );
+        $this->enqueue_scripts( [ 'name' => 'wpp-billet-thankyou', 'file' => 'scripts/theme/pages/billet/thankyou.js' ] );
     }
     
     public function request(): void

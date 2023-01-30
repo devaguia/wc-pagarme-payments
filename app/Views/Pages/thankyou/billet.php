@@ -16,8 +16,8 @@
             <div class="billet-line">
                 <span><?php echo __( "Digitable line:", "wc-pagarme-payments" ); ?></span>
                 <div>
-                    <input type="text" name="" id="" value="<?php echo esc_attr( isset( $billet_line ) ? $billet_line : "" ); ?>" >
-                    <span>
+                    <input type="text" id="wpp-billet-line" value="<?php echo esc_attr( isset( $billet_line ) ? $billet_line : "" ); ?>" >
+                    <span id="wpp-copy-billet">
                         <i class="fa-regular fa-copy"></i>
                     </span>
                 </div>
