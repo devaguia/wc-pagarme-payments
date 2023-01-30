@@ -7,7 +7,7 @@ use WPP\Helpers\Gateways;
 use WPP\Model\Repository\Settings;
 
 /**
- * Name: Pagarme
+ * Render Pagar.me settings page
  * @package Controller 
  * @since 1.0.0
  */
@@ -20,46 +20,30 @@ class Pagarme extends Render
 
     public function __construct()
     {
-        $this->get_fields();
+        $this->get_database_fields();
     }
 
-    /**
-     * Enqueue custom scripts and styles to the page
-     * @since 1.0.0
-     * @return void
-     */
-    private function enqueue()
+
+    private function enqueue(): void
     {
         $this->enqueue_scripts( [ 'name' => 'wpp-admin', 'file' => 'scripts/admin/pages/pagarme/index.js' ] );
         $this->enqueue_styles( [ 'name' => 'wpp-admin', 'file' => 'styles/admin/pages/pagarme/index.css' ] );
     }
 
-    /**
-     * Set default values
-     * @since 1.0.0
-     * @return void
-     */
-    private function default() 
+
+    private function default(): void
     {
         $this->fields = [
             'secret_key'          => '',
             'public_key'          => '',
             'payment_mode'        => '',
             'credit_installments' => [],
-            'anti_fraud'          => false,
-            'anti_fraud_value'    => 0,
             'success_status'      => 'wc-processing',
-            'order_logs'          => false,
-            'api_version'         => 1,
         ];
     }
 
-    /**
-     * Get fields from database
-     * @since 1.0.0
-     * @return array
-     */
-    private function get_fields()
+
+    private function get_database_fields(): void
     {
         $settings = new Settings;
         $fields   = $settings->find();

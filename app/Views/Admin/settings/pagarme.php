@@ -73,10 +73,12 @@
                     </div>
                 </div>
                 <div class="status">
-                    <h4><strong><?php echo __( "Order Logs", "wc-pagarme-payments" ); ?></strong></h4>
-                    <div>
-                        <input type="checkbox" name="wpp-order-logs" id="wpp-order-logs" <?php echo esc_attr( isset( $order_logs ) && $order_logs ? 'checked' : '' ) ?>>
-                        <label for="wpp-order-logs"><?php echo __( "Add log section on order edit page.", "wc-pagarme-payments"); ?></label>
+                    <h4><strong><?php echo __( "Export settings", "wc-pagarme-payments" ); ?></strong></h4>
+                    <div class="export-settings">
+                        <label><?php echo __( "Export settings and other useful information(for support).", "wc-pagarme-payments"); ?></label>
+                        <div>
+                            <button type="button" id="wpp-export-settings">Export<i class="fa-solid fa-download"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,9 +122,6 @@
                 </div>
             </div>
             <div class="submit">
-                <div>
-                    <input type="button" id="wpp-export" value="<?php echo __( "Export Settings", "wc-pagarme-payments" ); ?>">
-                </div>
                 <div>
                     <input type="submit" id="wpp-submit" value="<?php echo __( "Save Settings", "wc-pagarme-payments" ); ?>" >
                 </div>

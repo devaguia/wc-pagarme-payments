@@ -117,6 +117,26 @@
           color: $black-color;
         }
       }
+
+      .export-settings {
+        button {
+          background-color: #fff;
+          border: solid 1px $secondary-color;
+          color: $secondary-color;
+          margin-top: 10px;
+          padding: 5px 30px;
+          border-radius: 5px;
+          font-size: 14px;
+
+          i {
+            margin-left: 5px;
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
     }
     .payment-options {
       margin-top: 20px;
@@ -215,9 +235,6 @@
 
     .submit {
       float: right;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 10px;
 
       input {
         height: 40px !important;
@@ -246,12 +263,6 @@
       #wpp-submit {
         background-color: $secondary-color;
         color: $white-color;
-      }
-
-      #wpp-export {
-        background-color: #fff;
-        border: solid 1px $secondary-color;
-        color: $secondary-color;
       }
     }
   }
