@@ -30,7 +30,6 @@ class Settings
         $model->set_public_key( $this->propeties['public-key'] );
         $model->set_payment_mode( $this->propeties['payment-mode'] );
         $model->set_success_status( $this->propeties['finish-order-status'] );
-        $model->set_order_logs( $this->propeties['order-logs'] );
 
         $result = $model->save();
 
@@ -62,8 +61,7 @@ class Settings
                 'finish-order-status',
                 'secret-key',
                 'public-key',
-                'payment-mode',
-                'order-logs'
+                'payment-mode'
             ];
 
             foreach ( $vars as $key => $var ) {
@@ -80,19 +78,6 @@ class Settings
                         'message' => __( "Invalid parameters! Some mandatory fields were not sent.", "wc-pagarme-payments" )
                     ];
                 }
-            }
-
-            $double_check = [
-                'wpp-order-logs',
-                'wpp-anti-fraud'
-            ];
-
-            foreach ( $double_check as $var ) {
-                if ( ! isset( $vars[$var] ) ) {
-                    $var = str_replace( "wpp-", "", $var );
-                    
-                    $this->propeties[$var] = false;
-                } 
             }
         }
     }

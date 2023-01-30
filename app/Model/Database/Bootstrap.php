@@ -2,11 +2,10 @@
 
 namespace WPP\Model\Database;
 
-use WPP\Model\Database\Tables\OrderLogs;
 use WPP\Model\Database\Tables\Settings;
 
 /**
- * Name: Bootstrap
+ * Initialize database settings
  * @package Model
  * @since 1.0.0
  */
@@ -17,29 +16,20 @@ class Bootstrap
    public function __construct()
    {
       $this->tables = [
-         Settings::class,
-         OrderLogs::class
+         Settings::class
       ];
 
       $this->init();
    }
 
-   /**
-    * Initialize configurations
-    * @since 1.0.0
-    * @return void
-    */
-   public function init()
+
+   public function init(): void
    {
       $this->tables();
    }
 
-   /**
-    * Remove custom tables on database
-    * @since 1.0.0
-    * @return void
-    */
-   public function uninstall()
+
+   public function uninstall(): void
    {
       foreach ($this->tables as $table) {
          if ( class_exists( $table ) ) {
@@ -49,12 +39,7 @@ class Bootstrap
       }
    }
 
-   /**
-    * Initialize custom tables on database
-    * @since 1.0.0
-    * @return void
-    */
-   private function tables() 
+   private function tables() : void
    {
       foreach ($this->tables as $table) {
          if ( class_exists( $table ) ) {

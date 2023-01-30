@@ -2,28 +2,18 @@
 
 namespace WPP\Model\Database;
 
+/**
+ * Abstract class for table model
+ * @package Model
+ * @since 1.0.0
+ */
 abstract class Table
 {
-    /**
-     * @var string
-     */
-    protected $prefix;
+    protected string $prefix;
+    protected object $db;
+    protected string $table;
 
-    /**
-     * @var object
-     */
-    protected $db;
-
-    /**
-     * @var string
-     */
-    protected $table;
-
-    /**
-     * Set WPDB object
-     * @return void
-     */
-    private function set_database()
+    private function set_database(): void
     {
         global $wpdb;
 
@@ -33,28 +23,23 @@ abstract class Table
         }
     }
 
-    /**
-     * Set table prefix property
-     * @return void
-     */
-    private function set_prefix()
+
+    private function set_prefix(): void
     {
         if ( $this->db ) {
             $this->prefix = $this->db->prefix;
         }
     }
 
-    /**
-     * Set table property
-     * @return void
-     */
-    protected function set_table( $table )
+
+    protected function set_table( $table ): void
     {
         $this->set_database();
         $this->table = $this->prefix . $table;
     }
 
-    protected function create( $fields = [] )
+
+    protected function create( $fields = [] ): void
     {
         if ( empty( $fields ) ) return;
 
@@ -69,7 +54,8 @@ abstract class Table
         $this->db->query( "CREATE TABLE IF NOT EXISTS {$this->table} ( {$fields} );"  );
     }
 
-    protected function drop()
+
+    protected function drop(): void
     {
         $this->db->query( "DROP DATABASE {$this->table};" );
     }

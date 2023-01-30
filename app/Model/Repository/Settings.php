@@ -120,29 +120,20 @@ class Settings extends Repository implements InterfaceRepository
         }
     }
 
-    /**
-     * Get default settings
-     * @return array
-     */
-    private function default()
+
+    private function default(): array
     {
         return [
             'secret_key'           => "",
             'public_key'           => "",
             'payment_mode'         => "",
             'credit_installments'  => serialize($this->get_default_credit_installments()),
-            'anti_fraud'           => false,
-            'anti_fraud_value'     => 0,
-            'success_status'       => "wc-processing",
-            'order_logs'           => false,
-            'api_version'          => 1
+            'success_status'       => "wc-processing"
         ];
     }
 
-    /**
-     * @return array
-     */
-    private function get_default_credit_installments()
+
+    private function get_default_credit_installments(): array
     {
         $installments = [];
 

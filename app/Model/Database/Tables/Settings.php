@@ -16,7 +16,7 @@ class Settings extends Table
         $this->set_table( "wc_pagarme_settings" );
     }
 
-    public function up() 
+    public function up(): void
     {
         $this->create( [
             'id'         => [ 'INT AUTO_INCREMENT primary key NOT NULL' ],
@@ -27,7 +27,7 @@ class Settings extends Table
         ] );
     }
 
-    public function down()
+    public function down(): void
     {
         $this->drop();
     }
