@@ -49,7 +49,7 @@ abstract class Gateway extends WC_Payment_Gateway
         $request->set_token( $token );
 
         $response = json_decode( $request->handle_request() );
-
+        
         if ( $response ) {
             
             $this->logger->add( $response );
@@ -324,6 +324,10 @@ abstract class Gateway extends WC_Payment_Gateway
 
             case 'generated':
                 $status = 'wc-on-hold';
+                break;
+
+            case 'not_authorized':
+                $status = 'wc-failed';
                 break;
             
             default:

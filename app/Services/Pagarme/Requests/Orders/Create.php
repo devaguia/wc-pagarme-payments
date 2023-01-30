@@ -47,6 +47,8 @@ class Create extends Request implements InterfaceRequest
 
     public function __construct( $wc_order )
     {
+        parent::__construct();
+        
         $this->set_endpoint( "orders" );
         $this->set_method( "POST" );
     }

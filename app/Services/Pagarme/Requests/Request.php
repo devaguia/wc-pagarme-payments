@@ -5,50 +5,30 @@ namespace WPP\Services\Pagarme\Requests;
 use WPP\Services\Pagarme\Config;
 
 /**
- * Name: Request
  * Abstract class for requests
  * @package Pagarme
  * @since 1.0.0
  */
 abstract class Request 
 {
-    /**
-     * @var array
-     */
-    private $body;
+    private array $body;
+    private array $header;
+    private string $method;
+    private string $endpoint;
+    private string $token;
 
-    /**
-     * @var array
-     */
-    private $header;
+    public function __construct()
+    {
+       $this->header     = [];
+       $this->body       = [];
+       $this->method     = "";
+       $this->endpoint   = "";
+       $this->token      = "";
+    }
 
-    /**
-     * @var string
-     */
-    private $method;
 
-    /**
-     * @var string
-     */
-    private $endpoint;
-
-    /**
-     * @var string
-     */
-    private $token;
-
-    /**
-     * Send requests
-     * @param array $header
-     * @param array $body
-     * @param string $url
-     */
     protected function send()
     {
-        if ( ! $this->body ) $this->body     = [];
-        if ( ! $this->header ) $this->header = [];
-
-
         $_header = [
             'Accept'         => 'application/json',
             'Content-Type'   => 'application/json',
@@ -67,66 +47,43 @@ abstract class Request
         $url = $this->get_request_url( $this->endpoint );
 
         $response = wp_remote_request( $url, $args );
-
+        
         if ( isset( $response['body'] ) ) {
             return $response['body'];
         }
     }
 
-    /**
-     * Get the full request url
-     * @param string $base
-     * @param array $parameters
-     * @return string
-     */
-    protected function get_request_url( $endpoint )
+
+    protected function get_request_url( string $endpoint ): string
     {
         return Config::base_url() . "/$endpoint";
     }
 
-    /**
-     * Set body
-     * @param array $body
-     */
-    protected function set_body( $body )
+
+    protected function set_body( array $body ): void
     {
         $this->body = $body;
     }
 
 
-    /**
-     * Set header
-     * @param array $header
-     */
-    protected function set_header( $header )
+    protected function set_header( array $header ): void
     {
         $this->header = $header;
     }
 
-    /**
-     * Set method
-     * @param array $method
-     */
-    protected function set_method( $method )
+    protected function set_method( string $method ): void
     {
         $this->method = $method;
     }
 
-    /**
-     * Set endpoint
-     * @param array $endpoint
-     */
-    protected function set_endpoint( $endpoint )
+
+    protected function set_endpoint( string $endpoint ): void
     {
         $this->endpoint = $endpoint;
     }
 
 
-    /**
-     * Set token
-     * @param array $token
-     */
-    public function set_token( $token )
+    public function set_token( string $token ): void
     {
         $this->token = $token;
     }

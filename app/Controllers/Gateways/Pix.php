@@ -184,8 +184,11 @@ class Pix extends Gateway implements InterfaceGateways
 
             }
         }
-        
-        if ( ! empty( $metas ) ){
+
+        $disallowed_status = [ 'wc-failed', 'wc-cancelled' ];
+        $status = $this->get_woocommerce_status( $metas['status'] );
+
+        if ( ! empty( $metas ) && ! array_intersect( $disallowed_status, [ $status ] ) ) {
             foreach ( $metas as $key => $meta ) {
                 update_post_meta( $wc_order->get_id(), "wc-pagarme-$key", $meta );
             }

@@ -209,12 +209,60 @@ class Credit extends Gateway implements InterfaceGateways
 
     public function show_thankyou_page( int $wc_order_id ): void
     {
-        new ThankyouCredit;
+        new ThankyouCredit( $wc_order_id );
     }
     
 
-    protected function validade_transaction( $response, object $wc_order ): bool
+    protected function validade_transaction( array $charges, object $wc_order ): bool
     {
+        global $woocommerce;
+
+        $needed =  [ 'first_six_digits', 'last_four_digits', 'brand', 'holder_name', 'exp_month', 'exp_year' ];
+        $metas  = [];
+
+        foreach ( $charges as $charge ) {
+            if ( isset( $charge->last_transaction->card ) ) {
+                $transaction = (array) $charge->last_transaction;
+                $card = (array) $transaction['card'];
+                
+                if ( array_intersect( $needed, array_keys( $card ) ) === $needed ) {
+                    $metas['card_first_digits'] = $card['first_six_digits'];
+                    $metas['card_last_digits']  = $card['last_four_digits'];
+                    $metas['card_brand']        = $card['brand'];
+                    $metas['card_holder_name']  = $card['holder_name'];
+                    $metas['card_exp_month']    = $card['exp_month'];
+                    $metas['card_exp_year']     = $card['exp_year'];
+                    $metas['status']            = $transaction['status'];
+                }
+
+            }
+        }
+        
+        $disallowed_status = [ 'wc-failed', 'wc-cancelled' ];
+        $status = $this->get_woocommerce_status( $metas['status'] );
+
+        if ( ! empty( $metas ) && ! array_intersect( $disallowed_status, [ $status ] ) ) {
+            foreach ( $metas as $key => $meta ) {
+                update_post_meta( $wc_order->get_id(), "wc-pagarme-$key", $meta );
+            }
+
+            $wc_order->update_status( $status, sprintf( "<strong>%s</strong> :", __( "Pagar.me: ", 'wc-pagarme-payments' ) ), true );
+
+            wc_reduce_stock_levels( $wc_order->get_id() );
+
+            if ( $status === 'wc-on-hold' ) {
+                    $wc_order->add_order_note( sprintf( "<strong>%s</strong> : %s.",
+                    __( "Pagar.me: ", 'wc-pagarme-payments' ), 
+                    __( "Awaiting credit card payment", 'wc-pagarme-payments' )
+                ), true );
+            }
+
+
+            $woocommerce->cart->empty_cart();
+
+            return true;
+        }
+
         return false;
     }
 
