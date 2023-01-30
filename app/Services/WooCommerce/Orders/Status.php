@@ -21,9 +21,7 @@ class Status
 
     private function get_new_status(): array
     {
-        return [ 
-            'wc-test-payment'  => __( 'Status test', "wc-pagarme-payments" ) 
-        ];
+        return [];
     }
 
 

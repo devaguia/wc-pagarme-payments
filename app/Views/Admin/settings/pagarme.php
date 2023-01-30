@@ -113,10 +113,16 @@
                     </div>
                 </div>
                 <div class="wpp-warnings">
-                    <div class="wpp-warning" id="wpp-warning-key">
+                    <div class="wpp-warning" id="wpp-warning-equal-key">
                         <span>
                             <strong><?php echo __( "Warning: ", "wc-pagarme-payments" ); ?></strong>
                             <?php echo __( "Your keys must be of the same type (test or production).", "wc-pagarme-payments" ); ?>
+                        </span>
+                    </div>
+                    <div class="wpp-warning" id="wpp-warning-valid-key">
+                        <span>
+                            <strong><?php echo __( "Warning: ", "wc-pagarme-payments" ); ?></strong>
+                            <?php echo __( "One of your keys does not have the correct format!", "wc-pagarme-payments" ); ?>
                         </span>
                     </div>
                 </div>

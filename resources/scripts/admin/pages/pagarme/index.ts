@@ -28,33 +28,58 @@ class Service extends Ajax {
   checkTokenContent(): void {
     const secretKey: HTMLInputElement|null = document.querySelector("#wpp-secret-key");
     const publicKey: HTMLInputElement|null = document.querySelector("#wpp-public-key");
-    const warning: HTMLDivElement|null = document.querySelector("#wpp-warning-key");
 
-    if (!secretKey || !publicKey || !warning) return;
+    if (!secretKey || !publicKey) return;
 
     [secretKey, publicKey].forEach(element => {
       element.addEventListener("keyup", () => {
-        const secretMode = secretKey.value.includes('sk_test_');
-        const publicMode = publicKey.value.includes('pk_test_');
-
-        if (secretMode !== publicMode) {
-          warning.classList.add('wpp-warning-active');
-          this.controlSubmitDisabled(false);
-        } else {
-          warning.classList.remove('wpp-warning-active');
-          this.controlSubmitDisabled(true);
-
-          const mode = secretMode  ? 'test' : 'production';
-          this.setPaymentMode(mode);
-        }
+        this.checkEqualKeys(secretKey, publicKey);
+        this.checkValidKeys(secretKey, publicKey);
       });
     });
+  }
+  
+  checkValidKeys( secretKey: HTMLInputElement, publicKey: HTMLInputElement ) {
+    const warning: HTMLDivElement|null = document.querySelector("#wpp-warning-valid-key");
+
+    if (!warning) return;
+
+    const sKey = secretKey.value.includes('sk_');
+    const pKey = publicKey.value.includes('pk_');
+
+    if (!sKey || !pKey) {
+      warning.classList.add('wpp-warning-active');
+      this.controlSubmitDisabled(true);
+    } else {
+      warning.classList.remove('wpp-warning-active');
+      this.controlSubmitDisabled(false);
+    }
+  }
+
+  checkEqualKeys( secretKey: HTMLInputElement, publicKey: HTMLInputElement ) {
+    const warning: HTMLDivElement|null = document.querySelector("#wpp-warning-equal-key");
+
+    if (!warning) return;
+
+    const secretMode = secretKey.value.includes('sk_test_');
+    const publicMode = publicKey.value.includes('pk_test_');
+
+    if (secretMode !== publicMode) {
+      warning.classList.add('wpp-warning-active');
+      this.controlSubmitDisabled(true);
+    } else {
+      warning.classList.remove('wpp-warning-active');
+      this.controlSubmitDisabled(false);
+
+      const mode = secretMode  ? 'test' : 'production';
+      this.setPaymentMode(mode);
+    }
   }
 
   controlSubmitDisabled(active: boolean = true): void {
     const submit: HTMLInputElement|null = document.querySelector("#wpp-submit");
 
-    if (active) {
+    if (!active) {
       submit?.removeAttribute("disabled");
       submit?.classList.remove("wpp-submit-disabled");
     } else {
