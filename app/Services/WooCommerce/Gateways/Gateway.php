@@ -9,30 +9,21 @@ use WPP\Services\Pagarme\Requests\Orders\Create;
 use WPP\Services\WooCommerce\Logs\Logger;
 
 /**
- * Name: Billet
  * Structure the billet payment method
- * @package Controllers
+ * @package Services
  * @since 1.0.0
  */
 abstract class Gateway extends WC_Payment_Gateway 
 {
-    /**
-     * @var Logs
-     */
-    protected $logger;
+    protected Logger $logger;
 
     public function __construct()
     {
         $this->logger = new Logger;
     }
 
-    /**
-     * Handle gateway process payment
-     * @since 1.0.0
-     * @param int $wc_order_id
-     * @return void
-     */
-    public function process_payment( $wc_order_id )
+
+    public function process_payment($wc_order_id )
     {
         $wc_order = wc_get_order( $wc_order_id );
         
@@ -65,7 +56,7 @@ abstract class Gateway extends WC_Payment_Gateway
 
             if ( isset( $response->errors ) ) {
                 $this->logger->add( [ $response->erros, $response->message ], 'error' );
-                return $this->abort_process( $response->message );
+                return $this->abort_payment_process( $response->message );
             }
 
             if ( isset ( $response->charges ) ) {
@@ -90,17 +81,12 @@ abstract class Gateway extends WC_Payment_Gateway
         }
         
 
-        return $this->abort_process( __( 'Pagar.me: Failed to charge', 'wc-pagarme-payments' ) );
+        return $this->abort_payment_process( __( 'Pagar.me: Failed to charge', 'wc-pagarme-payments' ) );
 
     }
 
-    /**
-     * Get order itens
-     * @since 1.0.0
-     * @param object $wc_order
-     * @return array
-     */
-    private function get_items( $wc_order )
+
+    private function get_items( object $wc_order ): array
     {
         $items = [];
         $cart  = $wc_order->get_items();
@@ -129,13 +115,8 @@ abstract class Gateway extends WC_Payment_Gateway
         return $items;
     }
 
-    /**
-     * Get customer address
-     * @since 1.0.0
-     * @param object $wc_order
-     * @return array
-     */
-    private function get_address( $wc_order )
+
+    private function get_address( object $wc_order )
     {
         $billing  = $wc_order->get_address( 'billing' );
         $shipping = $wc_order->get_address( 'shipping' );
@@ -168,13 +149,8 @@ abstract class Gateway extends WC_Payment_Gateway
         return $this->abort_payment_process( $message );
     }
 
-    /**
-     * Validade WooCommerce address fields
-     * @since 1.0.0
-     * @param array $address
-     * @return bool
-     */
-    private function validate_address_fields( $address )
+
+    private function validate_address_fields( array $address ): bool
     {
         $needed = [ 'address_1', 'city', 'state', 'postcode', 'country', 'number', 'neighborhood' ];
 
@@ -188,13 +164,8 @@ abstract class Gateway extends WC_Payment_Gateway
         return $validate;
     }
 
-    /**
-     * Get customer info fields
-     * @since 1.0.0
-     * @param object $wc_order
-     * @return array
-     */
-    private function get_customer( $wc_order )
+
+    private function get_customer( object $wc_order ): array
     {
         $billing_first_name = $wc_order->get_billing_first_name();
         $billing_last_name  = $wc_order->get_billing_last_name();
@@ -216,7 +187,7 @@ abstract class Gateway extends WC_Payment_Gateway
 
     }
 
-    protected function get_person()
+    protected function get_person(): array
     {
         $billing_persontype  = $this->get_post_vars( 'billing_persontype' );
         $billing_cnpj        = $this->get_post_vars( 'billing_cnpj' );
@@ -236,14 +207,8 @@ abstract class Gateway extends WC_Payment_Gateway
 
     }
 
-    /**
-     * Get phone info
-     * @since 1.0.0
-     * @param object $wc_order
-     * @param array $phones
-     * @return array
-     */
-    private function get_phones( $wc_order, $phones = [] )
+
+    private function get_phones( object $wc_order, array $phones = [] ): array
     {
         $billing_phone = $wc_order->get_billing_phone();
         if ( $billing_phone ) {
@@ -279,13 +244,8 @@ abstract class Gateway extends WC_Payment_Gateway
         return $phones;
     }
 
-    /**
-     * Get order shipping
-     * @since 1.0.0
-     * @param object $wc_order
-     * @return array
-     */
-    private function get_order_shipping( $wc_order, $address, $customer )
+
+    private function get_order_shipping( object $wc_order, array $address, array $customer ): array
     {
         $shipping = [
             'amount'      => 0,
@@ -313,13 +273,8 @@ abstract class Gateway extends WC_Payment_Gateway
         return $shipping;
     }
 
-    /**
-     * Get order discounts
-     * @since 1,0,0
-     * @param object $wc_order
-     * @return float
-     */
-    private function get_discounts( $wc_order )
+
+    private function get_discounts( object $wc_order ): float
     {
         $count = count( $wc_order->get_items() );
         $discount = 0;
@@ -336,13 +291,8 @@ abstract class Gateway extends WC_Payment_Gateway
         return $discount / $count;
     }
 
-    /**
-     * Get order taxes
-     * @since 1.0.0
-     * @param object $wc_order
-     * @return float
-     */
-    private function get_taxes( $wc_order )
+
+    private function get_taxes( object $wc_order ): float
     {
         $count = count( $wc_order->get_items() );
         $taxes = 0;
@@ -358,24 +308,14 @@ abstract class Gateway extends WC_Payment_Gateway
         return $taxes / $count;
     }
 
-    /**
-     * Get POST variables
-     * @since 1.0.0
-     * @param string $var
-     * @return mixed|bool
-     */
-    private function get_post_vars( $var )
+
+    private function get_post_vars( string $var )
     {
         return isset( $_POST[$var] ) && ! empty( $_POST[$var] ) ? $_POST[$var] : false;
     }
 
-    /**
-     * Convert The Pagar.me order status to the WooCommerce order status
-     * @since 1.0.0
-     * @param string $original_status
-     * @return string
-     */
-    protected function get_woocommerce_status( $original_status )
+
+    protected function get_woocommerce_status( string $original_status ): string
     {
         switch ( $original_status ) {
             case 'paid':
@@ -394,51 +334,25 @@ abstract class Gateway extends WC_Payment_Gateway
         return $status;
     }
 
-    /**
-     * Get success WooCommerce status
-     * @since 1.0.0
-     * @return string
-     */
-    protected function get_success_status()
+
+    protected function get_success_status(): string
     {
         $model = new Settings();
         return $model->get_success_status();
     }
 
-    /**
-     * Abort payment process
-     * @since 1.0.0
-     * @param string $message
-     * @return bool
-     */
-    protected function abort_process( $message, $type = "error" )
+
+    protected function abort_payment_process( string $message, string $type = "error" ): bool
     {
         wc_add_notice(  __( "Pagar.me: $message", 'wc-pagarme-payments' ), $type );
         return false;
     }
 
-    /**
-     * Abtract method for payment method data
-     * @since 1.0.0
-     * @param object $wc_order
-     * @return array
-     */
-    abstract protected function get_payment_method( $wc_order );    
 
-    /**
-     * Abstract method for validate transaction response
-     * @since 1.0.0
-     * @param object
-     * @return bool
-     */
-    abstract protected function validade_transaction( $charges, $wc_order );
+    abstract protected function get_payment_method( object $wc_order ): array;  
 
-    /**
-     * Abtract method for handle the thankyou page
-     * @since 1.0.0
-     * @param int $wc_order_id
-     * @return void
-     */
-    abstract public function show_thankyou_page( $wc_order_id );    
+    abstract protected function validade_transaction( array $charges, object $wc_order ): bool;
+
+    abstract public function show_thankyou_page( int $wc_order_id ): void;    
 
 }

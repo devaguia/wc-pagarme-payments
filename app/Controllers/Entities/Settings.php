@@ -2,7 +2,6 @@
 
 namespace WPP\Controllers\Entities;
 
-use WPP\Helpers\Utils;
 use WPP\Model\Entity\Settings as Model;
 
 /**

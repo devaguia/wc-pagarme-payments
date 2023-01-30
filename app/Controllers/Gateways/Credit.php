@@ -3,6 +3,7 @@
 namespace WPP\Controllers\Gateways;
 
 use WPP\Controllers\Checkout\Credit as Checkout;
+use WPP\Controllers\Thankyou\Credit as ThankyouCredit;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
 use WPP\Controllers\Webhooks\Credit as Webhooks;
@@ -10,17 +11,13 @@ use WPP\Model\Entity\Settings;
 use WPP\Services\WooCommerce\Gateways\Gateway;
 
 /**
- * Name: Billet
  * Structure the billet payment method
  * @package Controllers
  * @since 1.0.0
  */
 class Credit extends Gateway implements InterfaceGateways
 {
-    /**
-     * @var array
-     */
-    private $card_fields;
+    private array $card_fields;
 
     public function __construct() {
         
@@ -54,12 +51,8 @@ class Credit extends Gateway implements InterfaceGateways
         parent::__construct();
     }
 
-    /**
-     * Create/Edit billet gateway options
-     * @since 1.0.0
-     * @return void
-     */
-    public function init_form_fields()
+
+    public function init_form_fields(): void
     {
         wp_enqueue_style( 'wpp-credit-page', Config::__dist( "styles/admin/pages/credit/index.css") );
         wp_enqueue_script( 'wpp-credit-page', Config::__dist( "scripts/admin/pages/credit/index.js") );
@@ -118,12 +111,8 @@ class Credit extends Gateway implements InterfaceGateways
         
     }
 
-    /**
-     * Render the payment fields
-     * @since 1.0.0
-     * @return void
-     */
-    public function payment_fields()
+
+    public function payment_fields(): void
     {
 
         if ( $this->description ) {
@@ -141,12 +130,8 @@ class Credit extends Gateway implements InterfaceGateways
         new Checkout;
     }
 
-    /**
-     * Validate the payment fields
-     * @since 1.0.0
-     * @return boolean
-     */
-    public function validate_fields()
+
+    public function validate_fields(): bool
     {
         $fields['token']         = [];
         $fields['owner']         = isset( $_POST['wpp-card-owner'] ) && $_POST['wpp-card-owner'] ? filter_var( $_POST['wpp-card-owner'], FILTER_SANITIZE_SPECIAL_CHARS ) : false;
@@ -174,7 +159,7 @@ class Credit extends Gateway implements InterfaceGateways
         return true;
     }
 
-    private function get_invalid_field_message( $field )
+    private function get_invalid_field_message( string $field ): string
     {
         switch ( $field ) {
             case 'owner':
@@ -205,13 +190,8 @@ class Credit extends Gateway implements InterfaceGateways
         return $message;
     }
 
-    /**
-     * Method override WPP\Services\WooCommerce\Gateways\Gateway::get_payment_method 
-     * @since 1.0.0
-     * @param object $wc_order
-     * @return array
-     */
-    protected function get_payment_method( $wc_order )
+
+    protected function get_payment_method( object $wc_order ): array
     {
         return [
             [
@@ -226,23 +206,14 @@ class Credit extends Gateway implements InterfaceGateways
         ];
     }
 
-    /**
-     * Method override WPP\Services\WooCommerce\Gateways\Gateway::show_thankyou_page 
-     * @since 1.0.0
-     * @param int $wc_order_id
-     * @return void
-     */
-    public function show_thankyou_page( $wc_order_id )
+
+    public function show_thankyou_page( int $wc_order_id ): void
     {
+        new ThankyouCredit;
     }
     
-    /**
-     * Method override WPP\Services\WooCommerce\Gateways\Gateway::validade_response 
-     * @since 1.0.0
-     * @param object $response
-     * @return bool
-     */
-    protected function validade_transaction( $response, $wc_order )
+
+    protected function validade_transaction( $response, object $wc_order ): bool
     {
         return false;
     }

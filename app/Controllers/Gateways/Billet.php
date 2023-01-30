@@ -13,7 +13,6 @@ use WPP\Model\Entity\Settings;
 use WPP\Services\WooCommerce\Gateways\Gateway;
 
 /**
- * Name: Billet
  * Structure the billet payment method
  * @package Controllers
  * @since 1.0.0
@@ -21,8 +20,8 @@ use WPP\Services\WooCommerce\Gateways\Gateway;
 class Billet extends Gateway implements InterfaceGateways
 {
 
-    public function __construct() {
-        
+    public function __construct()
+    {
         $this->id                 = "wc-pagarme-billet";
         $this->icon               = Config::__images( "icons/billet.svg");
         $this->has_fields         = false;
@@ -52,12 +51,8 @@ class Billet extends Gateway implements InterfaceGateways
         parent::__construct();
     }
 
-    /**
-     * Create/Edit billet gateway options
-     * @since 1.0.0
-     * @return void
-     */
-    public function init_form_fields()
+    
+    public function init_form_fields(): void
     {
         wp_enqueue_style( 'wpp-billet-page', Config::__dist( "styles/admin/pages/billet/index.css") );
         wp_enqueue_script( 'wpp-billet-page', Config::__dist( "scripts/admin/pages/billet/index.js") );
@@ -140,12 +135,8 @@ class Billet extends Gateway implements InterfaceGateways
         
     }
 
-    /**
-     * Render the payment fields
-     * @since 1.0.0
-     * @return void
-     */
-    public function payment_fields()
+
+    public function payment_fields(): void
     {
 
         if ( $this->description ) {
@@ -163,24 +154,15 @@ class Billet extends Gateway implements InterfaceGateways
         new Checkout;
     }
 
-    /**
-     * Validate the payment fields
-     * @since 1.0.0
-     * @return boolean
-     */
-    public function validate_fields()
+
+    public function validate_fields(): bool
     {
         ## Validade fields
         return true;
     }
 
-    /**
-     * Method override WPP\Services\WooCommerce\Gateways\Gateway::get_payment_method 
-     * @since 1.0.0
-     * @param object $wc_order
-     * @return array
-     */
-    protected function get_payment_method( $wc_order )
+
+    protected function get_payment_method( object $wc_order ): array
     {
         $person     = $this->get_person();
         $expiration = $this->get_option( "expiration" );
@@ -203,24 +185,14 @@ class Billet extends Gateway implements InterfaceGateways
         ];
     }
 
-    /**
-     * Method override WPP\Services\WooCommerce\Gateways\Gateway::show_thankyou_page 
-     * @since 1.0.0
-     * @param int $wc_order_id
-     * @return void
-     */
-    public function show_thankyou_page( $wc_order_id )
+
+    public function show_thankyou_page( int $wc_order_id ): void
     {
-        return new ThankyouBillet( $wc_order_id );
+        new ThankyouBillet( $wc_order_id );
     }
 
-    /**
-     * Method override WPP\Services\WooCommerce\Gateways\Gateway::validade_response 
-     * @since 1.0.0
-     * @param object $response
-     * @return bool
-     */
-    protected function validade_transaction( $charges, $wc_order )
+
+    protected function validade_transaction( array $charges, object $wc_order ): bool
     {
         global $woocommerce;
 
