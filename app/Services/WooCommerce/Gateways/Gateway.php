@@ -30,7 +30,7 @@ abstract class Gateway extends WC_Payment_Gateway
         $address  = $this->get_address( $wc_order );
         $customer = $this->get_customer( $wc_order );
         $phones   = $this->get_phones( $wc_order );
-        $items    = $this->get_items( $wc_order );
+        $items    = $this->get_order_items( $wc_order );
         $payment  = $this->get_payment_method( $wc_order );
         $shipping = $this->get_order_shipping( $wc_order, $address, $customer );
 
@@ -49,7 +49,7 @@ abstract class Gateway extends WC_Payment_Gateway
         $request->set_token( $token );
 
         $response = json_decode( $request->handle_request() );
-        
+
         if ( $response ) {
             
             $this->logger->add( $response );
@@ -86,7 +86,7 @@ abstract class Gateway extends WC_Payment_Gateway
     }
 
 
-    private function get_items( object $wc_order ): array
+    private function get_order_items( object $wc_order ): array
     {
         $items = [];
         $cart  = $wc_order->get_items();

@@ -5,16 +5,13 @@ namespace WPP\Controllers\Thankyou;
 use WPP\Controllers\Render\Render;
 
 /**
- * Name: Render Billet thankyou page
+ * Render Billet thankyou page
  * @package Controller\Render
  * @since 1.0.0
  */
 class Billet extends Render
 {
-    /**
-     * @var int
-     */
-    private $wc_order_id;
+    private int $wc_order_id;
 
     public function __construct( $wc_order_id )
     {
@@ -22,12 +19,7 @@ class Billet extends Render
         $this->request();
     }
 
-    /**
-     * Get order payment meta values
-     * @since 1.0.0
-     * @return array
-     */
-    private function get_metas()
+    private function get_metas(): array
     {
         $keys  = [ 'barcode', 'billet_line', 'transaction_type', 'billet_url', 'billet_pdf', 'status' ];
         $metas = [];
@@ -43,17 +35,12 @@ class Billet extends Render
         return $metas;
     }
 
-    /**
-     * Enqueue custom scripts and styles to the page
-     * @since 1.0.0
-     * @return void
-     */
-    private function enqueue()
+    private function enqueue(): void
     {
         $this->enqueue_styles( [ 'name' => 'wpp-billet-thankyou', 'file' => 'styles/theme/pages/thankyou/billet.css' ] );
     }
     
-    public function request()
+    public function request(): void
     {
         $metas = $this->get_metas();
 

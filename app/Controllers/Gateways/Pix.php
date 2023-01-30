@@ -44,6 +44,8 @@ class Pix extends Gateway implements InterfaceGateways
         }
 
         new Webhooks( $this->id, get_class( $this ) );
+
+        parent::__construct();
     }
 
 
@@ -157,12 +159,59 @@ class Pix extends Gateway implements InterfaceGateways
 
     public function show_thankyou_page( int $wc_order_id ): void
     {
-        new ThankyouPix;
+        new ThankyouPix( $wc_order_id );
     }
 
 
     protected function validade_transaction( array $charges, object $wc_order ): bool
     {
+        global $woocommerce;
+
+        $needed =  [ 'qr_code', 'expires_at', 'transaction_type', 'qr_code_url', 'status' ];
+        $metas  = [];
+
+        foreach ( $charges as $charge ) {
+            if ( isset( $charge->last_transaction ) ) {
+                $transaction = (array) $charge->last_transaction;
+                
+                if ( array_intersect( $needed, array_keys( $transaction ) ) === $needed ) {
+                    $metas['pix_qrcode']       = $transaction['qr_code'];
+                    $metas['pix_url']          = $transaction['qr_code_url'];
+                    $metas['pix_expiration']   = $transaction['expires_at'];
+                    $metas['transaction_type'] = $transaction['transaction_type'];
+                    $metas['status']           = $transaction['status'];
+                }
+
+            }
+        }
+        
+        if ( ! empty( $metas ) ){
+            foreach ( $metas as $key => $meta ) {
+                update_post_meta( $wc_order->get_id(), "wc-pagarme-$key", $meta );
+            }
+
+            $status = $this->get_woocommerce_status( $metas['status'] );
+
+            $wc_order->update_status( $status, sprintf( "<strong>%s</strong> :", __( "Pagar.me: ", 'wc-pagarme-payments' ) ), true );
+
+            wc_reduce_stock_levels( $wc_order->get_id() );
+
+            $wc_order->add_order_note( sprintf( "<strong>%s</strong> : %s.",
+                __( "Pagar.me: ", 'wc-pagarme-payments' ), 
+                __( "QRCode link: {$metas['pix_url']}", 'wc-pagarme-payments' )
+            ), true );
+            
+            $wc_order->add_order_note( sprintf( "<strong>%s</strong> : %s", 
+                __( "Pagar.me: ", 'wc-pagarme-payments' ), 
+                __( "Awaiting the payment of the PIX transaction.", 'wc-pagarme-payments' )
+            ), true );
+
+
+            $woocommerce->cart->empty_cart();
+
+            return true;
+        }
+
         return false;
     }
 
