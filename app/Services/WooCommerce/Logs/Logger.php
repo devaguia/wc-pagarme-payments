@@ -11,13 +11,15 @@ use WC_Logger;
  */
 class Logger
 {
-  protected WC_Logger $wc;
-  protected string $prefix;
+  private WC_Logger $wc;
+  private string $prefix;
+  private bool $enabled;
 
-  public function __construct()
+  public function __construct( bool $enabled = true )
   {
-    $this->wc = new WC_Logger();
-    $this->prefix = WPP_PLUGIN_SLUG;
+    $this->wc      = new WC_Logger();
+    $this->enabled = $enabled;
+    $this->prefix  = WPP_PLUGIN_SLUG;
   }
 
   public function add( $var, string $type = 'request' ): void
@@ -38,8 +40,9 @@ class Logger
         $title = '--- PAGAR.ME PAYMENTS REQUEST LOG ---';
       break;
 
-
-      $this->wc->add( $log, "\n{$title} : \n" . print_r( $var, true ) . "\n" );
+      if ( $this->enabled ) {
+        $this->wc->add( $log, "\n{$title} : \n" . print_r( $var, true ) . "\n" );
+      }
     }
   }
 }

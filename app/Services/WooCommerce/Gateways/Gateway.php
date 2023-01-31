@@ -19,7 +19,9 @@ abstract class Gateway extends WC_Payment_Gateway
 
     public function __construct()
     {
-        $this->logger = new Logger;
+        $this->logger = new Logger( 
+            $this->get_option('logs') === 'yes' ? true : false
+        );
     }
 
 

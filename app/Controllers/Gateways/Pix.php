@@ -145,6 +145,7 @@ class Pix extends Gateway implements InterfaceGateways
 
     protected function get_payment_method( object $wc_order ): array
     {
+        //TODO discont for pix and billet payments
         return [
             [
                 "amount" => preg_replace( '/[^0-9]/', '', $wc_order->get_total() ),
