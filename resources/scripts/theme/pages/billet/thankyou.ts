@@ -6,7 +6,7 @@ class Thankyou {
         this.copyBilletLine();
     }
 
-    copyBilletLine() {
+    copyBilletLine(): void {
         const button: HTMLInputElement|null = document.querySelector("#wpp-copy-billet");
 
         if (button) {

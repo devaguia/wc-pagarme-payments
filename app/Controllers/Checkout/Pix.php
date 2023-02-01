@@ -24,6 +24,7 @@ class Pix extends Render
     private function enqueue()
     {
         $this->enqueue_styles( [ 'name' => 'wpp-pix-checkout', 'file' => 'styles/theme/pages/checkout/pix.css' ] );
+        $this->enqueue_scripts( [ 'name' => 'wpp-billet-checkout', 'file' => 'scripts/theme/pages/pix/checkout.js' ] );
     }
 
     public function request()

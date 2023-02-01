@@ -2,6 +2,7 @@
 
 namespace WPP\Services\WooCommerce;
 
+use WPP\Services\WooCommerce\Checkout\Discount;
 use WPP\Services\WooCommerce\Gateways\Gateways;
 use WPP\Services\WooCommerce\Orders\Status;
 
@@ -21,5 +22,6 @@ class WooCommerce
 	{  
         new Gateways;
         new Status;
+		new Discount;
 	}
 }
