@@ -1,6 +1,6 @@
 <?php
 
-namespace WPP\Core;
+namespace WPP\Helpers;
 
 use WPP\Model\Database\Bootstrap;
 
@@ -10,7 +10,7 @@ use WPP\Model\Database\Bootstrap;
  * @package Helper
  * @since 1.0.0
  */
-class Uninstall 
+class Uninstall // TODO create settings option for remove plugins data on remove him
 {
     public function __construct()
     {

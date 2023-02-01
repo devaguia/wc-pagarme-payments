@@ -9,11 +9,8 @@ namespace WPP\Helpers;
  */
 class Gateways
 {
-    /**
-     * Get the Pagar.me payment methods
-     * @return array
-     */
-    public static function pagarme_payment_methods()
+
+    public static function pagarme_payment_methods(): array
     {
         $gateways = WC()->payment_gateways->payment_gateways();
         $needle   = [
@@ -27,12 +24,12 @@ class Gateways
         foreach ( $gateways as $key => $gateway ) {
 
             if ( in_array( $key, $needle ) ) {
-                if ( isset( $gateway->settings ) ) {
+                if ( isset( $gateway->settings ) && is_array( $gateway->settings ) ) {
                     $settings = $gateway->settings;
 
                     $methods[$key] = [
-                        'active' => self::get_status( $settings ),
-                        'label'  => self::get_title( $key )
+                        'active' => self::get_gateway_status( $settings ),
+                        'label'  => self::get_gateway_title( $key )
                     ];
                 }
             }
@@ -41,11 +38,8 @@ class Gateways
         return $methods;
     }
 
-    /**
-     * Get formated gateway title
-     * @return string
-     */
-    private static function get_title( $method )
+
+    private static function get_gateway_title( string $method ): string
     {
         switch ($method) {
             case 'wc-pagarme-billet':
@@ -67,11 +61,8 @@ class Gateways
         return $result;
     }
 
-    /**
-     * Get gateway status
-     * @return bool
-     */
-    private static function get_status( $settings )
+
+    private static function get_gateway_status( array $settings ): bool
     {
         if ( isset( $settings['enabled'] ) ) {
             if ( $settings['enabled'] === 'yes' ) {

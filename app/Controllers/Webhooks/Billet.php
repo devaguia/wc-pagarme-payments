@@ -13,7 +13,7 @@ use WPP\Services\WooCommerce\Webhooks\InterfaceWebhooks;
 class Billet implements InterfaceWebhooks
 {
 
-    public function __construct()
+    public function __construct() //TODO Create webhook system
     {
         ## Do something
     }

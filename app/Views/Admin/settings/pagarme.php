@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="status">
-                    <h4><strong><?php echo __( "Export settings", "wc-pagarme-payments" ); ?></strong></h4>
+                    <h4><strong><?php echo __( "Export settings", "wc-pagarme-payments" ); //TODO create export file ?></strong></h4>
                     <div class="export-settings">
                         <label><?php echo __( "Export settings and other useful information(for support).", "wc-pagarme-payments"); ?></label>
                         <div>

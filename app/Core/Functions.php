@@ -8,9 +8,8 @@ use WPP\Controllers\Entities\Settings;
 use WPP\Controllers\Menus;
 use WPP\Model\Database\Bootstrap;
 use WPP\Helpers\Config;
-use WPP\Core\Uninstall;
-use WPP\Model\Database\Tables\Settings as TablesSettings;
-use WPP\Model\Entity\Settings as EntitySettings;
+use WPP\Helpers\Export;
+use WPP\Helpers\Uninstall;
 use WPP\Services\WooCommerce\WooCommerce;
 
 /**
@@ -122,10 +121,7 @@ class Functions
         );
     }
 
-    /**
-     * Ajax function for save Pagar.me settings
-     * @return void
-     */
+
     public static function ajax_save_pagarme_settings()
     {
         $settings = new Settings;
@@ -134,6 +130,21 @@ class Functions
         return wp_send_json(
             [ 'content' => $settings->get_response() ],
             $settings->get_status()
+        );
+    }
+
+
+    public static function ajax_export_settings_file()
+    {
+        $export = new Export;
+        $file   = $export->get_export_file_url();
+        $status = $file ? 200 : 400;
+
+        return wp_send_json(
+            [ 
+                'content' => [ 'file' => $file ] 
+            ],
+            $status
         );
     }
 }
