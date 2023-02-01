@@ -77,7 +77,7 @@
                     <div class="export-settings">
                         <label><?php echo __( "Export settings and other useful information(for support).", "wc-pagarme-payments"); ?></label>
                         <div>
-                            <button type="button" id="wpp-export-settings">Export<i class="fa-solid fa-download"></i></button>
+                            <button type="button" id="wpp-export-settings"><?php echo __( "Download", "wc-pagarme-payments"); ?><i class="fa-solid fa-download"></i></button>
                         </div>
                     </div>
                 </div>

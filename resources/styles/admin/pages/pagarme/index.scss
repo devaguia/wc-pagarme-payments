@@ -121,8 +121,8 @@
       .export-settings {
         button {
           background-color: #fff;
-          border: solid 1px $secondary-color;
-          color: $secondary-color;
+          border: solid 1px #000;
+          color: #000;
           margin-top: 10px;
           padding: 5px 30px;
           border-radius: 5px;
@@ -134,6 +134,7 @@
 
           &:hover {
             cursor: pointer;
+            color: $secondary-color;
           }
         }
       }
