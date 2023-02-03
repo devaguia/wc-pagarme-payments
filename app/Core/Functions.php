@@ -137,14 +137,13 @@ class Functions
     public static function ajax_export_settings_file()
     {
         $export = new Export;
-        $file   = $export->get_export_file_url();
-        $status = $file ? 200 : 400;
+        $data   = $export->get_data();
 
         return wp_send_json(
             [ 
-                'content' => [ 'file' => $file ] 
+                'content' => [ 'file' => $data ] 
             ],
-            $status
+            200
         );
     }
 }

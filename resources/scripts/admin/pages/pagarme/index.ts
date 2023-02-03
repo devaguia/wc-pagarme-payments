@@ -8,6 +8,49 @@ class Service extends Ajax {
     this.submit();
     this.showTokenContent();
     this.checkTokenContent();
+    this.exportSettingsFile();
+  }
+
+  exportSettingsFile(): void {
+    const input: HTMLInputElement|null = document.querySelector("#wpp-export-settings");
+
+    input?.addEventListener("click", () => {
+      this.getSettingsContent();
+    });
+  }
+
+  getSettingsContent(): void {
+    const data = new FormData();
+    data.append("action", "export_settings_file");
+
+    fetch(`${window.location.origin}/wp-admin/admin-ajax.php`, {
+      method: "POST",
+      body: data
+    })
+    .then((response: any) => response.json())
+    .then((data: any) => {
+      this.downloadSettingsFile(JSON.stringify(data.content, null, 4));
+    });
+  }
+
+  downloadSettingsFile( content: string ): void {
+    const file = new File([content], 'export.json', {
+      type: 'application/json',
+    });
+
+    const url: string = URL.createObjectURL(file);
+    const element: HTMLElement|null = document.createElement('a');
+
+    if (element) {
+      element.setAttribute('href', url);
+      element.setAttribute('download', 'export.json');
+    
+      document.body.appendChild(element);
+    
+      element.click();
+    
+      document.body.removeChild(element);
+    }
   }
 
   showTokenContent(): void {

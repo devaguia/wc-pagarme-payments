@@ -3,7 +3,6 @@
 namespace WPP\Core;
 
 /**
- * Name: Actions
  * Call the actions and filters
  * @package Hooks
  * @since 1.0.0
@@ -47,4 +46,9 @@ add_action( 'wp_ajax_save_pagarme_installments', [
 add_action( 'wp_ajax_save_pagarme_settings', [
     Functions::class,
     'ajax_save_pagarme_settings'
+], 999 );
+
+add_action( 'wp_ajax_export_settings_file', [
+    Functions::class,
+    'ajax_export_settings_file'
 ], 999 );

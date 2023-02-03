@@ -19,14 +19,15 @@ class Discount
   {
     if ( is_admin() && ! defined( 'DOING_AJAX' ) || is_cart() ) return;
 
+    if ( ! WC()->session->chosen_payment_method ) return;
+
     $namespace = $this->get_payment_method_namespace( WC()->session->chosen_payment_method );
 
     if ( $namespace && class_exists( $namespace ) ) {
 
-        $gateway = new $namespace;
-
         add_filter( 'woocommerce_coupons_enabled', '__return_true' );
     
+        $gateway          = new $namespace;
         $enabled_discount = $gateway->get_option( "enabled_discount" );
     
         if ( $enabled_discount && $enabled_discount === 'yes' ) {

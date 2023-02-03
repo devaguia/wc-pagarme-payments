@@ -5,7 +5,6 @@ namespace WPP\Helpers;
 use WPP\Model\Database\Bootstrap;
 
 /**
- * Name: Uninstall
  * Remove all tables and plugin data
  * @package Helper
  * @since 1.0.0
@@ -14,15 +13,11 @@ class Uninstall // TODO create settings option for remove plugins data on remove
 {
     public function __construct()
     {
-        $this->removeTables();
+        $this->remove_tables();
     }
     
-    /**
-     * Remove all tables created by the plugin
-     * @since 1.0.0
-     * @return void
-     */
-    private static function removeTables()
+
+    private static function remove_tables(): void
     {
         $boot = new Bootstrap;
         $boot->uninstall();

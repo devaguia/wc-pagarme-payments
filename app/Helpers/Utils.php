@@ -50,7 +50,7 @@ class Utils
         extract($data);
         ob_start();
 
-        $template = get_template_directory() . "/wctp-templates/$file";
+        $template = get_template_directory() . "/pagarme-templates/$file";
         
         if ( ! file_exists( $template ) ) {
             $template = Config::__views( $file );

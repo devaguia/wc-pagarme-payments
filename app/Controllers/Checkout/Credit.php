@@ -7,8 +7,7 @@ use WPP\Controllers\Render\Render;
 use WPP\Model\Entity\Settings;
 
 /**
- * Name: Render Checkout
- * Checkout field
+ * Render the credit card checkout fields
  * @package Controller\Render
  * @since 1.0.0
  */
@@ -19,22 +18,15 @@ class Credit extends Render
         $this->request();
     }
 
-    /**
-     * Enqueue custom scripts and styles to the page
-     * @return void
-     */
-    private function enqueue()
+
+    private function enqueue(): void
     {
         $this->enqueue_styles( [ 'name' => 'wpp-credit-checkout', 'file' => 'styles/theme/pages/checkout/credit.css' ] );
         $this->enqueue_scripts( [ 'name' => 'wpp-credit-checkout', 'file' => 'scripts/theme/pages/credit/checkout.js' ] );
     }
 
-    /**
-     * Get installments from database
-     * @since 1.0.0
-     * @return array
-     */
-    private function get_installments_settings()
+
+    private function get_installments_settings(): array
     {
         $model = new Settings( true );
         $installments = $model->get_single( 'credit_installments' );
@@ -46,12 +38,8 @@ class Credit extends Render
         return [];
     }
 
-    /**
-     * Get formatted installments
-     * @since 1.0.0
-     * @return array
-     */
-    private function get_installments()
+
+    private function get_installments(): array
     {
         $gateway = new GatewaysCredit;
         $max_installments = intval( $gateway->get_option("installments_quant") );
@@ -84,10 +72,8 @@ class Credit extends Render
 
     }
 
-    /**
-     * @return string
-     */
-    private function get_public_key()
+
+    private function get_public_key(): string
     {
         $model      = new Settings( true );
         $public_key = $model->get_single( 'public_key' );
@@ -99,10 +85,8 @@ class Credit extends Render
         return "";
     }
 
-    /**
-     * @return void
-     */
-    public function request()
+
+    public function request(): void
     {
         $this->render( 'Pages/checkout/credit.php',[
             'installments' => $this->get_installments(),

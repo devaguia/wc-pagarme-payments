@@ -2,6 +2,8 @@
 
 namespace WPP\Helpers;
 
+use WPP\Model\Entity\Settings;
+
 /**
  * Export plugin data
  * @package Helper
@@ -9,65 +11,73 @@ namespace WPP\Helpers;
  */
 class Export 
 {
+    private array $data;
+
     public function __construct()
     {
-        $data = [
+        $this->data = [
             'pagarme_settings'   => $this->get_settings_data(),
-            'pagarme_orders'     => $this->get_pagarme_orders_quantity(),
             'override_templates' => $this->check_override_pagarme_templates(),
             'site_data'          => [
-                'active_gateways'  => $this->get_active_gateways(),
+                'active_gateways'  => $this->get_site_gateways(),
                 'active_plugins'   => $this->get_active_plugins(),
                 'acrive_theme'     => $this->get_active_theme()
             ]
         ];
-
-        $this->create_file( $data );
     }
 
-    private function create_file( $data ): bool
+
+    public function get_data(): array
     {
-        return true;
+        return $this->data;
     }
 
-    public function get_export_file_url(): string
-    {
-        return true;
-    }
 
     private function get_settings_data(): array
     {
         $gateways = $this->get_pagarme_gateways_data();
-        return [];
+        $model = new Settings();
+        
+        return [
+            'success_status'      => $model->get_success_status(),
+            'payment_mode'        => $model->get_payment_mode(),
+            'credit_installments' => $model->get_credit_installments(),
+            'gateways'            => $gateways
+        ];
     }
+
 
     private function get_pagarme_gateways_data(): array
     {
-        return [];
+        return Gateways::pagarme_payment_methods();
     }
 
-    private function check_override_pagarme_templates(): array
+
+    private function check_override_pagarme_templates(): bool
     {
-        return [];
+        return is_dir( get_template_directory() . "/pagarme-templates/" );
     }
 
-    private function get_pagarme_orders_quantity(): array
+
+    private function get_site_gateways(): array
     {
-        return [];
+        return Gateways::get_all_payment_methods();
     }
 
-    private function get_active_gateways(): array
-    {
-        return [];
-    }
 
     private function get_active_theme(): array
     {
-        return [];
+        $theme = wp_get_theme();
+
+        return [
+            'name'    => $theme->name,
+            'version' => $theme->version
+        ];
     }
+
 
     private function get_active_plugins(): array
     {
-        return [];
+        return wp_get_active_and_valid_plugins();
     }
 }

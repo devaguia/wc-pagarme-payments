@@ -39,6 +39,24 @@ class Gateways
     }
 
 
+    public static function get_all_payment_methods(): array
+    {
+        $gateways = WC()->payment_gateways->payment_gateways();
+
+        $methods = [];
+
+        foreach ( $gateways as $key => $gateway ) {
+            if ( isset( $gateway->settings ) && is_array( $gateway->settings ) ) {
+                $settings = $gateway->settings;
+
+                $methods[$key] = self::get_gateway_status( $settings ) ? 'active' : 'disabled';
+            }
+        }
+
+        return $methods;
+    }
+
+
     private static function get_gateway_title( string $method ): string
     {
         switch ($method) {
