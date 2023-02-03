@@ -6,6 +6,7 @@ use WPP\Model\Database\Bootstrap;
 
 /**
  * Remove all tables and plugin data
+ * 
  * @package Helper
  * @since 1.0.0
  */

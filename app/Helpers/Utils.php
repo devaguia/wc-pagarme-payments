@@ -3,19 +3,14 @@
 namespace WPP\Helpers;
 
 /**
- * Name: Utils
  * Has the statics methods
+ * 
  * @package Helpers
  * @since 1.0.0
  */
 class Utils
 {
-    /**
-     * Parse constroller file name to view
-     * @param string $controller
-     * @return string
-     */
-    public static function parse_view( $controller )
+    public static function parse_view( string $controller ): string
     {
 
         $split = str_split( $controller );
@@ -36,16 +31,12 @@ class Utils
             }
             $count++;
         }
+
         return $view;
     }
 
-    /**
-     * Render HTML files
-     * @param string $file
-     * @param array $data
-     * @return string
-     */
-    public static function render( $file, $data )
+
+    public static function render( string $file, array $data ): string
     {
         extract($data);
         ob_start();
@@ -63,7 +54,7 @@ class Utils
         return $html;
     }
 
-    public static function active_payment_methods()
+    public static function active_payment_methods(): array
     {
         $gateways = WC()->payment_gateways->get_available_payment_gateways();
         $methods  = [];

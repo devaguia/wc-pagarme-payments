@@ -4,6 +4,7 @@ namespace WPP\Core;
 
 /**
  * Call the actions and filters
+ * 
  * @package Hooks
  * @since 1.0.0
  */

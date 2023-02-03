@@ -13,51 +13,33 @@ use WPP\Helpers\Uninstall;
 use WPP\Services\WooCommerce\WooCommerce;
 
 /**
- * Name: Function
  * Handle the hooks functions
+ * 
  * @package Core
  * @since 1.0.0
  */
 class Functions
 {
-    /**
-     * Load plugin text domain
-     * @since 1.0.0
-     * @return void
-     */
-    public static function initialize()
+    public static function initialize(): void
     {
         load_plugin_textdomain( WPP_PLUGIN_SLUG , false );
     }
 
-    /**
-     * Create admin menu
-     * @since 1.0.0
-     * @return void
-     */
-    public static function create_admin_menu()
+
+    public static function create_admin_menu(): void
     {
         new Menus();
     }
 
-    /**
-     * Init Woocommerce classes
-     * @since 1.0.0
-     * @return Woocommerce
-     */
-    public static function woocommerce()
+
+    public static function woocommerce(): void
     {
-        return new WooCommerce;
+        new WooCommerce;
     }
 
-    /**
-     * Create extra link on plugins page
-     * @since 1.0.0
-     * @param array $arr
-     * @param string $name
-     * @return array
-     */
-    public static function settings_link( $arr, $name ){
+
+    public static function settings_link( array $arr, string $name ): array
+    {
 
         if( $name === Config::__base() ) {
 
@@ -72,31 +54,21 @@ class Functions
         return $arr;
     }
 
-    /**
-     * Activate plugin
-     * @since 1.0.0
-     * @return void|bool
-     */
-    public static function activate( $plugin )
+
+    public static function activate( string $plugin ): void
     {
         if ( Config::__base() === $plugin ) {
             new Bootstrap;
         }
     }
 
-    /**
-     * Desactive the plugin
-     * @since 1.0.0
-     * @return void
-     */
-    public static function desactive() {
+
+    public static function desactive(): void
+    {
         new Uninstall;
     }
 
-    /**
-     * Ajax function for get installments
-     * @return void
-     */
+
     public static function ajax_get_installment_settings()
     {
         $settings = new Installments;
@@ -106,10 +78,7 @@ class Functions
         );
     }
 
-    /**
-     * Ajax function for save Pagar.me installments settings
-     * @return void
-     */
+
     public static function ajax_save_pagarme_installments()
     {
         $settings = new EntitiesInstallments;

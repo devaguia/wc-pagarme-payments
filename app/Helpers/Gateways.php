@@ -4,6 +4,7 @@ namespace WPP\Helpers;
 
 /**
  * Pagar.me Gateways statics methods
+ * 
  * @package Helpers
  * @since 1.0.0
  */

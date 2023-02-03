@@ -3,8 +3,8 @@
 namespace WPP\Helpers;
 
 /**
- * Name: Config
  * Create configuration methods
+ * 
  * @package Helper
  * @since 1.0.0
  */
@@ -59,7 +59,7 @@ class Config
     }
 
 
-    public static function _payment_methods(): string
+    public static function _payment_methods(): array
     {
         return [
             'wc-pagarme-payments'
