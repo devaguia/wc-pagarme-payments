@@ -2,7 +2,7 @@
     <div class="wpp-container wpp-container-pagarme">
         <div class="title">
             <h1>
-                <?php echo __( "Pagar.me General Settings", "wc-pagarme-payments" );?>
+                <?php echo __( "Pagar.me General Settings", "wc-pagarme-payments" ); ?>
             </h1>
             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42.8925 43.9518H56.9567C56.9783 43.3835 56.9999 42.8081 56.9999 42.2326C56.9711 18.9361 37.9328 0.0500387 14.4216 0V13.9215C30.1847 13.9465 42.9503 26.6134 42.9466 42.2326C42.9503 42.8045 42.9286 43.3799 42.8925 43.9518Z" fill="#65A300"></path><path d="M0 42.235C0 50.3896 6.76427 57.0001 15.1084 57.0001C23.4526 57.0001 30.2169 50.3896 30.2169 42.235C30.2169 34.0805 23.4526 27.47 15.1084 27.47C6.76427 27.47 0 34.0805 0 42.235Z" fill="#65A300"></path></svg>
             <?php if ( isset( $payment_mode_label ) && $payment_mode_label ): ?>
@@ -72,12 +72,29 @@
                         </select>
                     </div>
                 </div>
-                <div class="status">
-                    <h4><strong><?php echo __( "Export settings", "wc-pagarme-payments" ); //TODO create export file ?></strong></h4>
+                <div class="export">
+                    <h4><strong><?php echo __( "Export settings", "wc-pagarme-payments" ); ?></strong></h4>
                     <div class="export-settings">
                         <label><?php echo __( "Export settings and other useful information(for support).", "wc-pagarme-payments"); ?></label>
                         <div>
                             <button type="button" id="wpp-export-settings"><?php echo __( "Download", "wc-pagarme-payments"); ?><i class="fa-solid fa-download"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="uninstall">
+                    <h4><strong><?php echo __( "Erase Settings", "wc-pagarme-payments" ); ?></strong></h4>
+                    <div>
+                        <input type="checkbox" name="wpp-erase-settings" id="wpp-erase-settings">
+                        <label for="wpp-erase-settings"><?php echo __( "Erase settings after desactivate the plugin.", "wc-pagarme-payments"); ?></label>
+                    </div>
+                </div>
+                <div class="webhook">
+                    <h4><strong><?php echo __( "Webhook Endpoint", "wc-pagarme-payments" ); ?></strong></h4>
+                    <div>
+                        <label for=""><?php echo __( "Use the link above to configure your pagarme Webhooks.", "wc-pagarme-payments" ); ?></label>
+                        <div>
+                            <input type="text" id="wpp-webhook-link" readonly value="<?php echo esc_url( isset( $webhook_url ) ? $webhook_url : "" ) ?>">
+                            <button id="wpp-webhook-copy"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
                 </div>

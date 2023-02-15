@@ -6,13 +6,12 @@ use WPP\Controllers\Checkout\Pix as Checkout;
 use WPP\Controllers\Thankyou\Pix as ThankyouPix;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
-use WPP\Controllers\Webhooks\Pix as Webhooks;
 use WPP\Model\Entity\Settings;
 use WPP\Services\WooCommerce\Gateways\Gateway;
 
 /**
- * Name: Billet
  * Structure the billet payment method
+ * 
  * @package Controllers
  * @since 1.0.0
  */
@@ -42,8 +41,6 @@ class Pix extends Gateway implements InterfaceGateways
         if ( is_admin() ) {
             add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'process_admin_options' ] );
         }
-
-        new Webhooks( $this->id, get_class( $this ) );
 
         parent::__construct();
     }
@@ -145,7 +142,6 @@ class Pix extends Gateway implements InterfaceGateways
 
     protected function get_payment_method( object $wc_order ): array
     {
-        //TODO discont for pix and billet payments
         return [
             [
                 "amount" => preg_replace( '/[^0-9]/', '', $wc_order->get_total() ),

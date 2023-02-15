@@ -53,3 +53,8 @@ add_action( 'wp_ajax_export_settings_file', [
     Functions::class,
     'ajax_export_settings_file'
 ], 999 );
+
+add_action( 'rest_api_init', [
+    Functions::class,
+    'register_webhook_api'
+] );

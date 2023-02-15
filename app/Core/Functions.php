@@ -6,6 +6,7 @@ use WPP\Controllers\Entities\Installments as EntitiesInstallments;
 use WPP\Controllers\Menus\Installments;
 use WPP\Controllers\Entities\Settings;
 use WPP\Controllers\Menus;
+use WPP\Controllers\Webhooks;
 use WPP\Model\Database\Bootstrap;
 use WPP\Helpers\Config;
 use WPP\Helpers\Export;
@@ -23,6 +24,7 @@ class Functions
     public static function initialize(): void
     {
         load_plugin_textdomain( WPP_PLUGIN_SLUG , false );
+        new Webhooks;
     }
 
 
@@ -35,6 +37,11 @@ class Functions
     public static function woocommerce(): void
     {
         new WooCommerce;
+    }
+
+    public static function register_webhook_api(): void
+    {
+        // new Webhooks;
     }
 
 

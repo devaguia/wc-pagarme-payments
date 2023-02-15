@@ -7,7 +7,8 @@ use WPP\Model\Repository;
 use Exception;
 
 /**
- * Name: Settings
+ * Repository class for settings table
+ * 
  * @package Model 
  * @since 1.0.0
  */
@@ -15,6 +16,7 @@ class Settings extends Repository implements InterfaceRepository
 {
     /**
      * Find Pagar.me settings
+     * 
      * @param string $key
      * @return array
      */
@@ -127,6 +129,8 @@ class Settings extends Repository implements InterfaceRepository
             'secret_key'           => "",
             'public_key'           => "",
             'payment_mode'         => "",
+            'webhook_token'        => hash( "sha256", get_site_url() . time() ),
+            'erase_settings'       => false,
             'credit_installments'  => serialize($this->get_default_credit_installments()),
             'success_status'       => "wc-processing"
         ];

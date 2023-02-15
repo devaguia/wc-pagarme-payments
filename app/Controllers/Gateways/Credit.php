@@ -6,12 +6,12 @@ use WPP\Controllers\Checkout\Credit as Checkout;
 use WPP\Controllers\Thankyou\Credit as ThankyouCredit;
 use WPP\Helpers\Config;
 use WPP\Services\WooCommerce\Gateways\InterfaceGateways;
-use WPP\Controllers\Webhooks\Credit as Webhooks;
 use WPP\Model\Entity\Settings;
 use WPP\Services\WooCommerce\Gateways\Gateway;
 
 /**
  * Structure the billet payment method
+ * 
  * @package Controllers
  * @since 1.0.0
  */
@@ -45,9 +45,7 @@ class Credit extends Gateway implements InterfaceGateways
         if ( is_admin() ) {
             add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'process_admin_options' ] );
         }
-
-        new Webhooks( $this->id, get_class( $this ) );
-
+        
         parent::__construct();
     }
 

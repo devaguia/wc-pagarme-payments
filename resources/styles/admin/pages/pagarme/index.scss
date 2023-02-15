@@ -109,7 +109,7 @@
       }
 
       > div {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         > h4 {
           font-size: 14px;
           margin: 0;
@@ -135,6 +135,42 @@
           &:hover {
             cursor: pointer;
             color: $secondary-color;
+          }
+        }
+      }
+
+      .webhook {
+        > div {
+          > div {
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: 97% 3%;
+            padding-right: 10px;
+
+            input, button {
+              height: 35px;
+              border-radius: 5px;
+              border: solid 0.1px rgba(0, 0, 0, 0.2);
+              font-size: 16px;
+
+              box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            }
+
+            input {
+              padding-left: 15px;
+              background-color: #fff;
+            }
+
+            button {
+              border-color: $secondary-color;
+              background-color: transparent ;
+              color: $secondary-color;
+              &:hover {
+                cursor: pointer;
+                background-color: $secondary-color;
+                color: #fff;
+              }
+            }
           }
         }
       }

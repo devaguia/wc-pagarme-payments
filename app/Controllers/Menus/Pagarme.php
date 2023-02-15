@@ -8,18 +8,17 @@ use WPP\Model\Repository\Settings;
 
 /**
  * Render Pagar.me settings page
+ * 
  * @package Controller 
  * @since 1.0.0
  */
 class Pagarme extends Render
 {
-    /**
-     * @var array
-     */
-    private $fields;
+    private array $fields;
 
     public function __construct()
     {
+        $this->fields = [];
         $this->get_database_fields();
     }
 
@@ -37,6 +36,8 @@ class Pagarme extends Render
             'secret_key'          => '',
             'public_key'          => '',
             'payment_mode'        => '',
+            'webhook_token'       => '',
+            'erase_settings'      => '',
             'credit_installments' => [],
             'success_status'      => 'wc-processing',
         ];
@@ -60,6 +61,7 @@ class Pagarme extends Render
 
         $this->get_gateways();
         $this->get_statuses();
+        $this->get_webhook_url();
         $this->get_payment_mode_label();
     }
 
@@ -93,6 +95,14 @@ class Pagarme extends Render
     {
         $statuses = wc_get_order_statuses();
         $this->fields['statuses'] = ( is_array( $statuses ) && ! empty( $statuses ) ) ? $statuses : [];
+    }
+
+    private function get_webhook_url(): void
+    {
+        $token = $this->fields['webhook_token'];
+        if ( $token ) {
+            $this->fields['webhook_url'] = get_site_url() . "/index.php/wc-api/pagarme_webhooks?token=$token";
+        }
     }
     
     private function get_payment_mode_label(): void
