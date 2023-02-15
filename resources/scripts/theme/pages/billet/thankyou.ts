@@ -14,8 +14,13 @@ class Thankyou {
                 const input: HTMLInputElement|null = document.querySelector("#wpp-billet-line");
 
                 if (input) {
-                    input.select();
-                    let result = document.execCommand('copy');
+                    try {
+                        navigator.clipboard.writeText(input.value);
+                 
+                    } catch (error) {
+                        input.select();
+                        document.execCommand('copy');
+                    }
                 }
             });
         }

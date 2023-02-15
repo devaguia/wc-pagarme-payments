@@ -9,6 +9,7 @@ class Service extends Ajax {
     this.showTokenContent();
     this.checkTokenContent();
     this.exportSettingsFile();
+    this.copyWebhook();
   }
 
   exportSettingsFile(): void {
@@ -51,6 +52,25 @@ class Service extends Ajax {
     
       document.body.removeChild(element);
     }
+  }
+
+  copyWebhook(): void {
+    const field: HTMLInputElement|null = document.querySelector("#wpp-webhook-link");
+    const button: HTMLAnchorElement|null = document.querySelector("#wpp-webhook-copy");
+
+    if (!field || !button) return;
+
+    button.addEventListener("click", () => {
+      let value = field.value;
+
+      try {
+       navigator.clipboard.writeText(value);
+
+      } catch (error) {
+        field.select();
+        document.execCommand('copy');
+      }
+    });
   }
 
   showTokenContent(): void {

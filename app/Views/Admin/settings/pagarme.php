@@ -93,8 +93,8 @@
                     <div>
                         <label for=""><?php echo __( "Use the link above to configure your pagarme Webhooks.", "wc-pagarme-payments" ); ?></label>
                         <div>
-                            <input type="text" id="wpp-webhook-link" readonly value="<?php echo esc_url( isset( $webhook_url ) ? $webhook_url : "" ) ?>">
-                            <button id="wpp-webhook-copy"><i class="fa-regular fa-copy"></i></button>
+                            <input type="password" id="wpp-webhook-link" readonly value="<?php echo esc_url( isset( $webhook_url ) ? $webhook_url : "" ) ?>">
+                            <a id="wpp-webhook-copy"><i class="fa-regular fa-copy"></i></a>
                         </div>
                     </div>
                 </div>

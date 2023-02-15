@@ -142,12 +142,9 @@
       .webhook {
         > div {
           > div {
-            display: grid;
-            grid-gap: 10px;
-            grid-template-columns: 97% 3%;
-            padding-right: 10px;
+            display: flex;
 
-            input, button {
+            input, a {
               height: 35px;
               border-radius: 5px;
               border: solid 0.1px rgba(0, 0, 0, 0.2);
@@ -159,15 +156,24 @@
             input {
               padding-left: 15px;
               background-color: #fff;
+              width: 100%;
             }
 
-            button {
-              border-color: $secondary-color;
-              background-color: transparent ;
-              color: $secondary-color;
+            a {
+              width: 35px;
+              height: 40px;
+              float: right;
+              margin-left: 10px;
+              background-color: $secondary-color ;
+              color: #fff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 18px;
               &:hover {
                 cursor: pointer;
                 background-color: $secondary-color;
+                opacity: 80%;
                 color: #fff;
               }
             }
@@ -301,6 +307,69 @@
       #wpp-submit {
         background-color: $secondary-color;
         color: $white-color;
+      }
+    }
+  }
+}
+
+@media (max-width: 780px) {
+
+  #wpbody-content {
+    .wpp-container-pagarme {
+
+      .title {
+        display: flex;
+  
+        > h1 {
+          font-weight: 600;
+          color: $black-color;
+        }
+  
+        svg {
+          width: 30px;
+          margin-left: 10px;
+          margin-top: -5px;
+        }
+      }
+
+      .keys {
+
+        > div {
+          display: grid;
+          grid-template-columns: 1fr !important;
+
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+
+  #wpbody-content {
+    .wpp-container-pagarme {
+
+      .title {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+
+        svg {
+          display: none;
+        }
+
+        .wpp-payment-mode {
+          left: 0;
+          bottom: 0;
+          span {
+          }
+        }
+      }
+
+      .submit {
+        width: 100%;
+        div, input {
+          width: 100%;
+        }
       }
     }
   }
