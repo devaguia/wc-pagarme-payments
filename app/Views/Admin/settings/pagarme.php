@@ -84,7 +84,7 @@
                 <div class="uninstall">
                     <h4><strong><?php echo __( "Erase Settings", "wc-pagarme-payments" ); ?></strong></h4>
                     <div>
-                        <input type="checkbox" name="wpp-erase-settings" id="wpp-erase-settings">
+                        <input type="checkbox" name="wpp-erase-settings" id="wpp-erase-settings" <?php echo esc_attr( isset( $erase_settings ) && $erase_settings ? 'checked' : '' ); ?>>
                         <label for="wpp-erase-settings"><?php echo __( "Erase settings after desactivate the plugin.", "wc-pagarme-payments"); ?></label>
                     </div>
                 </div>

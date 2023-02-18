@@ -18,6 +18,7 @@ class Settings
     private Repository $repository;
     private string $payment_mode;
     private string $webhook_token;
+    private string $erase_settings;
 
 
     public function __construct( $single = false )
@@ -57,6 +58,9 @@ class Settings
                 case 'webhook_token':
                     $this->set_webhook_token( $field->value );
                     break;
+                case 'erase_settings':
+                    $this->set_erase_settings( $field->value );
+                    break;
             }
         }
     }
@@ -91,7 +95,8 @@ class Settings
             'payment_mode'         => $this->get_payment_mode(),
             'public_key'           => $this->get_public_key(),
             'success_status'       => $this->get_success_status(),
-            'webhook_token'        => $this->get_webhook_token()
+            'webhook_token'        => $this->get_webhook_token(),
+            'erase_settings'       => $this->get_erase_settings()
         ];
     }
 
@@ -163,5 +168,15 @@ class Settings
     public function set_webhook_token( string $value ): void
     {
         $this->webhook_token = $value;
+    }
+
+    public function get_erase_settings(): string
+    {
+        return $this->erase_settings;
+    }
+
+    public function set_erase_settings( string $value ): void
+    {
+        $this->erase_settings = $value;
     }
 }

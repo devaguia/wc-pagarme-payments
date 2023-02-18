@@ -44,6 +44,7 @@ class Export
             'payment_mode'        => $model->get_payment_mode(),
             'credit_installments' => $model->get_credit_installments(),
             'webhook_token'       => $model->get_webhook_token(),
+            'erase_settings'      => $model->get_erase_settings(),
             'gateways'            => $gateways
         ];
     }

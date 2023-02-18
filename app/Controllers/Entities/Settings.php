@@ -30,6 +30,7 @@ class Settings
         $model->set_public_key( $this->propeties['public-key'] );
         $model->set_payment_mode( $this->propeties['payment-mode'] );
         $model->set_success_status( $this->propeties['finish-order-status'] );
+        $model->set_erase_settings( $this->propeties['erase-settings'] );
 
         $result = $model->save();
 
@@ -61,7 +62,8 @@ class Settings
                 'finish-order-status',
                 'secret-key',
                 'public-key',
-                'payment-mode'
+                'payment-mode',
+                'erase-settings'
             ];
 
             foreach ( $vars as $key => $var ) {
