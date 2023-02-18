@@ -93,6 +93,9 @@ class Service extends Ajax {
     const publicKey: HTMLInputElement|null = document.querySelector("#wpp-public-key");
 
     if (!secretKey || !publicKey) return;
+    
+    this.checkEqualKeys(secretKey, publicKey);
+    this.checkValidKeys(secretKey, publicKey);
 
     [secretKey, publicKey].forEach(element => {
       element.addEventListener("keyup", () => {
