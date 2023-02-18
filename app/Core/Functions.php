@@ -39,11 +39,6 @@ class Functions
         new Webhooks;
     }
 
-    public static function register_webhook_api(): void
-    {
-        // new Webhooks;
-    }
-
 
     public static function settings_link( array $arr, string $name ): array
     {
@@ -70,9 +65,16 @@ class Functions
     }
 
 
-    public static function desactive(): void
+    public static function desactivate(): void
     {
-        new Uninstall;
+        if ( ! current_user_can( 'activate_plugins' ) ) return;
+        
+	    $action = isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : false;
+	    $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : false;
+
+        if ( $action === 'deactivate' && $plugin === Config::__base() ) {
+            new Uninstall;
+        }  
     }
 
 

@@ -14,6 +14,11 @@ add_action( 'init', [
     'initialize' 
 ] );
 
+add_action( 'admin_init', [ 
+    Functions::class,
+    'desactivate' 
+] );
+
 add_action( 'admin_menu', [ 
     Functions::class,
     'create_admin_menu' 
@@ -53,8 +58,3 @@ add_action( 'wp_ajax_export_settings_file', [
     Functions::class,
     'ajax_export_settings_file'
 ], 999 );
-
-add_action( 'rest_api_init', [
-    Functions::class,
-    'register_webhook_api'
-] );

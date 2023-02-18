@@ -57,7 +57,7 @@ abstract class Table
 
     protected function drop(): void
     {
-        $this->db->query( "DROP DATABASE {$this->table};" );
+        $this->db->query( "DROP TABLE {$this->table};" );
     }
 
 }

@@ -3,6 +3,7 @@
 namespace WPP\Helpers;
 
 use WPP\Model\Database\Bootstrap;
+use WPP\Model\Entity\Settings;
 
 /**
  * Remove all tables and plugin data
@@ -10,17 +11,20 @@ use WPP\Model\Database\Bootstrap;
  * @package Helper
  * @since 1.0.0
  */
-class Uninstall // TODO create settings option for remove plugins data on remove him
+class Uninstall 
 {
     public function __construct()
     {
         $this->remove_tables();
     }
-    
 
     private static function remove_tables(): void
     {
-        $boot = new Bootstrap;
-        $boot->uninstall();
+        $model = new Settings();
+
+        if ( $model->get_erase_settings() ) {
+            $boot = new Bootstrap;
+            $boot->uninstall();
+        }
     }
 }
