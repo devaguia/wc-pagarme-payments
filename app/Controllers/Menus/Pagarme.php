@@ -101,7 +101,7 @@ class Pagarme extends Render
     {
         $token = $this->fields['webhook_token'];
         if ( $token ) {
-            $this->fields['webhook_url'] = get_site_url() . "/index.php/wc-api/pagarme_webhooks?token=$token";
+            $this->fields['webhook_url'] = get_site_url() . "/index.php/wc-api/wc_pagarme_webhooks?token=$token";
         }
     }
     

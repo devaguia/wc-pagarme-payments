@@ -17,6 +17,7 @@ class Settings
     private string $success_status;
     private Repository $repository;
     private string $payment_mode;
+    private string $webhook_token;
 
 
     public function __construct( $single = false )
@@ -52,6 +53,10 @@ class Settings
                 case 'payment_mode':
                     $this->set_payment_mode( $field->value );
                     break;
+
+                case 'webhook_token':
+                    $this->set_webhook_token( $field->value );
+                    break;
             }
         }
     }
@@ -85,7 +90,8 @@ class Settings
             'secret_key'           => $this->get_secret_key(),
             'payment_mode'         => $this->get_payment_mode(),
             'public_key'           => $this->get_public_key(),
-            'success_status'       => $this->get_success_status()
+            'success_status'       => $this->get_success_status(),
+            'webhook_token'        => $this->get_webhook_token()
         ];
     }
 
@@ -146,5 +152,16 @@ class Settings
     public function set_payment_mode( string $value ): void
     {
         $this->payment_mode = $value;
+    }
+
+    public function get_webhook_token(): string
+    {
+        return $this->webhook_token;
+    }
+
+
+    public function set_webhook_token( string $value ): void
+    {
+        $this->webhook_token = $value;
     }
 }

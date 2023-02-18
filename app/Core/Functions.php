@@ -24,7 +24,6 @@ class Functions
     public static function initialize(): void
     {
         load_plugin_textdomain( WPP_PLUGIN_SLUG , false );
-        new Webhooks;
     }
 
 
@@ -37,6 +36,7 @@ class Functions
     public static function woocommerce(): void
     {
         new WooCommerce;
+        new Webhooks;
     }
 
     public static function register_webhook_api(): void
