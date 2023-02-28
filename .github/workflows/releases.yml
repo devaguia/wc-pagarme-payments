@@ -50,8 +50,8 @@ jobs:
             NEXT_VERSION=$(bash .github/tags/next.sh)
             rm -r .github/
             
-            git config --global user.email "wpcare@apiki.com"
-            git config --global user.name "WP Care"
+            git config --global user.email "aguiartgv@gmail.com"
+            git config --global user.name "Matheus Aguiar(bot)"
 
             git add .
             git commit -am "build: Building a new version"
