@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: Pagar.me payments for WooCommerce
- * Plugin URI:  https://github.com/codebakerys/wc-pagarme-payments
+ * Plugin URI:  https://github.com/aguiarrdev/wc-pagarme-payments
  * Version:     1.0.0
  * Description: Payment plugin for WooCommerce/WordPress using the Pagar.me API
- * Author:      Code Bakery
- * Author URI:  https://github.com/codebakerys
+ * Author:      Matheus Aguiar
+ * Author URI:  https://github.com/aguiarrdev
  *
- * @link    https://github.com/codebakerys/wc-pagarme-payments
+ * @link    https://github.com/aguiarrdev/wc-pagarme-payments
  * @since   1.0.0
  * @package WPP
  */

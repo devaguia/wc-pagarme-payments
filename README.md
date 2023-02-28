@@ -15,10 +15,7 @@
 
 This is a template developed to facilitate the creation of plugins for the WordPress platform. It uses an adapted MVC pattern for a better development experience within the WordPress environment.
 
-By default it configures [ORM Eloquent](https://laravel.com/docs/9.x/eloquent) to facilitate database access, creation of new tables and other database options. If you don't want or don't need to use this tool, just remove the files inside the "[Model](./app/Model/)" folder and the "Bootstrap" class calls in the "[Functions.php](./app/Hooks/Functions.php)" and "[Uninstall.php](./app/Helpers/Uninstall.php)" files.
-Also don't forget to remove the dependency "[as247/wp-eloquent](https://github.com/as247/wp-eloquent)", present in the file "composer.json"
-
-The plugin also uses Typescript to develop features for Javascript. This is also optional and if necessary the files can be exchanged for Javascript files.
+The plugin uses Typescript to develop features for Javascript. This is also optional and if necessary the files can be exchanged for Javascript files.
 </br>
 **Author:** [Matheus Aguiar](https://github.com/aguiarrdev)
 </br>
@@ -40,7 +37,7 @@ npm install
 
 **Build production and watch the resource page changes**
 ```
-yarn watch
+yarn dev
 ```
 
 **Build production assets**
@@ -67,53 +64,93 @@ yarn build
 ├── app
 │   ├── Controllers
 │   │   ├── Checkout
-│   │   │   └── Checkout.php
+│   │   │   ├── Billet.php
+│   │   │   ├── Credit.php
+│   │   │   └── Pix.php
 │   │   ├── Entities
+│   │   │   ├── Installments.php
+│   │   │   └── Settings.php
 │   │   ├── Gateways
-│   │   │   └── Gateway.php
+│   │   │   ├── Billet.php
+│   │   │   ├── Credit.php
+│   │   │   └── Pix.php
 │   │   ├── Menus
-│   │   │   └── Service.php
+│   │   │   ├── Installments.php
+│   │   │   └── Pagarme.php
 │   │   ├── Menus.php
 │   │   ├── Render
 │   │   │   ├── InterfaceRender.php
 │   │   │   └── Render.php
-│   │   └── Webhooks
-│   │       └── Example.php
+│   │   ├── Thankyou
+│   │   │   ├── Billet.php
+│   │   │   ├── Credit.php
+│   │   │   └── Pix.php
+│   │   └── Webhooks.php
 │   ├── Core
 │   │   ├── Actions.php
-│   │   ├── Functions.php
-│   │   └── Uninstall.php
+│   │   └── Functions.php
 │   ├── Helpers
 │   │   ├── Config.php
+│   │   ├── Export.php
+│   │   ├── Gateways.php
+│   │   ├── Uninstall.php
 │   │   └── Utils.php
 │   ├── index.php
 │   ├── Model
 │   │   ├── Database
 │   │   │   ├── Bootstrap.php
+│   │   │   ├── Table.php
 │   │   │   └── Tables
-│   │   │       └── Example.php
-│   │   └── Example.php
+│   │   │       └── Settings.php
+│   │   ├── Entity
+│   │   │   └── Settings.php
+│   │   ├── InterfaceRepository.php
+│   │   ├── Repository
+│   │   │   └── Settings.php
+│   │   └── Repository.php
 │   ├── Services
+│   │   ├── Pagarme
+│   │   │   ├── Authentication.php
+│   │   │   ├── Config.php
+│   │   │   ├── Requests
+│   │   │   │   ├── InterfaceRequest.php
+│   │   │   │   ├── Orders
+│   │   │   │   │   ├── Cancel.php
+│   │   │   │   │   ├── Create.php
+│   │   │   │   │   └── Get.php
+│   │   │   │   └── Request.php
+│   │   │   └── Webhooks
+│   │   │       ├── Orders.php
+│   │   │       └── Webhook.php
 │   │   └── WooCommerce
+│   │       ├── Checkout
+│   │       │   └── Discount.php
 │   │       ├── Gateways
+│   │       │   ├── Gateway.php
 │   │       │   ├── Gateways.php
 │   │       │   └── InterfaceGateways.php
 │   │       ├── Logs
-│   │       │   └── Logs.php
+│   │       │   └── Logger.php
 │   │       ├── Orders
 │   │       │   └── Status.php
-│   │       ├── Webhooks
-│   │       │   ├── InterfaceWebhooks.php
-│   │       │   └── Webhooks.php
 │   │       └── WooCommerce.php
 │   └── Views
 │       ├── Admin
-│       │   ├── service.php
-│       │   └── template-parts
-│       │       └── header.php
+│       │   ├── credit
+│       │   │   └── installments.php
+│       │   ├── orders
+│       │   │   └── logs.php
+│       │   └── settings
+│       │       └── pagarme.php
 │       └── Pages
-│           └── template-parts
-│               └── index.php
+│           ├── checkout
+│           │   ├── billet.php
+│           │   ├── credit.php
+│           │   └── pix.php
+│           └── thankyou
+│               ├── billet.php
+│               ├── credit.php
+│               └── pix.php
 ├── composer.json
 ├── languages
 ├── LICENSE
@@ -121,50 +158,12 @@ yarn build
 ├── README.md
 ├── readme.txt
 ├── resources
-│   ├── images
-│   │   └── cb-icon.png
-│   ├── scripts
-│   │   ├── admin
-│   │   │   ├── components
-│   │   │   │   └── Notification
-│   │   │   │       └── index.ts
-│   │   │   └── pages
-│   │   │       └── service
-│   │   │           └── index.ts
-│   │   ├── global
-│   │   │   └── components
-│   │   └── theme
-│   │       ├── components
-│   │       └── pages
-│   └── styles
-│       ├── admin
-│       │   ├── base
-│       │   │   ├── index.scss
-│       │   │   └── _vars.scss
-│       │   ├── components
-│       │   │   ├── _container.scss
-│       │   │   ├── _notification.scss
-│       │   │   └── _title.scss
-│       │   ├── index.scss
-│       │   └── pages
-│       │       └── service
-│       │           └── index.scss
-│       ├── global
-│       │   ├── base
-│       │   │   ├── index.scss
-│       │   │   └── _vars.scss
-│       │   ├── components
-│       │   │   └── index.scss
-│       │   └── index.scss
-│       └── theme
-│           ├── base
-│           │   ├── index.scss
-│           │   └── _vars.scss
-│           ├── components
-│           │   └── index.scss
-│           └── index.scss
+│   ├── images/
+│   ├── scripts/
+│   └── styles/
 ├── tsconfig.json
 └── wc-pagarme-payments.php
+
 
 ```
 

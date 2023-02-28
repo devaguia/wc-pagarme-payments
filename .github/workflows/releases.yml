@@ -39,8 +39,8 @@ jobs:
       run: |
             NEXT_VERSION=$(bash .github/tags/next.sh)
 
-            git config --global user.email "wpcare@apiki.com"
-            git config --global user.name "WP Care"
+            git config --global user.email "aguiartgv@gmail.com"
+            git config --global user.name "Matheus Aguiar(bot)"
 
             git tag -a v$NEXT_VERSION-dev -m "New developer tag: v$NEXT_VERSION"
             git push origin v$NEXT_VERSION-dev
