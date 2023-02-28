@@ -1,6 +1,6 @@
 === Pagar.me payments for WooCommerce ===
 Contributors: aguiart0
-Tags: setup
+Tags: payments, Woocommerce, store, shop, checkout, cart, pagarme, loja, ecommerce, pix, billet, credit, cartao, boleto
 Requires at least: 5.0
 Tested up to: 6.0.1
 Stable tag: 1.0.0
