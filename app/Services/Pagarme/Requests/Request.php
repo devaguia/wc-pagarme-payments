@@ -47,6 +47,13 @@ abstract class Request
         $url = $this->get_request_url( $this->endpoint );
 
         $response = wp_remote_request( $url, $args );
+
+        if ( is_wp_error( $response ) ) {
+            return json_encode( [
+                'erros'   => $response,
+                'message' => __( 'Unable to connect to Pagar.me', 'wc-pagarme-payments' )
+            ] );
+        }
         
         if ( isset( $response['body'] ) ) {
             return $response['body'];
