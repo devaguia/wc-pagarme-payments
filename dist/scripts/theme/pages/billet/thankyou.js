@@ -1,0 +1,2 @@
+(()=>{class e{constructor(){document.querySelector(".wpp-thakyou-page-billet")&&this.copyBilletLine()}copyBilletLine(){const e=document.querySelector("#wpp-copy-billet");e&&e.addEventListener("click",(()=>{const e=document.querySelector("#wpp-billet-line");if(e)try{navigator.clipboard.writeText(e.value)}catch(t){e.select(),document.execCommand("copy")}}))}}document.addEventListener("DOMContentLoaded",(()=>{new e}))})();
+//# sourceMappingURL=thankyou.js.map
