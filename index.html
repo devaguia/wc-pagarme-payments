@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Pagar.me pagamentos para WooCommerce</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>Pagar.me pagamentos para WooCommerce</h1>
+            <img src="./images/icon.svg" alt="Ícone Pagar.me">
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <section id="about">
+            <div class="icon-subtitle">
+                <i class="fa-solid fa-circle-question"></i>
+                <h2>Sobre o plugin </h2>
+            </div>
+            <div class="description">
+                <div>
+                    <span>
+                        O plugin para WordPress <strong>Pagar.me pagamentos para WooCommerce</strong> tem como objetivo adaptar o serviço de pagamento da <a href="https://pagar.me/" target="_blank">Pagar.me</a> como um método de pagamento que integre com o plugin WooCommerce. O plugin utiliza a API pública disponibilizada pela própria pagadora em sua documentação.
+                    </span>
+                </div>
+                <div>
+                    <span>
+                        Este <strong>não é um plugin oficial</strong> e não possui vínculo com a empresa Pagar.me.
+                    </span>
+                </div>
+            </div>
+            <div class="description">
+                <h3>Contribuições</h3>
+                <div>
+                    <spam>Caso queira contribuir para o projeto com sujestões, dúvidas ou com envio de <a target="_blank" href="https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">Pull Requests</a>, você pode estar utilizando o repositório do plugin no GitHub. Fique a vontade para contribuir da forma que achar melhor.</spam>
+                </div>
+                <div class="contribuition">
+                    <a href="https://github.com/aguiarrdev/wc-pagarme-payments" target="_blank">
+                        <img src="./images/github.svg" alt="GitHub Icon">
+                        <span>Link do repositório do plugin.</span>
+                    </a>
+                </div>
+            </div>
+            <div class="description donation">
+                <h3>Doações</h3>
+                <div>
+                    <div class="donation-qr">
+                        <div>
+                            <span>Caso queira contribuir financeiramente com o projeto, aceitamos doações pelo <a href="https://paypal.com/">PayPal</a>.<br> Para, isso escanei o código abaixo <i class="fa-solid fa-qrcode"></i></span>
+                        </div>
+                        <div>
+                            <img src="./images/paypal.png" alt="Qr code para doações via PayPal">
+                        </div>
+                    </div>
+                    <div class="donation-link">
+                        <div>
+                            <span>Ou acesse o link abaixo:</span>
+                        </div>
+                        <div>
+                            <a href="https://www.paypal.com/donate/?hosted_button_id=87SP49SM6HJXW" target="_blank">
+                                <span><strong>Doe por aqui!</strong></span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="plugins-settings">
+            <div class="icon-subtitle">
+                <i class="fa-solid fa-gear"></i>
+                <h2>Configurações do plugin</h2>
+            </div>
+            <div>
+                <h3>Status</h3>
+                <div>
+                    <span>
+                        Essa configurações tem como objetivo controlar qual o status será usado para representar uma um pedido bem sucedido no WooCommerce, para os métodos de pagamento disponibilizados pelo plugin.
+                    </span>
+                </div>
+            </div>
+            <div>
+                <h3>Exportar configurações</h3>
+                <div>
+                    <span>Com essa configuração você consegue exportar um arquivo com dados relacionados as configurações do plugin Pagar.me pagamentos para WooCommerce, WooCommerce e do WordPress.</span>
+                </div>
+            </div>
+            <div>
+                <h3>Apagar configurações</h3>
+                <div>
+                    <span>Ao marcar essa opção, você concorda que todos os dados do plugin serão apagados ao desativá-lo.</span>
+                </div>
+            </div>
+            <div>
+                <h3>Endpoint de webhook</h3>
+                <div>
+                    <span>O link presente no campo de "Endpoint de webhook" é o link que será utilizado para poder configurar as notificações que o plugin irá receber da Pagar.me.</span>
+                </div>
+            </div>
+            <div>
+                <h3>Opções de pagamentos</h3>
+                <div>
+                    <span>Os dois campos presentes nessa configuração se referem as chaves privadas e púbilicas disponibilizadas pela Pagar.me e utilizadas para realizar a conexão com a API da pagadora.</span>
+                </div>
+                <div>
+                    <span>Para acessar essas chaves, dentro do painel da Pagar.me vá em:</span>
+                    <br>
+                    <span><strong>Configurações -> Chaves</strong></span>
+                </div>
+            </div>
+        </section>
+        <section id="webhook">
+            <div class="icon-subtitle">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <h2>Configurações de Webhook</h2>
+            </div>
+            <div>
+                <h3>Onde configurar?</h3>
+                <div>
+                    <span>Para configurar os eventos de Webhook, dentro do painel da Pagar.me vá em:
+                        <strong>Configurações -> Webhooks -> + Criar Webhook</strong></span>.
+                </div>
+            </div>
+            <div>
+                <h3>URL</h3>
+                <div>
+                    <span>Use a url gerada pelo plugin nas configurações(Endpoint de webhook) para preencher o campo de URL.</span>
+                </div>
+            </div>
+            <div>
+                <h3>Máximo de tentativas</h3>
+                <div>
+                    Recomendamos que mantenha essa campo preenchido com 3 tentativas.
+                </div>
+            </div>
+            <div>
+                <h3>Eventos</h3>
+                <div>
+                    <span>Para essa integração, nós só vamos utilizar os eventos referentes aos pedidos. Então clique na opção "Pedidos", e marque os eventos abaixo:</span>
+                </div>
+                <div>
+                    <ul>
+                        <li>order.canceled</li>
+                        <li>order.paid</li>
+                        <li>order.payment_failed</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="footer">
+        <hr>
+        <div class="links">
+            <div>
+                <a target="_blank" href="https://github.com/aguiarrdev"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <div>
+                <a target="_blank" href="https://www.linkedin.com/in/aguiarrdev/"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+            <div>
+                <a target="_blank" href="mailto:aguiartgv@gmail.com"><i class="fa-solid fa-square-envelope"></i></a>
+            </div>
+            <div>
+                <a target="_blank" href="https://www.paypal.com/donate/?hosted_button_id=87SP49SM6HJXW"><i class="fa-brands fa-gratipay"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/index.js"></script>
+</body>
+</html>

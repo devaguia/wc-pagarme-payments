@@ -1,0 +1,122 @@
+body, html {
+    border: 0;
+    margin: 0;
+    padding: 10px 30px;
+    font-family: 'Inter', sans-serif;
+
+}
+
+body a {
+    color: #65a300;
+}
+.header > div {
+    display: flex;
+}
+
+.header > div > img {
+    width: 40px;
+    margin: 0 10px;
+}
+
+.container > section {
+    margin-bottom: 50px;
+    text-align: justify;
+}
+
+.container > section > div > h2 {
+    margin-bottom: 5px;
+}
+
+.container > section > div.icon-subtitle {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.container > section > div > i {
+    margin-top: 20px;
+    margin-right: 10px;
+    color: #65a300;
+    font-size: 25px;
+}
+
+.container > section > div h3 {
+    margin-bottom: 5px;
+}
+
+.container > section .description {
+    margin-bottom: 20px;
+}
+
+.container > section .contribuition a{
+    display: flex;
+    margin-top: 10px;
+}
+
+.container > section .contribuition img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.container > section .donation img {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.container > section .donation > div > .donation-link {
+    margin-top: 10px;
+}
+
+.container > section .donation > div > .donation-link i {
+    margin-left: 10px;
+}
+
+.footer {
+    margin-top: 100px;
+}
+
+.footer > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer > div > div {
+    margin: 0 10px;
+}
+
+.footer > div > div i {
+    font-size: 30px;
+    color: #000;
+}
+
+@media (max-width: 620px) {
+    body, html {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 30px;
+    }
+
+    .header > div > img {
+        width: 60px;
+        margin: 0 10px;
+    }
+    
+    .container > section .donation img {
+        width: 50%;
+    }
+    
+    .container > section .donation .donation-qr > div{
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container > section .donation .donation-link > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
