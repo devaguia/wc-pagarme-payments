@@ -11,6 +11,7 @@ use WPP\Model\Database\Bootstrap;
 use WPP\Helpers\Config;
 use WPP\Helpers\Export;
 use WPP\Helpers\Uninstall;
+use WPP\Helpers\Utils;
 use WPP\Services\WooCommerce\WooCommerce;
 
 /**
@@ -29,7 +30,9 @@ class Functions
 
     public static function create_admin_menu(): void
     {
-        new Menus();
+        if ( empty( Utils::check_dependencies() ) ) {
+            new Menus();
+        }
     }
 
 
@@ -62,6 +65,26 @@ class Functions
         if ( Config::__base() === $plugin ) {
             new Bootstrap;
         }
+    }
+
+    public static function check_missing_dependencies(): void
+    {
+        $dependencies_missing = Utils::check_dependencies();
+
+        if ( is_array( $dependencies_missing ) && ! empty( $dependencies_missing ) ) {
+            add_action( 'admin_notices', [ 
+                Functions::class, 'admin_notice_dependencie' 
+            ] );
+        }
+    }
+
+    public static function admin_notice_dependencie(): void 
+    {
+        $class = 'notice notice-error';
+        $message = __( "Pagarme payments for WooCommerce: This plugin requires the following plugin to be installed: ", 'wc-pagarme-payments' );
+
+        $keys = array_keys( Utils::check_dependencies() );
+        printf( '<div class="%1$s"><p>%2$s <strong>%3$s</strong></p></div>', esc_attr( $class ), esc_html( $message ), esc_html( join(', ', $keys ) ) );
     }
 
 

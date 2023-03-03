@@ -19,6 +19,11 @@ add_action( 'admin_init', [
     'desactivate' 
 ] );
 
+add_action( 'admin_init', [ 
+    Functions::class,
+    'check_missing_dependencies' 
+] );
+
 add_action( 'admin_menu', [ 
     Functions::class,
     'create_admin_menu' 

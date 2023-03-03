@@ -3,7 +3,7 @@
 namespace WPP;
 
 // Define names
-define( 'WPP_PLUGIN_NAME', 'Pagarme payments for WooCommerce' );
+define( 'WPP_PLUGIN_NAME', __( 'Pagarme payments for WooCommerce', 'wc-pagarme-payments' ) );
 define( 'WPP_PLUGIN_SLUG', 'wc-pagarme-payments' );
 define( 'WPP_PLUGIN_NAMESPACE', 'WPP' );
 define( 'WPP_PLUGIN_PREFIX', 'wpp' );

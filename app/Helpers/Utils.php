@@ -65,4 +65,22 @@ class Utils
 
         return $methods;
     }
+
+    public static function check_dependencies(): array
+    {
+        $plugins = wp_get_active_and_valid_plugins();
+
+        $neededs = [
+            'WooCommerce'                     => Config::__dir( __DIR__, 3 ) . '/woocommerce/woocommerce.php',
+            'Brazilian Market on WooCommerce' => Config::__dir( __DIR__, 3 ) . '/woocommerce-extra-checkout-fields-for-brazil/woocommerce-extra-checkout-fields-for-brazil.php'
+        ];
+
+        foreach ($neededs as $key => $needed ) {
+            if ( in_array( $needed, $plugins ) ) {
+                unset( $neededs[$key] );
+            }
+        }
+
+        return $neededs;
+    }
 }
