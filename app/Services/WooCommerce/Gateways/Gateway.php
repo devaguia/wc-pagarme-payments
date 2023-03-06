@@ -83,7 +83,8 @@ abstract class Gateway extends WC_Payment_Gateway
         }
         
 
-        return $this->abort_payment_process( __( 'Pagar.me: Failed to charge', 'wc-pagarme-payments' ) );
+        $this->logger->add( $response, 'error' );
+        return $this->abort_payment_process( __( 'Failed to charge', 'wc-pagarme-payments' ) );
 
     }
 
