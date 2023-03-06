@@ -39,10 +39,10 @@ class Logger
         $log   = "{$this->prefix}-request";
         $title = '--- PAGAR.ME PAYMENTS REQUEST LOG ---';
       break;
+    }
 
-      if ( $this->enabled ) {
-        $this->wc->add( $log, "\n{$title} : \n" . print_r( $var, true ) . "\n" );
-      }
+    if ( $this->enabled ) {
+      $this->wc->add( $log, "\n{$title} : \n" . print_r( $var, true ) . "\n" );
     }
   }
 }
