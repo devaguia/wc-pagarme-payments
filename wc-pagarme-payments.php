@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Pagar.me payments for WooCommerce
  * Plugin URI:  https://github.com/aguiarrdev/wc-pagarme-payments
- * Version:     1.0.0
+ * Version:     1.0.1
  * Description: Payment plugin for WooCommerce/WordPress using the Pagar.me API
  * Author:      Matheus Aguiar
  * Author URI:  https://github.com/aguiarrdev

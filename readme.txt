@@ -3,7 +3,7 @@ Contributors: aguiart0
 Tags: payments, Woocommerce, store, shop, checkout, cart, pagarme, loja, ecommerce, pix, billet, credit, cartao, boleto
 Requires at least: 5.0
 Tested up to: 6.0.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -26,6 +26,10 @@ Payment plugin for WooCommerce/WordPress using the Pagar.me API
 - Screenshots
 
 == Changelog ==
+
+= 1.0.1 = 06-03-2023
+* Fix wrong call of log Functions
+* Fix duplicated prefix for error messages
 
 = 1.0.0 = 28-02-2023
 * Initial Release 

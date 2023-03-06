@@ -1,6 +1,6 @@
 {
   "name": "wc-pagarme-payments",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Payment plugin for WooCommerce/WordPress using the Pagar.me API",
   "repository": "https://github.com/aguiarrdev/wc-pagarme-payments",
   "author": "Matheus Aguiar",
